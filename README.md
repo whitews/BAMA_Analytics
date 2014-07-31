@@ -1,2 +1,2 @@
-BAMA-Analytics
+BAMA Analytics
 ==============
