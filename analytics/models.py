@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class Cohort(models.Model):
@@ -27,6 +28,32 @@ class Project(models.Model):
     )
 
 
+class Species(models.Model):
+    name = models.CharField(
+        unique=True,
+        max_length=128,
+        null=False,
+        blank=False
+    )
+    description = models.TextField(
+        null=True,
+        blank=True
+    )
+
+
+class Network(models.Model):
+    name = models.CharField(
+        unique=True,
+        max_length=128,
+        null=False,
+        blank=False
+    )
+    description = models.TextField(
+        null=True,
+        blank=True
+    )
+
+
 class Participant(models.Model):
     cohort = models.ForeignKey(
         Cohort,
@@ -39,11 +66,21 @@ class Participant(models.Model):
         null=False,
         blank=False
     )
+    species = models.ForeignKey(
+        Species,
+        null=True,
+        blank=True
+    )
+    network = models.ForeignKey(
+        Species,
+        null=True,
+        blank=True
+    )
 
 
-class ProjectParticipant(models.Model):
+class ProjectDataPoint(models.Model):
     project = models.ForeignKey(Project)
-    participant = models.ForeignKey(Participant)
+    data_point = models.ForeignKey(DataPoint)
 
 
 class Analyte(models.Model):
@@ -139,6 +176,12 @@ class UploadEvent(models.Model):
         null=False,
         blank=False
     )
+    user = models.ForeignKey(
+        User,
+        null=False,
+        blank=False,
+        editable=False
+    )
 
 
 class DataPoint(models.Model):
@@ -155,7 +198,6 @@ class DataPoint(models.Model):
         blank=False
     )
     global_id_code = models.CharField(
-        unique=True,
         max_length=64,
         null=True,
         blank=True
@@ -173,14 +215,14 @@ class DataPoint(models.Model):
     dilution = models.IntegerField()
     # fi is fluorescence intensity
     fi_minus_background = models.DecimalField(
-        max_digits=10,
-        decimal_places=2
+        max_digits=16,
+        decimal_places=9
     )
     fi_minus_background_blank = models.DecimalField(
-        max_digits=10,
-        decimal_places=2
+        max_digits=16,
+        decimal_places=9
     )
     cv = models.DecimalField(
-        max_digits=5,
-        decimal_places=2
+        max_digits=12,
+        decimal_places=9
     )
