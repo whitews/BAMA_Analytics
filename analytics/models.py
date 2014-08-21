@@ -72,7 +72,7 @@ class Participant(models.Model):
         blank=True
     )
     network = models.ForeignKey(
-        Species,
+        Network,
         null=True,
         blank=True
     )
