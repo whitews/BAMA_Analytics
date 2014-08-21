@@ -1,3 +1,18 @@
-from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+from django.core.exceptions import PermissionDenied
+from django.shortcuts import render_to_response
+from django.template import RequestContext
 
-# Create your views here.
+
+@login_required
+def permission_denied(request):
+    raise PermissionDenied
+
+
+@login_required
+def analytics_app(request):
+    return render_to_response(
+        'analytics_app.html',
+        {},
+        context_instance=RequestContext(request)
+    )
