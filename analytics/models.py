@@ -78,6 +78,50 @@ class Participant(models.Model):
     )
 
 
+class DataPoint(models.Model):
+    upload_event = models.ForeignKey(UploadEvent)
+    notebook = models.ForeignKey(Notebook)
+    participant = models.ForeignKey(Participant)
+    sample_type = models.ForeignKey(SampleType)
+    analyte = models.ForeignKey(Analyte)
+    isotype = models.ForeignKey(Isotype)
+    conjugate = models.ForeignKey(Conjugate)
+    buffer = models.ForeignKey(
+        Buffer,
+        null=False,
+        blank=False
+    )
+    global_id_code = models.CharField(
+        max_length=64,
+        null=True,
+        blank=True
+    )
+    visit_code = models.CharField(
+        max_length=32,
+        null=True,
+        blank=True
+    )
+    visit_date = models.DateField(
+        null=True,
+        blank=True
+    )
+    bead_number = models.IntegerField()
+    dilution = models.IntegerField()
+    # fi is fluorescence intensity
+    fi_minus_background = models.DecimalField(
+        max_digits=16,
+        decimal_places=9
+    )
+    fi_minus_background_blank = models.DecimalField(
+        max_digits=16,
+        decimal_places=9
+    )
+    cv = models.DecimalField(
+        max_digits=12,
+        decimal_places=9
+    )
+
+
 class ProjectDataPoint(models.Model):
     project = models.ForeignKey(Project)
     data_point = models.ForeignKey(DataPoint)
@@ -181,48 +225,4 @@ class UploadEvent(models.Model):
         null=False,
         blank=False,
         editable=False
-    )
-
-
-class DataPoint(models.Model):
-    upload_event = models.ForeignKey(UploadEvent)
-    notebook = models.ForeignKey(Notebook)
-    participant = models.ForeignKey(Participant)
-    sample_type = models.ForeignKey(SampleType)
-    analyte = models.ForeignKey(Analyte)
-    isotype = models.ForeignKey(Isotype)
-    conjugate = models.ForeignKey(Conjugate)
-    buffer = models.ForeignKey(
-        Buffer,
-        null=False,
-        blank=False
-    )
-    global_id_code = models.CharField(
-        max_length=64,
-        null=True,
-        blank=True
-    )
-    visit_code = models.CharField(
-        max_length=32,
-        null=True,
-        blank=True
-    )
-    visit_date = models.DateField(
-        null=True,
-        blank=True
-    )
-    bead_number = models.IntegerField()
-    dilution = models.IntegerField()
-    # fi is fluorescence intensity
-    fi_minus_background = models.DecimalField(
-        max_digits=16,
-        decimal_places=9
-    )
-    fi_minus_background_blank = models.DecimalField(
-        max_digits=16,
-        decimal_places=9
-    )
-    cv = models.DecimalField(
-        max_digits=12,
-        decimal_places=9
     )
