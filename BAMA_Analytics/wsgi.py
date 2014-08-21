@@ -10,6 +10,7 @@ https://docs.djangoproject.com/en/1.6/howto/deployment/wsgi/
 import os
 import sys
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "BAMA_Analytics.settings")
+os.environ['PYTHON_EGG_CACHE'] = '/srv/django-projects/python-eggs'
 
 paths = [
     '/srv/django-projects/BAMA_Analytics',
