@@ -78,6 +78,24 @@ class Participant(models.Model):
     )
 
 
+class UploadEvent(models.Model):
+    filename = models.CharField(
+        max_length=256,
+        null=False,
+        blank=False
+    )
+    upload_date = models.DateField(
+        null=False,
+        blank=False
+    )
+    user = models.ForeignKey(
+        User,
+        null=False,
+        blank=False,
+        editable=False
+    )
+
+
 class DataPoint(models.Model):
     upload_event = models.ForeignKey(UploadEvent)
     notebook = models.ForeignKey(Notebook)
@@ -207,22 +225,4 @@ class Notebook(models.Model):
     description = models.TextField(
         null=True,
         blank=True
-    )
-
-
-class UploadEvent(models.Model):
-    filename = models.CharField(
-        max_length=256,
-        null=False,
-        blank=False
-    )
-    upload_date = models.DateField(
-        null=False,
-        blank=False
-    )
-    user = models.ForeignKey(
-        User,
-        null=False,
-        blank=False,
-        editable=False
     )
