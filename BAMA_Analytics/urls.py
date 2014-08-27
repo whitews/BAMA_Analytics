@@ -7,4 +7,5 @@ urlpatterns = patterns('',
     (r'^', include('authenticate.urls')),
     (r'^', include('analytics.urls')),
     (r'^admin/', include(admin.site.urls)),
+    (r'^api/', include('rest_framework.urls', namespace='rest_framework')),
 )
