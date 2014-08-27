@@ -27,6 +27,7 @@ app.factory('LoginRedirectInterceptor', function($q, $window) {
 app.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
     $httpProvider.interceptors.push('LoginRedirectInterceptor');
 
+    $urlRouterProvider.when("", "/");
     $urlRouterProvider.otherwise("/");
 
     $stateProvider.state({
@@ -39,6 +40,31 @@ app.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
         },
         data: {
             ncyBreadcrumbLabel: 'Projects'
+        }
+     }).state({
+        name: '404',
+        url: '^',
+        parent: 'home',
+        views: {
+            '@': {
+                templateUrl: '/static/ng-app/partials/404.html'
+            }
+        },
+        data: {
+            ncyBreadcrumbLabel: ': ('
+        }
+    }).state({
+        name: 'project-detail',
+        parent: 'home',
+        url: 'project/:projectId',
+        views: {
+            '@': {
+                templateUrl: '/static/ng-app/partials/project-detail.html',
+                controller: 'ProjectDetailController'
+            }
+        },
+        data: {
+            ncyBreadcrumbLabel: '{{current_project.name}}'
         }
     });
 });

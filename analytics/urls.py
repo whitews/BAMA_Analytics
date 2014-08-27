@@ -6,7 +6,7 @@ from analytics.api_views import *
 # API routes
 urlpatterns = patterns('analytics.api_views',
     url(r'^api/analytics/?$', 'analytics_api_root', name='analytics-api-root'),
-    url(r'^api/repository/projects/?$', ProjectList.as_view(),
+    url(r'^api/analytics/projects/?$', ProjectList.as_view(),
         name='project-list'),
     url(r'^api/analytics/projects/(?P<pk>\d+)/?$', ProjectDetail.as_view(),
         name='project-detail'),
