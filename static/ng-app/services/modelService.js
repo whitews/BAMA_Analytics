@@ -1,4 +1,4 @@
-app.factory('ModelService', function($rootScope, Project) {
+app.factory('ModelService', function($rootScope, Cohort, Project) {
     var service = {};
 
     service.projects = Project.query();
@@ -10,6 +10,12 @@ app.factory('ModelService', function($rootScope, Project) {
         }, function() {
             $rootScope.$broadcast('current_project:invalid');
         });
+    };
+
+    service.get_cohorts = function() {
+        return Cohort.query(
+            {}
+        );
     };
 
     return service;

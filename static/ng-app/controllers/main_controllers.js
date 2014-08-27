@@ -8,7 +8,7 @@ var ModalFormCtrl = function ($scope, $modalInstance, instance) {
 app.controller(
     'MainController',
     ['$scope', function ($scope) {
-
+        // reserved for site wide functions
     }
 ]);
 
