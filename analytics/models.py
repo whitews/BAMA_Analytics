@@ -297,6 +297,10 @@ class DataPoint(models.Model):
         null=True,
         blank=True
     )
+    assay_date = models.DateField(
+        null=False,
+        blank=False
+    )
     bead_number = models.IntegerField()
     dilution = models.IntegerField()
     # fi is fluorescence intensity
