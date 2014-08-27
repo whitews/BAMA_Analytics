@@ -1,6 +1,7 @@
-app.factory('ModelService', function($rootScope, Cohort, Project) {
+app.factory('ModelService', function($rootScope, User, Cohort, Project) {
     var service = {};
 
+    service.user = User.get();
     service.projects = Project.query();
 
     service.setCurrentProjectById = function(id) {

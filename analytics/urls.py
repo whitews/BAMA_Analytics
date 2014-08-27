@@ -6,11 +6,15 @@ from analytics.api_views import *
 # API routes
 urlpatterns = patterns('analytics.api_views',
     url(r'^api/analytics/?$', 'analytics_api_root', name='analytics-api-root'),
+    url(r'^api/analytics/user/?$', get_user_details, name='get_user_details'),
+    url(r'^api/analytics/cohorts/?$', CohortList.as_view(),
+        name='cohort-list'),
+    url(r'^api/analytics/cohorts/(?P<pk>\d+)/?$', CohortDetail.as_view(),
+        name='cohort-detail'),
     url(r'^api/analytics/projects/?$', ProjectList.as_view(),
         name='project-list'),
     url(r'^api/analytics/projects/(?P<pk>\d+)/?$', ProjectDetail.as_view(),
         name='project-detail'),
-
 )
 
 # Non-API routes

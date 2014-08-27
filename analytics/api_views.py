@@ -2,7 +2,7 @@ from rest_framework import generics, status
 from rest_framework.authentication import \
     SessionAuthentication, \
     TokenAuthentication
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.decorators import \
     authentication_classes, \
     permission_classes, \
@@ -25,6 +25,7 @@ def analytics_api_root(request):
     """
 
     return Response({
+        'cohorts': reverse('cohort-list', request=request),
         'projects': reverse('project-list', request=request),
     })
 
@@ -36,6 +37,15 @@ class LoginRequiredMixin(object):
 
     authentication_classes = (SessionAuthentication, TokenAuthentication)
     permission_classes = (IsAuthenticated,)
+
+
+class AdminRequiredMixin(object):
+    """
+    View mixin to verify a user is an administrator.
+    """
+
+    authentication_classes = (SessionAuthentication,)
+    permission_classes = (IsAuthenticated, IsAdminUser)
 
 
 class PermissionRequiredMixin(SingleObjectMixin):
@@ -57,6 +67,71 @@ class PermissionRequiredMixin(SingleObjectMixin):
                 raise PermissionDenied
 
         return obj
+
+
+@api_view(['GET'])
+@authentication_classes((SessionAuthentication, TokenAuthentication))
+@permission_classes((IsAuthenticated,))
+def get_user_details(request):
+    return Response(
+        {
+            'username': request.user.username,
+            'email': request.user.email,
+            'superuser': request.user.is_superuser
+        }
+    )
+
+
+class CohortList(AdminRequiredMixin, generics.ListCreateAPIView):
+    """
+    API endpoint representing a list of cohorts.
+    """
+
+    model = Cohort
+    serializer_class = CohortSerializer
+    filter_fields = ('name',)
+
+    def get_queryset(self):
+        """
+        Override .get_queryset() to filter on user's cohorts.
+        """
+        return Cohort.objects.all()
+
+    def post(self, request, *args, **kwargs):
+        if not request.user.is_superuser:
+            return Response(status=status.HTTP_403_FORBIDDEN)
+
+        response = super(CohortList, self).post(request, *args, **kwargs)
+        return response
+
+
+class CohortDetail(
+        AdminRequiredMixin,
+        PermissionRequiredMixin,
+        generics.RetrieveUpdateDestroyAPIView):
+    """
+    API endpoint representing a single cohort.
+    """
+
+    model = Cohort
+    serializer_class = CohortSerializer
+
+    def put(self, request, *args, **kwargs):
+        cohort = Cohort.objects.get(id=kwargs['pk'])
+        if not cohort.has_modify_permission(request.user):
+            return Response(status=status.HTTP_403_FORBIDDEN)
+
+        return super(CohortDetail, self).put(request, *args, **kwargs)
+
+    def patch(self, request, *args, **kwargs):
+        return Response(status=status.HTTP_501_NOT_IMPLEMENTED)
+
+    def delete(self, request, *args, **kwargs):
+        cohort = Cohort.objects.get(id=kwargs['pk'])
+        if not cohort.has_modify_permission(request.user):
+            return Response(status=status.HTTP_403_FORBIDDEN)
+
+        return super(CohortDetail, self).delete(request, *args, **kwargs)
 
 
 class ProjectList(LoginRequiredMixin, generics.ListCreateAPIView):
