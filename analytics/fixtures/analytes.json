@@ -1,0 +1,2378 @@
+[
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "(92) TH023 gp120 (gD+/293T/Berman)",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 1
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "00MSA 4076 gp140",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 2
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "1086 Trimer",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 3
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "1086 gp120",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 4
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "1086 gp120 D7 monomer",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 5
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "1086C gp120 D7 monomer",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 6
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "1086C gp120 gD- /293T mono",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 7
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "1086C gp140C_avi",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 8
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "1086C_D7gp120.avi/293F",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 9
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "1394C9_G1.D11gp120.avi",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 10
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "254008_D11gp120.avi/293F",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 11
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "339 IgA-C1 Epi",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 12
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "427299gp120 D11 mut4 monomer",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 13
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "51802_D11gp120.avi/293F",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 14
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "6101 gp140",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 15
+},
+{
+    "fields": {
+        "subtrahend": null,
+        "name": "7B2 IgA",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 16
+},
+{
+    "fields": {
+        "subtrahend": null,
+        "name": "7B2 IgA2",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 17
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "89.6 gp120",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 18
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "9004S.gp140C.avi",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 19
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "9009SA_A4_2_gp120/CHO",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 20
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "907 IgA-C1 Epi",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 21
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "92TH023 gp120 gDneg 293F mon",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 22
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "92TH023 gp120 gDneg/293T",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 23
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "92TH023 gp120 gDneg/293T mon",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 24
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "96ZM651.D11gp120.avi",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 25
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "97CNGX2F 140 CF",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 26
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "A.9004SS gp120",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 27
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "A.9004SS_V1_V2_Tags",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 28
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "A.92RW020 gp120 AVI 293F monomer",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 29
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "A.Q23_V1_V2_Tags",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 30
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "A1.con.env03 140 CF",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 31
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "A1.con_env03gp140CF_avi",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 32
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "A244 D11gp120_avi",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 33
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "A244 gp 120 gD+ n160K/293T/mon",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 34
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "A244 gp 120 gD+/293T/mon",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 35
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "A244 gp 120 gDneg n160K/293T/mon",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 36
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "A244 gp 120 gDneg/293F/mon",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 37
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "A244 gp 120 gDneg/293T/mon",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 38
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "A244 gp120 delta11 293F monomer",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 39
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "A244 gp120 gD+/293T",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 40
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "A244 gp120 gDneg delta 11/293T/mon",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 41
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "A244 gp120 gDneg/293T",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 42
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "A244-K178-C-Biot",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 43
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "A244-K198-C-Biot",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 44
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "A244D11/K169V/V172E/H173Y",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 45
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "A244delta11gp120N156/N160K_avi/293F",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 46
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "ADA gp120",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 47
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "AE A244 V1V2 tags N156Q",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 48
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "AE.01.con_env03 gp140CF_avi",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 49
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "AE.427299 gp120D11_Q169K",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 50
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "AE.703357gp120 D11 Q169K monomer",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 51
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "AE.703357gp120 D11 monomer",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 52
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "AE.703357gp120D11mut3",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 53
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "AE.A244 V1V2 Tags/293F",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 54
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "AE.A244 V2 Tags/293F",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 55
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "AE.A244 V2 tags 293F",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 56
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "AE.A244 V2 tags/293F",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 57
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "AE.A244gp120D11_K169V",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 58
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "B.6240D11gp120mutC/293F",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 59
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "B.6240_D11gp120/293F",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 60
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "B.6240_gp120_delta11 /293F",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 61
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "B.63521_D11gp120/293F",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 62
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "B.63521_gp120delta11/293F",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 63
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "B.63521_gp140C/293F",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 64
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "B.9021 gp140C_mut/293F",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 65
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "B.9021 gp140C_mutC/293F",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 66
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "B.HXB/BaL_120 AVI",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 67
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "B.HXB/Bal_120_avi",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 68
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "B.HXB/Bal_120_avi/293F Monomer",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 69
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "B.MN V3 gp70",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 70
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "B.MN V3 gp70 (62)",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 71
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "B.acute CON 1059 gp120 monomer",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 72
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "B.con.env03 140 CF",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 73
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "BF1266_gp140C.avi/293F",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 74
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "BJOX002_D11gp120.avi/293F",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 75
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "BORI_D11gp120.avi/293F",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 76
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "Bal gp120",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 77
+},
+{
+    "fields": {
+        "subtrahend": null,
+        "name": "Bare Tetramer",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 78
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "Bcon03 ID Non-Tetramer",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 79
+},
+{
+    "fields": {
+        "subtrahend": 78,
+        "name": "Bcon03 ID Tetramer",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 80
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "Bcon03 ID non-Tetramer",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 81
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "Bio-1086C Cys-V1_HS",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 82
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "Bio-1086C V1_HS",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 83
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "Bio-A244 Cys-V1_HS",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 84
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "Bio-A244 Cys-V1_Scr_HS",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 85
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "Bio-A244 V1_HS",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 86
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "Bio-A244 V1_Scr_HS",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 87
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "Bio-Int/Pol_940",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 88
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "Bio-KS_720",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 89
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "Bio-MN Cys-V1_HS",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 90
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "Bio-MN V1_HS",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 91
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "Bio-P1/Gag_436",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 92
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "Bio-Pep#40.BD",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 93
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "Bio-Pro/Pol_90",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 94
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "Bio-RV144_C1(IgG)_BC",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 95
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "Bio-RV144_C1_BC",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 96
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "Bio-RV144_C5.1_AE",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 97
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "Bio-RV144_C5.1_B",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 98
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "Bio-RV144_C5.1_C",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 99
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "Bio-RV144_V2_AE",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 100
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "Bio-RV144_V2_B",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 101
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "Bio-RV144_V2_C",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 102
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "Bio-Rev_70",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 103
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "Bio-SIV V2-long",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 104
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "Bio-SIV V2_mac239",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 105
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "Bio-SIV V2_smE660",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 106
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "Bio-V3.A",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 107
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "Bio-V3.B",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 108
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "Bio-V3.C",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 109
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "Bio-V3.CRF1",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 110
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "Bio-V3.D",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 111
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "Bio-V3.M",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 112
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "Biotin-1086-171i",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 113
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "Biotin-9004S-171i",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 114
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "Biotin-CaseA2-171i",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 115
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "Biotin-E.A244-171i",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 116
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "Biotin-E.A244-171iScr",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 117
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "Biotin-Kg D 27.3",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 118
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "Biotin-Q23-171i",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 119
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "Biotin-VRC_A-171i",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 120
+},
+{
+    "fields": {
+        "subtrahend": null,
+        "name": "Blank",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 121
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "C.1086 V2 tags 293F",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 122
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "C.1086 V2 tags/293F",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 123
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "C.1086C_V1_V2 Tags",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 124
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "C.97ZA012 gp120 AVI 293F monomer",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 125
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "C.con.env03 140 CF",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 126
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "C.con.env03 140 CF_avi",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 127
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "C.con_env03gp140CF_avi",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 128
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "C1 Biotin",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 129
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "C2101_c01.gp140C.avi",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 130
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "CH0505 D11gp120",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 131
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "CN54 gp140",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 132
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "CNE20_D11gp120.avi/293F",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 133
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "Con 6 140 CF",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 134
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "Con 6 gp120/B",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 135
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "Con S gp140 CFI",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 136
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "G.con.env03 140 CF",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 137
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "GNE8 rgp120 Q pool",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 138
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "HIV gp140deltaV2 SF162 Chiron",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 139
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "HIV-1 Rev",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 140
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "HIV-1 SF162gp140dV2",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 141
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "HV 13700 AE.con.env03 140 CF",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 142
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "HV 14000 (DRCBL) gp140",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 143
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "Hep E2",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 144
+},
+{
+    "fields": {
+        "subtrahend": null,
+        "name": "Hu IgA",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 145
+},
+{
+    "fields": {
+        "subtrahend": null,
+        "name": "Hu IgE",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 146
+},
+{
+    "fields": {
+        "subtrahend": null,
+        "name": "Hu IgG1",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 147
+},
+{
+    "fields": {
+        "subtrahend": null,
+        "name": "Hu IgG2",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 148
+},
+{
+    "fields": {
+        "subtrahend": null,
+        "name": "Hu IgG3",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 149
+},
+{
+    "fields": {
+        "subtrahend": null,
+        "name": "Hu IgG4",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 150
+},
+{
+    "fields": {
+        "subtrahend": null,
+        "name": "Hu IgM",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 151
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "HxB2 new 8b core 1420R",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 152
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "HxB2 new 8b core 6x His",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 153
+},
+{
+    "fields": {
+        "subtrahend": null,
+        "name": "IgA",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 154
+},
+{
+    "fields": {
+        "subtrahend": null,
+        "name": "IgE",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 155
+},
+{
+    "fields": {
+        "subtrahend": null,
+        "name": "IgG1",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 156
+},
+{
+    "fields": {
+        "subtrahend": null,
+        "name": "IgG2",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 157
+},
+{
+    "fields": {
+        "subtrahend": null,
+        "name": "IgG3",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 158
+},
+{
+    "fields": {
+        "subtrahend": null,
+        "name": "IgG4",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 159
+},
+{
+    "fields": {
+        "subtrahend": null,
+        "name": "IgM",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 160
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "J08-V1V2 (A) N156Q.N160Q",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 161
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "J08-V1V2 (Clade A)",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 162
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "J08-V1V2 (Clade B)",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 163
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "J08-V1V2 (Clade C)",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 164
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "JO8-V1V2 (B) N156Q.N160Q",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 165
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "JO8-V1V2 (C) N156Q.N160Q",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 166
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "JRFL gp140",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 167
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "MN D11 gp120 AVI monomer",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 168
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "MN gp120 gD+/293T",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 169
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "MN gp120 gD-/293T",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 170
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "MN gp120 gDneg/293T",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 171
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "MNgp120gD-/293T",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 172
+},
+{
+    "fields": {
+        "subtrahend": 78,
+        "name": "MPR.03 Tetramer",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 173
+},
+{
+    "fields": {
+        "subtrahend": null,
+        "name": "MulVgp70_His6",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 174
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "N-Biot-A244-K178",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 175
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "N-Biot-A244-K198",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 176
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "Nef",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 177
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "OOMSA 4076 gp140",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 178
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "P66 (RT)",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 179
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "Purified IgG1",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 180
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "Purified IgG2",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 181
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "Purified IgG3",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 182
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "Purified IgG4",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 183
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "RHPA4259_C7.gp140C.avi",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 184
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "RSC3",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 185
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "RSC3 G367R",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 186
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "RSC3 delta371",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 187
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "RSC3 delta371/P363N",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 188
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "RSC3 delta371l",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 189
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "RV144 427299gp120 D11 monomer",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 190
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "Rhesus IgA",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 191
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "Rhesus IgG",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 192
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "SC42261_gp140.avi/293F",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 193
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "SF162.LS.D11gp120C.avi/293F Purified",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 194
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "SHIV162P3_gp70V1V2.HIS6",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 195
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "SIV gp120 mac239",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 196
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "SIV gp130 mac251",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 197
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "SIV gp140 (Bing Chen)",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 198
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "SIV p27",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 199
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "SIV p55",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 200
+},
+{
+    "fields": {
+        "subtrahend": 78,
+        "name": "SP62 Tetramer",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 201
+},
+{
+    "fields": {
+        "subtrahend": 78,
+        "name": "SP62 tetramer",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 202
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "Secretory Component (13364) - His 6 Prot",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 203
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "Stool 3 Aerobe",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 204
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "Stool 3 Anaerobe",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 205
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "TT31P.2792_D11gp120.avi/293F",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 206
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "TV1c8.2_21 gp140C_avi",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 207
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "TV1c8_D11gp120.avi/293F",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 208
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "Tat",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 209
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "US-1 gp140",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 210
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "VRC A 5304 gp140",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 211
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "VRC A_avi",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 212
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "VRC B gp140",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 213
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "VRC B_avi",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 214
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "VRC C_avi",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 215
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "VRC SIVmac239",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 216
+},
+{
+    "fields": {
+        "subtrahend": 174,
+        "name": "VRC_A_gp70V1V2_avi",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 217
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "WITO4160.gp140C.avi",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 218
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "YU2 gp120 old core",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 219
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "YU2 gp120 old core D368R",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 220
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "ZM96 gp140",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 221
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "ZM96 gp140-Ctag",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 222
+},
+{
+    "fields": {
+        "subtrahend": null,
+        "name": "anti-hu IgG1",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 223
+},
+{
+    "fields": {
+        "subtrahend": null,
+        "name": "anti-hu IgG2",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 224
+},
+{
+    "fields": {
+        "subtrahend": null,
+        "name": "anti-hu IgG3",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 225
+},
+{
+    "fields": {
+        "subtrahend": null,
+        "name": "anti-hu IgG4",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 226
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "gD full protein",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 227
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "gp120 TV1",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 228
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "gp120(MN)(HIV-1/Clade B)",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 229
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "gp130 SIVmac251",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 230
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "gp140 (SIVsmE660)",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 231
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "gp41",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 232
+},
+{
+    "fields": {
+        "subtrahend": 174,
+        "name": "gp70 B CASE A2 v1v2n156 Q",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 233
+},
+{
+    "fields": {
+        "subtrahend": 174,
+        "name": "gp70 Cl A/E V1V2",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 234
+},
+{
+    "fields": {
+        "subtrahend": 174,
+        "name": "gp70 V1/V2",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 235
+},
+{
+    "fields": {
+        "subtrahend": 174,
+        "name": "gp70 V1V2 AP",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 236
+},
+{
+    "fields": {
+        "subtrahend": null,
+        "name": "gp70 carrier",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 237
+},
+{
+    "fields": {
+        "subtrahend": null,
+        "name": "gp70 control",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 238
+},
+{
+    "fields": {
+        "subtrahend": 174,
+        "name": "gp70- V1V2(A) GnTI",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 239
+},
+{
+    "fields": {
+        "subtrahend": 174,
+        "name": "gp70- V1V2(C) GnTI",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 240
+},
+{
+    "fields": {
+        "subtrahend": 174,
+        "name": "gp70-SIVSME660-BR-CG7V, V1V2",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 241
+},
+{
+    "fields": {
+        "subtrahend": 174,
+        "name": "gp70-SIVmac239cs, 23, V1V2",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 242
+},
+{
+    "fields": {
+        "subtrahend": 174,
+        "name": "gp70-SIVmac251WY30, V1V2",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 243
+},
+{
+    "fields": {
+        "subtrahend": 174,
+        "name": "gp70-V1V2 (A)",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 244
+},
+{
+    "fields": {
+        "subtrahend": 174,
+        "name": "gp70-V1V2 (A) N156Q.N160Q",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 245
+},
+{
+    "fields": {
+        "subtrahend": 174,
+        "name": "gp70-V1V2 (B)",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 246
+},
+{
+    "fields": {
+        "subtrahend": 174,
+        "name": "gp70-V1V2 (B) N156Q.N160Q",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 247
+},
+{
+    "fields": {
+        "subtrahend": 174,
+        "name": "gp70-V1V2 (C)",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 248
+},
+{
+    "fields": {
+        "subtrahend": 174,
+        "name": "gp70-V1V2 (Case A2)",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 249
+},
+{
+    "fields": {
+        "subtrahend": 174,
+        "name": "gp70-V1V2 (Case A2) N156Q.N160Q",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 250
+},
+{
+    "fields": {
+        "subtrahend": 174,
+        "name": "gp70MNV3",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 251
+},
+{
+    "fields": {
+        "subtrahend": 174,
+        "name": "gp70_B.CaseA2 V1/V2/169K",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 252
+},
+{
+    "fields": {
+        "subtrahend": 174,
+        "name": "gp70_B.CaseA2 V1/V2mut3",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 253
+},
+{
+    "fields": {
+        "subtrahend": 174,
+        "name": "gp70_B.CaseA2 V1V2169K",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 254
+},
+{
+    "fields": {
+        "subtrahend": 174,
+        "name": "gp70_B.CaseA_V1_V2",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 255
+},
+{
+    "fields": {
+        "subtrahend": 174,
+        "name": "gp70_C.1086C V1/V2/293F",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 256
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "o-gpTV1deltaV2",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 257
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "p24",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 258
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "p31",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 259
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "p55",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 260
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "p66 (RT)",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 261
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "r.HA Wisconsin",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 262
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "r.gp120 A244 (gD+/CHO/GSID)",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 263
+},
+{
+    "fields": {
+        "subtrahend": 121,
+        "name": "r.gp120 MN (gD+/CHO/GSID)",
+        "description": null
+    },
+    "model": "analytics.analyte",
+    "pk": 264
+}
+]
