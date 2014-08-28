@@ -99,7 +99,7 @@ class CohortList(AdminRequiredMixin, generics.ListCreateAPIView):
         return Cohort.objects.all()
 
     def post(self, request, *args, **kwargs):
-        if not request.user.is_superuser:
+        if not request.user.is_staff:
             return Response(status=status.HTTP_403_FORBIDDEN)
 
         response = super(CohortList, self).post(request, *args, **kwargs)
@@ -118,8 +118,7 @@ class CohortDetail(
     serializer_class = CohortSerializer
 
     def put(self, request, *args, **kwargs):
-        cohort = Cohort.objects.get(id=kwargs['pk'])
-        if not cohort.has_modify_permission(request.user):
+        if not request.user.is_staff:
             return Response(status=status.HTTP_403_FORBIDDEN)
 
         return super(CohortDetail, self).put(request, *args, **kwargs)
@@ -128,8 +127,7 @@ class CohortDetail(
         return Response(status=status.HTTP_501_NOT_IMPLEMENTED)
 
     def delete(self, request, *args, **kwargs):
-        cohort = Cohort.objects.get(id=kwargs['pk'])
-        if not cohort.has_modify_permission(request.user):
+        if not request.user.is_staff:
             return Response(status=status.HTTP_403_FORBIDDEN)
 
         return super(CohortDetail, self).delete(request, *args, **kwargs)
