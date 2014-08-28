@@ -37,3 +37,25 @@ app.controller(
         }
     ]
 );
+
+app.controller(
+    'AnalyteEditController',
+    [
+        '$scope',
+        '$rootScope',
+        'ModelService',
+        function ($scope, $rootScope, ModelService) {
+            // need list of analytes for the subtrahend
+            $scope.analytes = ModelService.getAnalytes();
+            $scope.errors = null;
+            $scope.create_update = function(instance) {
+                $scope.errors = ModelService.createUpdateAnalyte(instance);
+
+                if (!$scope.errors) {
+                    // close modal
+                    $scope.ok();
+                }
+            }
+        }
+    ]
+);

@@ -59,3 +59,37 @@ app.controller(
         }
     ]
 );
+
+app.controller(
+    'AnalyteController',
+    [
+        '$scope',
+        '$controller',
+        '$modal',
+        'ModelService',
+        function ($scope, $controller, $modal, ModelService) {
+
+            $scope.analytes = ModelService.getAnalytes();
+
+            $scope.$on('analytes:updated', function () {
+                $scope.analytes = ModelService.getAnalytes();
+            });
+
+            $scope.init_form = function(instance) {
+                var proposed_instance = angular.copy(instance);
+                $scope.errors = [];
+
+                // launch form modal
+                var modalInstance = $modal.open({
+                    templateUrl: MODAL_URLS.ANALYTE,
+                    controller: ModalFormCtrl,
+                    resolve: {
+                        instance: function() {
+                            return proposed_instance;
+                        }
+                    }
+                });
+            };
+        }
+    ]
+);

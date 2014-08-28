@@ -128,6 +128,19 @@ app.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
         data: {
             ncyBreadcrumbLabel: '{{current_project.name}}'
         }
+    }).state({
+        name: 'analyte-list',
+        parent: 'admin',
+        url: 'analytes/',
+        views: {
+            '@': {
+                templateUrl: '/static/ng-app/partials/analyte-list.html',
+                controller: 'AnalyteController'
+            }
+        },
+        data: {
+            ncyBreadcrumbLabel: 'Analytes'
+        }
     });
 });
 
