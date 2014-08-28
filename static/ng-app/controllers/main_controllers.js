@@ -21,7 +21,27 @@ app.controller(
         '$modal',
         'ModelService',
         function ($scope, $controller, $modal, ModelService) {
-            $scope.projects = ModelService.projects;
+            $scope.projects = ModelService.get_projects();
+
+            $scope.$on('projects:updated', function () {
+                $scope.projects = ModelService.get_projects();
+            });
+
+            $scope.init_form = function(instance) {
+                var proposed_instance = angular.copy(instance);
+                $scope.errors = [];
+
+                // launch form modal
+                var modalInstance = $modal.open({
+                    templateUrl: MODAL_URLS.PROJECT,
+                    controller: ModalFormCtrl,
+                    resolve: {
+                        instance: function() {
+                            return proposed_instance;
+                        }
+                    }
+                });
+            };
         }
     ]
 );

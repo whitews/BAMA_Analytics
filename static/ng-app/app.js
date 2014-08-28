@@ -1,24 +1,24 @@
 var MODAL_URLS = {
-    'USER':               'static/ng-app/partials/user-form.html',
-    'COHORT':             'static/ng-app/partials/cohort-form.html',
-    'PARTICIPANT':        'static/ng-app/partials/participant-form.html',
-    'PROJECT':            'static/ng-app/partials/project-form.html',
-    'ANALYTE':            'static/ng-app/partials/analyte-form.html',
-    'CONJUGATE':          'static/ng-app/partials/conjugate-form.html',
-    'BUFFER':             'static/ng-app/partials/buffer-form.html',
-    'SAMPLE_TYPES':       'static/ng-app/partials/sample-type-form.html',
-    'ISOTYPE':            'static/ng-app/partials/isotype-list.html',
+    'USER':               'static/ng-app/partials/forms/user-form.html',
+    'COHORT':             'static/ng-app/partials/forms/cohort-form.html',
+    'PARTICIPANT':        'static/ng-app/partials/forms/participant-form.html',
+    'PROJECT':            'static/ng-app/partials/forms/project-form.html',
+    'ANALYTE':            'static/ng-app/partials/forms/analyte-form.html',
+    'CONJUGATE':          'static/ng-app/partials/forms/conjugate-form.html',
+    'BUFFER':             'static/ng-app/partials/forms/buffer-form.html',
+    'SAMPLE_TYPES':       'static/ng-app/partials/forms/sample-type-form.html',
+    'ISOTYPE':            'static/ng-app/partials/forms/isotype-list.html',
 
     // delete modals
-    'USER_DELETE':        'static/ng-app/partials/user-delete.html',
-    'COHORT_DELETE':      'static/ng-app/partials/cohort-delete.html',
-    'PARTICIPANT_DELETE': 'static/ng-app/partials/participant-delete.html',
-    'PROJECT_DELETE':     'static/ng-app/partials/project-delete.html',
-    'ANALYTE_DELETE':     'static/ng-app/partials/analyte-delete.html',
-    'CONJUGATE_DELETE':   'static/ng-app/partials/conjugate-delete.html',
-    'BUFFER_DELETE':      'static/ng-app/partials/buffer-delete.html',
-    'SAMPLE_TYPE_DELETE': 'static/ng-app/partials/sample-type-delete.html',
-    'ISOTYPE_DELETE':     'static/ng-app/partials/isotype-delete.html'
+    'USER_DELETE':        'static/ng-app/partials/forms/user-delete.html',
+    'COHORT_DELETE':      'static/ng-app/partials/forms/cohort-delete.html',
+    'PARTICIPANT_DELETE': 'static/ng-app/partials/forms/participant-delete.html',
+    'PROJECT_DELETE':     'static/ng-app/partials/forms/project-delete.html',
+    'ANALYTE_DELETE':     'static/ng-app/partials/forms/analyte-delete.html',
+    'CONJUGATE_DELETE':   'static/ng-app/partials/forms/conjugate-delete.html',
+    'BUFFER_DELETE':      'static/ng-app/partials/forms/buffer-delete.html',
+    'SAMPLE_TYPE_DELETE': 'static/ng-app/partials/forms/sample-type-delete.html',
+    'ISOTYPE_DELETE':     'static/ng-app/partials/forms/isotype-delete.html'
 };
 
 var app = angular.module(
