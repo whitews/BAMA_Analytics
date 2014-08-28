@@ -21,10 +21,10 @@ app.controller(
         '$modal',
         'ModelService',
         function ($scope, $controller, $modal, ModelService) {
-            $scope.projects = ModelService.get_projects();
+            $scope.projects = ModelService.getProjects();
 
             $scope.$on('projects:updated', function () {
-                $scope.projects = ModelService.get_projects();
+                $scope.projects = ModelService.getProjects();
             });
 
             $scope.init_form = function(instance) {

@@ -2,7 +2,16 @@ app.factory('ModelService', function($rootScope, User, Cohort, Project) {
     var service = {};
 
     service.user = User.get();
-    service.get_projects = function() {
+
+    // Cohort services
+    service.getCohorts = function() {
+        return Cohort.query(
+            {}
+        );
+    };
+
+    //Project services
+    service.getProjects = function() {
         return Project.query();
     };
 
@@ -13,12 +22,6 @@ app.factory('ModelService', function($rootScope, User, Cohort, Project) {
         }, function() {
             $rootScope.$broadcast('current_project:invalid');
         });
-    };
-
-    service.get_cohorts = function() {
-        return Cohort.query(
-            {}
-        );
     };
 
     service.createUpdateProject = function(instance) {

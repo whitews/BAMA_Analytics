@@ -35,10 +35,10 @@ app.controller(
         'ModelService',
         function ($scope, $controller, $modal, ModelService) {
 
-            $scope.cohorts = ModelService.get_cohorts();
+            $scope.cohorts = ModelService.getCohorts();
 
             $scope.$on('cohorts:updated', function () {
-                $scope.cohorts = ModelService.get_cohorts();
+                $scope.cohorts = ModelService.getCohorts();
             });
 
             $scope.init_form = function(instance) {
