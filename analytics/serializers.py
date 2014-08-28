@@ -15,3 +15,10 @@ class ProjectSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Project
+
+
+class AnalyteSerializer(serializers.ModelSerializer):
+    url = serializers.HyperlinkedIdentityField(view_name='analyte-detail')
+
+    class Meta:
+        model = Analyte

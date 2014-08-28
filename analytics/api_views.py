@@ -27,6 +27,7 @@ def analytics_api_root(request):
     return Response({
         'cohorts': reverse('cohort-list', request=request),
         'projects': reverse('project-list', request=request),
+        'analytes': reverse('analyte-list', request=request),
     })
 
 
@@ -184,3 +185,53 @@ class ProjectDetail(
             return Response(status=status.HTTP_403_FORBIDDEN)
 
         return super(ProjectDetail, self).delete(request, *args, **kwargs)
+
+
+class AnalyteList(AdminRequiredMixin, generics.ListCreateAPIView):
+    """
+    API endpoint representing a list of analytes.
+    """
+
+    model = Analyte
+    serializer_class = AnalyteSerializer
+    filter_fields = ('name', 'subtrahend')
+
+    def get_queryset(self):
+        """
+        Override .get_queryset() to filter on user's cohorts.
+        """
+        return Analyte.objects.all()
+
+    def post(self, request, *args, **kwargs):
+        if not request.user.is_staff:
+            return Response(status=status.HTTP_403_FORBIDDEN)
+
+        response = super(AnalyteList, self).post(request, *args, **kwargs)
+        return response
+
+
+class AnalyteDetail(
+        AdminRequiredMixin,
+        PermissionRequiredMixin,
+        generics.RetrieveUpdateDestroyAPIView):
+    """
+    API endpoint representing a single analyte.
+    """
+
+    model = Analyte
+    serializer_class = AnalyteSerializer
+
+    def put(self, request, *args, **kwargs):
+        if not request.user.is_staff:
+            return Response(status=status.HTTP_403_FORBIDDEN)
+    
+        return super(AnalyteDetail, self).put(request, *args, **kwargs)
+
+    def patch(self, request, *args, **kwargs):
+        return Response(status=status.HTTP_501_NOT_IMPLEMENTED)
+
+    def delete(self, request, *args, **kwargs):
+        if not request.user.is_staff:
+            return Response(status=status.HTTP_403_FORBIDDEN)
+    
+        return super(AnalyteDetail, self).delete(request, *args, **kwargs)

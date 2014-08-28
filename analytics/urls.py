@@ -15,6 +15,10 @@ urlpatterns = patterns('analytics.api_views',
         name='project-list'),
     url(r'^api/analytics/projects/(?P<pk>\d+)/?$', ProjectDetail.as_view(),
         name='project-detail'),
+    url(r'^api/analytics/analytes/?$', AnalyteList.as_view(),
+        name='analyte-list'),
+    url(r'^api/analytics/analytes/(?P<pk>\d+)/?$', AnalyteDetail.as_view(),
+        name='analyte-detail'),
 )
 
 # Non-API routes
