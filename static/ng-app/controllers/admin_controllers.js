@@ -59,16 +59,3 @@ app.controller(
         }
     ]
 );
-
-app.controller(
-    'CohortEditController',
-    [
-        '$scope',
-        '$rootScope',
-        '$controller',
-        'ModelService',
-        function ($scope, $rootScope, $controller, ModelService) {
-
-        }
-    ]
-);

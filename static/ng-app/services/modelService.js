@@ -10,6 +10,29 @@ app.factory('ModelService', function($rootScope, User, Cohort, Project) {
         );
     };
 
+    service.createUpdateCohort = function(instance) {
+        var errors = null;
+        var response;
+
+        if (instance.id) {
+            response = Cohort.update(
+                {id: instance.id },
+                instance
+            );
+        } else {
+            response = Cohort.save(instance);
+        }
+
+        response.$promise.then(function () {
+            // let everyone know the cohorts have changed
+            $rootScope.$broadcast('cohorts:updated');
+        }, function (error) {
+            errors = error.data;
+        });
+
+        return errors;
+    };
+
     //Project services
     service.getProjects = function() {
         return Project.query();
