@@ -19,6 +19,7 @@ class ProjectSerializer(serializers.ModelSerializer):
 
 class AnalyteSerializer(serializers.ModelSerializer):
     url = serializers.HyperlinkedIdentityField(view_name='analyte-detail')
+    subtrahend_name = serializers.CharField(source="subtrahend.name")
 
     class Meta:
         model = Analyte
