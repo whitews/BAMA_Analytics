@@ -141,6 +141,19 @@ app.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
         data: {
             ncyBreadcrumbLabel: 'Analytes'
         }
+    }).state({
+        name: 'conjugate-list',
+        parent: 'admin',
+        url: 'conjugates/',
+        views: {
+            '@': {
+                templateUrl: '/static/ng-app/partials/conjugate-list.html',
+                controller: 'ConjugateController'
+            }
+        },
+        data: {
+            ncyBreadcrumbLabel: 'Conjugates'
+        }
     });
 });
 

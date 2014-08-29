@@ -93,3 +93,37 @@ app.controller(
         }
     ]
 );
+
+app.controller(
+    'ConjugateController',
+    [
+        '$scope',
+        '$controller',
+        '$modal',
+        'ModelService',
+        function ($scope, $controller, $modal, ModelService) {
+
+            $scope.conjugates = ModelService.getConjugates();
+
+            $scope.$on('conjugates:updated', function () {
+                $scope.conjugates = ModelService.getConjugates();
+            });
+
+            $scope.init_form = function(instance) {
+                var proposed_instance = angular.copy(instance);
+                $scope.errors = [];
+
+                // launch form modal
+                var modalInstance = $modal.open({
+                    templateUrl: MODAL_URLS.CONJUGATE,
+                    controller: ModalFormCtrl,
+                    resolve: {
+                        instance: function() {
+                            return proposed_instance;
+                        }
+                    }
+                });
+            };
+        }
+    ]
+);

@@ -1,4 +1,4 @@
-app.factory('ModelService', function($rootScope, User, Cohort, Project, Analyte) {
+app.factory('ModelService', function($rootScope, User, Cohort, Project, Analyte, Conjugate) {
     var service = {};
 
     service.user = User.get();
@@ -93,6 +93,36 @@ app.factory('ModelService', function($rootScope, User, Cohort, Project, Analyte)
         response.$promise.then(function () {
             // let everyone know the analytes have changed
             $rootScope.$broadcast('analytes:updated');
+        }, function (error) {
+            errors = error.data;
+        });
+
+        return errors;
+    };
+    
+    // Conjugate services
+    service.getConjugates = function() {
+        return Conjugate.query(
+            {}
+        );
+    };
+
+    service.createUpdateConjugate = function(instance) {
+        var errors = null;
+        var response;
+
+        if (instance.id) {
+            response = Conjugate.update(
+                {id: instance.id },
+                instance
+            );
+        } else {
+            response = Conjugate.save(instance);
+        }
+
+        response.$promise.then(function () {
+            // let everyone know the conjugates have changed
+            $rootScope.$broadcast('conjugates:updated');
         }, function (error) {
             errors = error.data;
         });

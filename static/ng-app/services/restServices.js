@@ -2,7 +2,8 @@ var URLS = {
     'USER':                '/api/analytics/user/',
     'COHORTS':             '/api/analytics/cohorts/',
     'PROJECTS':            '/api/analytics/projects/',
-    'ANALYTES':            '/api/analytics/analytes/'
+    'ANALYTES':            '/api/analytics/analytes/',
+    'CONJUGATES':          '/api/analytics/conjugates/'
 };
 
 app.factory('User', ['$resource', function ($resource) {
@@ -47,4 +48,14 @@ app.factory('User', ['$resource', function ($resource) {
     );
 
     return Analyte;
+}]).factory('Conjugate', ['$resource', function ($resource) {
+    var Conjugate = $resource(
+        URLS.CONJUGATES + ':id',
+        {},
+        {
+            update: { method: 'PUT' }
+        }
+    );
+
+    return Conjugate;
 }]);
