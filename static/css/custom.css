@@ -458,6 +458,11 @@ select.app, input.app {
   font-size: 14px;
 }
 
+.modal-header > span {
+  font-size: 15px;
+  font-weight: 900;
+}
+
 .modal-body {
   font-size: 14px;
 }
