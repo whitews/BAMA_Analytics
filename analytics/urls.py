@@ -23,6 +23,10 @@ urlpatterns = patterns('analytics.api_views',
         name='conjugate-list'),
     url(r'^api/analytics/conjugates/(?P<pk>\d+)/?$', ConjugateDetail.as_view(),
         name='conjugate-detail'),
+    url(r'^api/analytics/buffers/?$', BufferList.as_view(),
+        name='buffer-list'),
+    url(r'^api/analytics/buffers/(?P<pk>\d+)/?$', BufferDetail.as_view(),
+        name='buffer-detail'),
 )
 
 # Non-API routes

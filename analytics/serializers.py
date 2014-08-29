@@ -30,3 +30,10 @@ class ConjugateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Conjugate
+
+
+class BufferSerializer(serializers.ModelSerializer):
+    url = serializers.HyperlinkedIdentityField(view_name='buffer-detail')
+
+    class Meta:
+        model = Buffer
