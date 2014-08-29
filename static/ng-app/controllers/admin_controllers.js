@@ -127,3 +127,37 @@ app.controller(
         }
     ]
 );
+
+app.controller(
+    'BufferController',
+    [
+        '$scope',
+        '$controller',
+        '$modal',
+        'ModelService',
+        function ($scope, $controller, $modal, ModelService) {
+
+            $scope.buffers = ModelService.getBuffers();
+
+            $scope.$on('buffers:updated', function () {
+                $scope.buffers = ModelService.getBuffers();
+            });
+
+            $scope.init_form = function(instance) {
+                var proposed_instance = angular.copy(instance);
+                $scope.errors = [];
+
+                // launch form modal
+                var modalInstance = $modal.open({
+                    templateUrl: MODAL_URLS.BUFFER,
+                    controller: ModalFormCtrl,
+                    resolve: {
+                        instance: function() {
+                            return proposed_instance;
+                        }
+                    }
+                });
+            };
+        }
+    ]
+);

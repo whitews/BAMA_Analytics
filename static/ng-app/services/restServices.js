@@ -3,7 +3,8 @@ var URLS = {
     'COHORTS':             '/api/analytics/cohorts/',
     'PROJECTS':            '/api/analytics/projects/',
     'ANALYTES':            '/api/analytics/analytes/',
-    'CONJUGATES':          '/api/analytics/conjugates/'
+    'CONJUGATES':          '/api/analytics/conjugates/',
+    'BUFFERS':             '/api/analytics/buffers/'
 };
 
 app.factory('User', ['$resource', function ($resource) {
@@ -58,4 +59,14 @@ app.factory('User', ['$resource', function ($resource) {
     );
 
     return Conjugate;
+}]).factory('Buffer', ['$resource', function ($resource) {
+    var Buffer = $resource(
+        URLS.BUFFERS + ':id',
+        {},
+        {
+            update: { method: 'PUT' }
+        }
+    );
+
+    return Buffer;
 }]);

@@ -154,6 +154,19 @@ app.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
         data: {
             ncyBreadcrumbLabel: 'Conjugates'
         }
+    }).state({
+        name: 'buffer-list',
+        parent: 'admin',
+        url: 'buffers/',
+        views: {
+            '@': {
+                templateUrl: '/static/ng-app/partials/buffer-list.html',
+                controller: 'BufferController'
+            }
+        },
+        data: {
+            ncyBreadcrumbLabel: 'Buffers'
+        }
     });
 });
 
