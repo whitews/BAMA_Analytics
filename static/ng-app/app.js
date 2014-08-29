@@ -7,7 +7,7 @@ var MODAL_URLS = {
     'CONJUGATE':          'static/ng-app/partials/forms/conjugate-form.html',
     'BUFFER':             'static/ng-app/partials/forms/buffer-form.html',
     'SAMPLE_TYPES':       'static/ng-app/partials/forms/sample-type-form.html',
-    'ISOTYPE':            'static/ng-app/partials/forms/isotype-list.html',
+    'ISOTYPE':            'static/ng-app/partials/forms/isotype-form.html',
 
     // delete modals
     'USER_DELETE':        'static/ng-app/partials/forms/user-delete.html',
@@ -166,6 +166,19 @@ app.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
         },
         data: {
             ncyBreadcrumbLabel: 'Buffers'
+        }
+    }).state({
+        name: 'isotype-list',
+        parent: 'admin',
+        url: 'isotypes/',
+        views: {
+            '@': {
+                templateUrl: '/static/ng-app/partials/isotype-list.html',
+                controller: 'IsotypeController'
+            }
+        },
+        data: {
+            ncyBreadcrumbLabel: 'Isotypes'
         }
     });
 });

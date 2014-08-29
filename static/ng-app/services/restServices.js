@@ -4,7 +4,8 @@ var URLS = {
     'PROJECTS':            '/api/analytics/projects/',
     'ANALYTES':            '/api/analytics/analytes/',
     'CONJUGATES':          '/api/analytics/conjugates/',
-    'BUFFERS':             '/api/analytics/buffers/'
+    'BUFFERS':             '/api/analytics/buffers/',
+    'ISOTYPES':            '/api/analytics/isotypes/'
 };
 
 app.factory('User', ['$resource', function ($resource) {
@@ -69,4 +70,14 @@ app.factory('User', ['$resource', function ($resource) {
     );
 
     return Buffer;
+}]).factory('Isotype', ['$resource', function ($resource) {
+    var Isotype = $resource(
+        URLS.ISOTYPES + ':id',
+        {},
+        {
+            update: { method: 'PUT' }
+        }
+    );
+
+    return Isotype;
 }]);

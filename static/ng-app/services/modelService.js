@@ -1,4 +1,12 @@
-app.factory('ModelService', function($rootScope, User, Cohort, Project, Analyte, Conjugate, Buffer) {
+app.factory('ModelService', function(
+        $rootScope,
+        User,
+        Cohort,
+        Project,
+        Analyte,
+        Conjugate,
+        Buffer,
+        Isotype) {
     var service = {};
 
     service.user = User.get();
@@ -153,6 +161,36 @@ app.factory('ModelService', function($rootScope, User, Cohort, Project, Analyte,
         response.$promise.then(function () {
             // let everyone know the buffers have changed
             $rootScope.$broadcast('buffers:updated');
+        }, function (error) {
+            errors = error.data;
+        });
+
+        return errors;
+    };
+
+    // Isotype services
+    service.getIsotypes = function() {
+        return Isotype.query(
+            {}
+        );
+    };
+
+    service.createUpdateIsotype = function(instance) {
+        var errors = null;
+        var response;
+
+        if (instance.id) {
+            response = Isotype.update(
+                {id: instance.id },
+                instance
+            );
+        } else {
+            response = Isotype.save(instance);
+        }
+
+        response.$promise.then(function () {
+            // let everyone know the isotypes have changed
+            $rootScope.$broadcast('isotypes:updated');
         }, function (error) {
             errors = error.data;
         });

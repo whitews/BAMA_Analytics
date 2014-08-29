@@ -161,3 +161,37 @@ app.controller(
         }
     ]
 );
+
+app.controller(
+    'IsotypeController',
+    [
+        '$scope',
+        '$controller',
+        '$modal',
+        'ModelService',
+        function ($scope, $controller, $modal, ModelService) {
+
+            $scope.isotypes = ModelService.getIsotypes();
+
+            $scope.$on('isotypes:updated', function () {
+                $scope.isotypes = ModelService.getIsotypes();
+            });
+
+            $scope.init_form = function(instance) {
+                var proposed_instance = angular.copy(instance);
+                $scope.errors = [];
+
+                // launch form modal
+                var modalInstance = $modal.open({
+                    templateUrl: MODAL_URLS.ISOTYPE,
+                    controller: ModalFormCtrl,
+                    resolve: {
+                        instance: function() {
+                            return proposed_instance;
+                        }
+                    }
+                });
+            };
+        }
+    ]
+);
