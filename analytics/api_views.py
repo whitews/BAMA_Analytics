@@ -30,6 +30,7 @@ def analytics_api_root(request):
         'analytes': reverse('analyte-list', request=request),
         'conjugates': reverse('conjugate-list', request=request),
         'buffers': reverse('buffer-list', request=request),
+        'isotypes': reverse('isotype-list', request=request),
     })
 
 
@@ -337,3 +338,53 @@ class BufferDetail(
             return Response(status=status.HTTP_403_FORBIDDEN)
     
         return super(BufferDetail, self).delete(request, *args, **kwargs)
+
+
+class IsotypeList(AdminRequiredMixin, generics.ListCreateAPIView):
+    """
+    API endpoint representing a list of isotypes.
+    """
+
+    model = Isotype
+    serializer_class = IsotypeSerializer
+    filter_fields = ('name')
+
+    def get_queryset(self):
+        """
+        Override .get_queryset() to filter on user's cohorts.
+        """
+        return Isotype.objects.all()
+
+    def post(self, request, *args, **kwargs):
+        if not request.user.is_staff:
+            return Response(status=status.HTTP_403_FORBIDDEN)
+
+        response = super(IsotypeList, self).post(request, *args, **kwargs)
+        return response
+
+
+class IsotypeDetail(
+        AdminRequiredMixin,
+        PermissionRequiredMixin,
+        generics.RetrieveUpdateDestroyAPIView):
+    """
+    API endpoint representing a single isotype.
+    """
+
+    model = Isotype
+    serializer_class = IsotypeSerializer
+
+    def put(self, request, *args, **kwargs):
+        if not request.user.is_staff:
+            return Response(status=status.HTTP_403_FORBIDDEN)
+    
+        return super(IsotypeDetail, self).put(request, *args, **kwargs)
+
+    def patch(self, request, *args, **kwargs):
+        return Response(status=status.HTTP_501_NOT_IMPLEMENTED)
+
+    def delete(self, request, *args, **kwargs):
+        if not request.user.is_staff:
+            return Response(status=status.HTTP_403_FORBIDDEN)
+    
+        return super(IsotypeDetail, self).delete(request, *args, **kwargs)

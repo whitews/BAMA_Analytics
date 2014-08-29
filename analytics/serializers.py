@@ -37,3 +37,10 @@ class BufferSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Buffer
+
+
+class IsotypeSerializer(serializers.ModelSerializer):
+    url = serializers.HyperlinkedIdentityField(view_name='isotype-detail')
+
+    class Meta:
+        model = Isotype

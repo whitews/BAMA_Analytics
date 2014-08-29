@@ -27,6 +27,10 @@ urlpatterns = patterns('analytics.api_views',
         name='buffer-list'),
     url(r'^api/analytics/buffers/(?P<pk>\d+)/?$', BufferDetail.as_view(),
         name='buffer-detail'),
+    url(r'^api/analytics/isotypes/?$', IsotypeList.as_view(),
+        name='isotype-list'),
+    url(r'^api/analytics/isotypes/(?P<pk>\d+)/?$', IsotypeDetail.as_view(),
+        name='isotype-detail'),
 )
 
 # Non-API routes
