@@ -23,3 +23,10 @@ class AnalyteSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Analyte
+
+
+class ConjugateSerializer(serializers.ModelSerializer):
+    url = serializers.HyperlinkedIdentityField(view_name='conjugate-detail')
+
+    class Meta:
+        model = Conjugate

@@ -28,6 +28,7 @@ def analytics_api_root(request):
         'cohorts': reverse('cohort-list', request=request),
         'projects': reverse('project-list', request=request),
         'analytes': reverse('analyte-list', request=request),
+        'conjugates': reverse('conjugate-list', request=request),
     })
 
 
@@ -235,3 +236,53 @@ class AnalyteDetail(
             return Response(status=status.HTTP_403_FORBIDDEN)
     
         return super(AnalyteDetail, self).delete(request, *args, **kwargs)
+
+
+class ConjugateList(AdminRequiredMixin, generics.ListCreateAPIView):
+    """
+    API endpoint representing a list of conjugates.
+    """
+
+    model = Conjugate
+    serializer_class = ConjugateSerializer
+    filter_fields = ('name')
+
+    def get_queryset(self):
+        """
+        Override .get_queryset() to filter on user's cohorts.
+        """
+        return Conjugate.objects.all()
+
+    def post(self, request, *args, **kwargs):
+        if not request.user.is_staff:
+            return Response(status=status.HTTP_403_FORBIDDEN)
+
+        response = super(ConjugateList, self).post(request, *args, **kwargs)
+        return response
+
+
+class ConjugateDetail(
+        AdminRequiredMixin,
+        PermissionRequiredMixin,
+        generics.RetrieveUpdateDestroyAPIView):
+    """
+    API endpoint representing a single conjugate.
+    """
+
+    model = Conjugate
+    serializer_class = ConjugateSerializer
+
+    def put(self, request, *args, **kwargs):
+        if not request.user.is_staff:
+            return Response(status=status.HTTP_403_FORBIDDEN)
+    
+        return super(ConjugateDetail, self).put(request, *args, **kwargs)
+
+    def patch(self, request, *args, **kwargs):
+        return Response(status=status.HTTP_501_NOT_IMPLEMENTED)
+
+    def delete(self, request, *args, **kwargs):
+        if not request.user.is_staff:
+            return Response(status=status.HTTP_403_FORBIDDEN)
+    
+        return super(ConjugateDetail, self).delete(request, *args, **kwargs)
