@@ -31,6 +31,7 @@ def analytics_api_root(request):
         'conjugates': reverse('conjugate-list', request=request),
         'buffers': reverse('buffer-list', request=request),
         'isotypes': reverse('isotype-list', request=request),
+        'sample-types': reverse('sample-type-list', request=request),
     })
 
 
@@ -388,3 +389,53 @@ class IsotypeDetail(
             return Response(status=status.HTTP_403_FORBIDDEN)
     
         return super(IsotypeDetail, self).delete(request, *args, **kwargs)
+
+
+class SampleTypeList(AdminRequiredMixin, generics.ListCreateAPIView):
+    """
+    API endpoint representing a list of isotypes.
+    """
+
+    model = SampleType
+    serializer_class = SampleTypeSerializer
+    filter_fields = ('name')
+
+    def get_queryset(self):
+        """
+        Override .get_queryset() to filter on user's cohorts.
+        """
+        return SampleType.objects.all()
+
+    def post(self, request, *args, **kwargs):
+        if not request.user.is_staff:
+            return Response(status=status.HTTP_403_FORBIDDEN)
+
+        response = super(SampleTypeList, self).post(request, *args, **kwargs)
+        return response
+
+
+class SampleTypeDetail(
+        AdminRequiredMixin,
+        PermissionRequiredMixin,
+        generics.RetrieveUpdateDestroyAPIView):
+    """
+    API endpoint representing a single isotype.
+    """
+
+    model = SampleType
+    serializer_class = SampleTypeSerializer
+
+    def put(self, request, *args, **kwargs):
+        if not request.user.is_staff:
+            return Response(status=status.HTTP_403_FORBIDDEN)
+    
+        return super(SampleTypeDetail, self).put(request, *args, **kwargs)
+
+    def patch(self, request, *args, **kwargs):
+        return Response(status=status.HTTP_501_NOT_IMPLEMENTED)
+
+    def delete(self, request, *args, **kwargs):
+        if not request.user.is_staff:
+            return Response(status=status.HTTP_403_FORBIDDEN)
+    
+        return super(SampleTypeDetail, self).delete(request, *args, **kwargs)

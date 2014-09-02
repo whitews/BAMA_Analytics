@@ -44,3 +44,10 @@ class IsotypeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Isotype
+
+
+class SampleTypeSerializer(serializers.ModelSerializer):
+    url = serializers.HyperlinkedIdentityField(view_name='sample-type-detail')
+
+    class Meta:
+        model = SampleType
