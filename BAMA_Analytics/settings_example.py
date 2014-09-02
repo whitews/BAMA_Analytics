@@ -26,6 +26,7 @@ TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 
+ANONYMOUS_USER_ID = -1
 
 # Application definition
 
@@ -37,7 +38,10 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_extensions',
-    'analytics'
+    'authenticate',
+    'analytics',
+    'rest_framework',
+    'guardian'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -50,9 +54,40 @@ MIDDLEWARE_CLASSES = (
 )
 
 ROOT_URLCONF = 'BAMA_Analytics.urls'
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/home'
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+SESSION_SAVE_EVERY_REQUEST = True
+SESSION_COOKIE_AGE = 900  # seconds
 
 WSGI_APPLICATION = 'BAMA_Analytics.wsgi.application'
 
+TEMPLATE_DIRS = (
+    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
+    # Always use forward slashes, even on Windows.
+    # Don't forget to use absolute paths, not relative paths.
+    BASE_DIR + '/BAMA_Analytics/templates',
+    BASE_DIR + '/BAMA_Analytics/authenticate/templates',
+    BASE_DIR + '/BAMA_Analytics/analytics/templates'
+)
+
+# Absolute path to the directory static files should be collected to.
+# Don't put anything in this directory yourself; store your static files
+# in apps' "static/" subdirectories and in STATICFILES_DIRS.
+# Example: "/home/media/media.lawrence.com/static/"
+STATIC_ROOT = ''
+
+# URL prefix for static files.
+# Example: "http://media.lawrence.com/static/"
+STATIC_URL = '/static/'
+
+# Additional locations of static files
+STATICFILES_DIRS = (
+    # Put strings here, like "/home/html/static" or "C:/www/django/static".
+    # Always use forward slashes, even on Windows.
+    # Don't forget to use absolute paths, not relative paths.
+    BASE_DIR + '/BAMA_Analytics/static/',
+)
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
