@@ -5,7 +5,8 @@ var URLS = {
     'ANALYTES':            '/api/analytics/analytes/',
     'CONJUGATES':          '/api/analytics/conjugates/',
     'BUFFERS':             '/api/analytics/buffers/',
-    'ISOTYPES':            '/api/analytics/isotypes/'
+    'ISOTYPES':            '/api/analytics/isotypes/',
+    'SAMPLE_TYPES':        '/api/analytics/sample-types/'
 };
 
 app.factory('User', ['$resource', function ($resource) {
@@ -80,4 +81,14 @@ app.factory('User', ['$resource', function ($resource) {
     );
 
     return Isotype;
+}]).factory('SampleType', ['$resource', function ($resource) {
+    var SampleType = $resource(
+        URLS.SAMPLE_TYPES + ':id',
+        {},
+        {
+            update: { method: 'PUT' }
+        }
+    );
+
+    return SampleType;
 }]);

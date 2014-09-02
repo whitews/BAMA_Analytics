@@ -195,3 +195,37 @@ app.controller(
         }
     ]
 );
+
+app.controller(
+    'SampleTypeController',
+    [
+        '$scope',
+        '$controller',
+        '$modal',
+        'ModelService',
+        function ($scope, $controller, $modal, ModelService) {
+
+            $scope.sample_types = ModelService.getSampleTypes();
+
+            $scope.$on('sample_types:updated', function () {
+                $scope.sample_types = ModelService.getSampleTypes();
+            });
+
+            $scope.init_form = function(instance) {
+                var proposed_instance = angular.copy(instance);
+                $scope.errors = [];
+
+                // launch form modal
+                var modalInstance = $modal.open({
+                    templateUrl: MODAL_URLS.SAMPLE_TYPE,
+                    controller: ModalFormCtrl,
+                    resolve: {
+                        instance: function() {
+                            return proposed_instance;
+                        }
+                    }
+                });
+            };
+        }
+    ]
+);

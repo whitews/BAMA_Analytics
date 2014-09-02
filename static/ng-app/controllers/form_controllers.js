@@ -119,3 +119,23 @@ app.controller(
         }
     ]
 );
+
+app.controller(
+    'SampleTypeEditController',
+    [
+        '$scope',
+        '$rootScope',
+        'ModelService',
+        function ($scope, $rootScope, ModelService) {
+            $scope.errors = null;
+            $scope.create_update = function(instance) {
+                $scope.errors = ModelService.createUpdateSampleType(instance);
+
+                if (!$scope.errors) {
+                    // close modal
+                    $scope.ok();
+                }
+            }
+        }
+    ]
+);

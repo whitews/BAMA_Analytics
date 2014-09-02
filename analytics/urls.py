@@ -31,9 +31,9 @@ urlpatterns = patterns('analytics.api_views',
         name='isotype-list'),
     url(r'^api/analytics/isotypes/(?P<pk>\d+)/?$', IsotypeDetail.as_view(),
         name='isotype-detail'),
-    url(r'^api/analytics/sample_types/?$', SampleTypeList.as_view(),
+    url(r'^api/analytics/sample-types/?$', SampleTypeList.as_view(),
         name='sample-type-list'),
-    url(r'^api/analytics/sample_types/(?P<pk>\d+)/?$', SampleTypeDetail.as_view(),
+    url(r'^api/analytics/sample-types/(?P<pk>\d+)/?$', SampleTypeDetail.as_view(),
         name='sample-type-detail'),
 )
 

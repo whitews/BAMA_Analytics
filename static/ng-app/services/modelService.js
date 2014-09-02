@@ -6,7 +6,8 @@ app.factory('ModelService', function(
         Analyte,
         Conjugate,
         Buffer,
-        Isotype) {
+        Isotype,
+        SampleType) {
     var service = {};
 
     service.user = User.get();
@@ -191,6 +192,36 @@ app.factory('ModelService', function(
         response.$promise.then(function () {
             // let everyone know the isotypes have changed
             $rootScope.$broadcast('isotypes:updated');
+        }, function (error) {
+            errors = error.data;
+        });
+
+        return errors;
+    };
+    
+    // SampleType services
+    service.getSampleTypes = function() {
+        return SampleType.query(
+            {}
+        );
+    };
+
+    service.createUpdateSampleType = function(instance) {
+        var errors = null;
+        var response;
+
+        if (instance.id) {
+            response = SampleType.update(
+                {id: instance.id },
+                instance
+            );
+        } else {
+            response = SampleType.save(instance);
+        }
+
+        response.$promise.then(function () {
+            // let everyone know the sample_types have changed
+            $rootScope.$broadcast('sample_types:updated');
         }, function (error) {
             errors = error.data;
         });
