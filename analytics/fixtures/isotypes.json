@@ -1,0 +1,114 @@
+[
+{
+    "fields": {
+        "name": "IgG",
+        "description": "Total IgG"
+    },
+    "model": "analytics.isotype",
+    "pk": 1
+},
+{
+    "fields": {
+        "name": "IgG1",
+        "description": "IgG1"
+    },
+    "model": "analytics.isotype",
+    "pk": 2
+},
+{
+    "fields": {
+        "name": "IgG2",
+        "description": "IgG2"
+    },
+    "model": "analytics.isotype",
+    "pk": 3
+},
+{
+    "fields": {
+        "name": "IgG3",
+        "description": "IgG3"
+    },
+    "model": "analytics.isotype",
+    "pk": 4
+},
+{
+    "fields": {
+        "name": "IgG4",
+        "description": "IgG4"
+    },
+    "model": "analytics.isotype",
+    "pk": 5
+},
+{
+    "fields": {
+        "name": "IgA",
+        "description": "Total IgA"
+    },
+    "model": "analytics.isotype",
+    "pk": 6
+},
+{
+    "fields": {
+        "name": "IgA1",
+        "description": "IgA1"
+    },
+    "model": "analytics.isotype",
+    "pk": 7
+},
+{
+    "fields": {
+        "name": "IgA2",
+        "description": "IgA2"
+    },
+    "model": "analytics.isotype",
+    "pk": 8
+},
+{
+    "fields": {
+        "name": "dIgA",
+        "description": "dimeric IgA"
+    },
+    "model": "analytics.isotype",
+    "pk": 9
+},
+{
+    "fields": {
+        "name": "pIgR",
+        "description": "polymeric IgR"
+    },
+    "model": "analytics.isotype",
+    "pk": 10
+},
+{
+    "fields": {
+        "name": "SIgA",
+        "description": "secretory IgA"
+    },
+    "model": "analytics.isotype",
+    "pk": 11
+},
+{
+    "fields": {
+        "name": "IgM",
+        "description": "IgM"
+    },
+    "model": "analytics.isotype",
+    "pk": 12
+},
+{
+    "fields": {
+        "name": "IgD",
+        "description": "IgD"
+    },
+    "model": "analytics.isotype",
+    "pk": 13
+},
+{
+    "fields": {
+        "name": "IgE",
+        "description": "IgE"
+    },
+    "model": "analytics.isotype",
+    "pk": 14
+}
+]
