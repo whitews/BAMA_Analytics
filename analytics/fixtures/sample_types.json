@@ -1,0 +1,74 @@
+[
+{
+    "fields": {
+        "name": "PLA",
+        "description": "Plasma"
+    },
+    "model": "analytics.sampletype",
+    "pk": 1
+},
+{
+    "fields": {
+        "name": "SER",
+        "description": "Serum"
+    },
+    "model": "analytics.sampletype",
+    "pk": 2
+},
+{
+    "fields": {
+        "name": "SEM",
+        "description": "Semen"
+    },
+    "model": "analytics.sampletype",
+    "pk": 3
+},
+{
+    "fields": {
+        "name": "SPG",
+        "description": "Cervical Sponge"
+    },
+    "model": "analytics.sampletype",
+    "pk": 4
+},
+{
+    "fields": {
+        "name": "CVL",
+        "description": "Cervical Lavage"
+    },
+    "model": "analytics.sampletype",
+    "pk": 5
+},
+{
+    "fields": {
+        "name": "CER",
+        "description": "Cervical Lavage"
+    },
+    "model": "analytics.sampletype",
+    "pk": 6
+},
+{
+    "fields": {
+        "name": "SAL",
+        "description": "Saliva"
+    },
+    "model": "analytics.sampletype",
+    "pk": 7
+},
+{
+    "fields": {
+        "name": "VSC",
+        "description": "Vaginal Secretions"
+    },
+    "model": "analytics.sampletype",
+    "pk": 8
+},
+{
+    "fields": {
+        "name": "REC",
+        "description": "Rectal Weck"
+    },
+    "model": "analytics.sampletype",
+    "pk": 9
+}
+]
