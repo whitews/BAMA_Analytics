@@ -61,6 +61,28 @@ app.controller(
 );
 
 app.controller(
+    'CohortDetailController',
+    [
+        '$scope',
+        '$controller',
+        '$state',
+        '$stateParams',
+        '$modal',
+        'ModelService',
+        function ($scope, $controller, $state, $stateParams, $modal, ModelService) {
+            ModelService.setCurrentCohortById($stateParams.cohortId);
+            $scope.$on('current_cohort:updated', function () {
+                $scope.current_cohort = ModelService.current_cohort;
+            });
+            $scope.$on('current_cohort:invalid', function () {
+                // re-direct to 404
+                $state.transitionTo('404');
+            });
+        }
+    ]
+);
+
+app.controller(
     'AnalyteController',
     [
         '$scope',

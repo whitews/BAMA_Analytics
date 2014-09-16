@@ -1,0 +1,51 @@
+    <table class="table">
+      <thead>
+        <tr>
+          <th class="center" colspan="50">
+            <div style="position:relative">
+              <h4>{{ current_cohort.name }}</h4>
+              <div style="position:absolute; right:0;top:0;">
+                <div class="btn-group">
+                    <a class="btn btn-danger btn-sm" ng-click="init_delete(current_cohort, 'COHORT_DELETE')" ng-show="can_modify_cohort">Delete Cohort</a>
+                </div>
+
+                <div class="btn-group">
+                    <a class="btn btn-default btn-sm" ng-click="init_form(current_cohort, 'COHORT')" ng-show="can_modify_cohort">Edit Cohort</a>
+                    <a class="btn btn-default btn-sm"  ui-sref="user-list" ng-show="can_manage_users">Manage Users</a>
+                </div>
+              </div>
+            </div>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td colspan="50">{{ current_cohort.description }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="well">
+
+      <div class="row">
+        <div class="col-md-3">
+          <h4>Data Points</h4>
+
+              <a ui-sref="cohort-data-list({cohortId: current_cohort.id })">View</a><br/>
+
+        </div>
+        <div class="col-md-3">
+
+        </div>
+        <div class="col-md-3">
+
+        </div>
+        <div class="col-md-3">
+
+        </div>
+      </div>
+
+      <div class="row">
+        <br/>
+      </div>
+
+    </div>
