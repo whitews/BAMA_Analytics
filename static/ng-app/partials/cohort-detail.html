@@ -13,6 +13,7 @@
                     <a class="btn btn-default btn-sm" ng-click="init_form(current_cohort, 'COHORT')" ng-show="current_cohort.permissions.modify_cohort_data">Edit Cohort</a>
                     <a class="btn btn-default btn-sm"  ui-sref="user-list" ng-show="current_cohort.permissions.manage_cohort_users">Manage Users</a>
                 </div>
+
               </div>
             </div>
           </th>
@@ -24,28 +25,85 @@
         </tr>
       </tbody>
     </table>
-    <div class="well">
 
-      <div class="row">
-        <div class="col-md-3">
-          <h4>Data Points</h4>
+    <div class="slide" ng-show="show_upload">
+      <div class="drop-box" ng-show="dropSupported" ng-file-drop="onFileSelect($files);" ng-file-drop-available="dropSupported=true">
 
-              <a ui-sref="cohort-data-list({cohortId: current_cohort.id })">View</a><br/>
+        <div class="text-center instruction" ng-hide="sample_upload_model.file_queue.length > 0"><em>Drop CSV files here</em></div>
 
-        </div>
-        <div class="col-md-3">
+      </div>
+    </div>
 
-        </div>
-        <div class="col-md-3">
+    <div class="row">
+      <div class="col-md-4">
 
-        </div>
-        <div class="col-md-3">
+        <div class="well" style="margin-top:52px">
+          <form class="unstyled-checkboxes" id="sample-filter-form" method="get">
+            <div style="position: relative">
+              <h5>Filter Data</h5>
+              <div style="position: absolute; right:0;top:0;">
+                <button class="btn btn-default btn-xs" ng-click="apply_filter()">
+                  Apply
+                </button>
+              </div>
+            </div>
 
+            <hr/>
+
+            <b>Filter1</b>
+            <ul>
+              <li ng-repeat="s in something">
+                <label>
+                  <input type="checkbox" ng-model="p.query" />
+                  {{ asdf }}
+                </label>
+              </li>
+            </ul>
+
+            <hr/>
+
+          </form>
         </div>
       </div>
 
-      <div class="row">
-        <br/>
-      </div>
+      <div class="col-md-8">
+        <table id="data-table" class="table table-hover">
+          <thead>
+            <tr>
 
+                <th colspan="50" class="center">
+
+                  <div style="position:relative;">
+
+                    <h5>Data Points</h5>
+
+                    <div style="position:absolute; right:0;top:0;">
+                      <div class="btn-group pull-right">
+                        <a class="btn btn-success btn-xs" ng-click="show_upload=true" ng-show="current_cohort.permissions.add_cohort_data">Upload Data</a>
+                      </div>
+                    </div>
+
+                  </div>
+
+                </th>
+            </tr>
+            <tr>
+                <th></th>
+                <th>Col1</th>
+                <th>Col2</th>
+                <th>Col3</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="s in samples">
+              <td class="no-wrap" width="1%">
+
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
