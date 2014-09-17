@@ -12,6 +12,7 @@ from rest_framework.response import Response
 
 from django.views.generic.detail import SingleObjectMixin
 from django.core.exceptions import PermissionDenied
+from django.shortcuts import get_object_or_404
 
 from analytics.serializers import *
 
@@ -33,6 +34,20 @@ def analytics_api_root(request):
         'isotypes': reverse('isotype-list', request=request),
         'sample-types': reverse('sample-type-list', request=request),
     })
+
+
+@api_view(['GET'])
+@authentication_classes((SessionAuthentication, TokenAuthentication))
+@permission_classes((IsAuthenticated,))
+def get_cohort_permissions(request, cohort):
+    cohort = get_object_or_404(Cohort, pk=cohort)
+
+    if not cohort.has_view_permission(request.user):
+        raise PermissionDenied
+
+    perms = cohort.get_user_permissions(request.user)
+
+    return Response(perms)
 
 
 class LoginRequiredMixin(object):

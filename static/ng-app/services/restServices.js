@@ -40,6 +40,19 @@ app.factory('User', ['$resource', function ($resource) {
         }
     );
 
+    Cohort.prototype.getUserPermissions = function() {
+        var perms = $resource(
+            URLS.COHORTS + this.id + '/permissions/',
+            {},
+            {
+                get: {
+                    isArray: false
+                }
+            }
+        );
+        return perms.get();
+    };
+
     return Cohort;
 }]).factory('Analyte', ['$resource', function ($resource) {
     var Analyte = $resource(

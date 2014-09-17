@@ -6,12 +6,12 @@
               <h4>{{ current_cohort.name }}</h4>
               <div style="position:absolute; right:0;top:0;">
                 <div class="btn-group">
-                    <a class="btn btn-danger btn-sm" ng-click="init_delete(current_cohort, 'COHORT_DELETE')" ng-show="can_modify_cohort">Delete Cohort</a>
+                    <a class="btn btn-danger btn-sm" ng-click="init_delete(current_cohort, 'COHORT_DELETE')" ng-show="current_cohort.permissions.modify_cohort_data">Delete Cohort</a>
                 </div>
 
                 <div class="btn-group">
-                    <a class="btn btn-default btn-sm" ng-click="init_form(current_cohort, 'COHORT')" ng-show="can_modify_cohort">Edit Cohort</a>
-                    <a class="btn btn-default btn-sm"  ui-sref="user-list" ng-show="can_manage_users">Manage Users</a>
+                    <a class="btn btn-default btn-sm" ng-click="init_form(current_cohort, 'COHORT')" ng-show="current_cohort.permissions.modify_cohort_data">Edit Cohort</a>
+                    <a class="btn btn-default btn-sm"  ui-sref="user-list" ng-show="current_cohort.permissions.manage_cohort_users">Manage Users</a>
                 </div>
               </div>
             </div>

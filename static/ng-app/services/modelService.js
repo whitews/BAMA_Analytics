@@ -21,8 +21,11 @@ app.factory('ModelService', function(
 
     service.setCurrentCohortById = function(id) {
         service.current_cohort = Cohort.get({'id':id});
-        service.current_cohort.$promise.then(function() {
-            $rootScope.$broadcast('current_cohort:updated');
+        service.current_cohort.$promise.then(function(c) {
+            c.getUserPermissions().$promise.then(function (value) {
+                c.permissions = value;
+                $rootScope.$broadcast('current_cohort:updated');
+            });
         }, function() {
             $rootScope.$broadcast('current_cohort:invalid');
         });

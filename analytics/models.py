@@ -22,6 +22,35 @@ class ProtectedModel(models.Model):
         return False
 
 
+class CohortManager(models.Manager):
+    @staticmethod
+    def get_cohorts_user_can_view(user):
+        """
+        Return a list of cohorts for which the given user has view permissions,
+        Do NOT use this method to determine whether a user has view access to a
+        particular cohort, use instance method has_view_permission instead.
+        """
+        cohorts = get_objects_for_user(
+            user,
+            'view_cohort_data',
+            klass=Cohort)
+
+        return cohorts
+
+    @staticmethod
+    def get_cohorts_user_can_manage_users(user):
+        """
+        Return a list of cohorts for which the given user has user management
+        permissions.
+        """
+        cohorts = get_objects_for_user(
+            user,
+            'manage_cohort_users',
+            klass=Cohort)
+
+        return cohorts
+    
+
 class Cohort(models.Model):
     name = models.CharField(
         unique=True,
@@ -33,6 +62,52 @@ class Cohort(models.Model):
         null=True,
         blank=True
     )
+
+    objects = CohortManager()
+
+    class Meta:
+        permissions = (
+            ('view_cohort_data', 'View Cohort Data'),
+            ('add_cohort_data', 'Add Cohort Data'),
+            ('modify_cohort_data', 'Modify/Delete Cohort Data'),
+            ('manage_cohort_users', 'Manage Cohort Users'),
+        )
+
+    def has_view_permission(self, user):
+        if user.has_perm('view_cohort_data', self):
+            return True
+        return False
+
+    def has_add_permission(self, user):
+        if user.has_perm('add_cohort_data', self):
+            return True
+        return False
+
+    def has_modify_permission(self, user):
+        if user.has_perm('modify_cohort_data', self):
+            return True
+        return False
+
+    def has_user_management_permission(self, user):
+        if user.has_perm('manage_cohort_users', self):
+            return True
+        return False
+
+    def get_cohort_users(self):
+        user_set = set()
+        user_set.update(get_users_with_perms(self, with_superusers=False))
+
+        return user_set
+
+    def get_user_permissions(self, user):
+        perms_dict = {
+            'view_cohort_data': self.has_view_permission(user),
+            'add_cohort_data': self.has_add_permission(user),
+            'modify_cohort_data': self.has_modify_permission(user),
+            'manage_cohort_users': self.has_user_management_permission(user)
+        }
+
+        return perms_dict
 
 
 class ProjectManager(models.Manager):
