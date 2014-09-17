@@ -436,10 +436,9 @@ select.app, input.app {
 }
 
 .instruction {
-    margin-top: 5%;
-    font: 36px bold "Optima", "FreeSerif";
-    font-weight: 900;
-    color: #c6c6c6;
+  font: 36px bold "Roboto Slab", "Optima", "FreeSerif";
+  font-weight: 900;
+  color: #c6c6c6;
 }
 
 .danger {
@@ -500,4 +499,24 @@ form.unstyled-checkboxes > ul > li > label {
 }
 form.unstyled-checkboxes > ul > li > label > input[type="checkbox"] {
     margin: 0px !important;
+}
+
+/* Animations */
+.slide.ng-hide-remove, .slide.ng-hide-add {
+  -webkit-transition:5.5s linear all;
+  transition:5.5s linear all;
+  display: block!important;
+}
+.slide.ng-hide-remove {
+  top: 100px;
+}
+
+.slide.ng-hide-remove.ng-hide-remove-active {
+  top: 0px;
+}
+.slide.ng-hide-add {
+    top: 0;
+}
+.slide.ng-hide-add.ng-hide-add-active {
+    top: -100px;
 }

@@ -27,6 +27,7 @@ var app = angular.module(
         'ngSanitize',
         'ngCookies',
         'ngResource',
+        'ngAnimate',
         'ui.router',
         'ui.bootstrap',
         'ui.select2',
