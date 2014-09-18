@@ -31,9 +31,19 @@
 
         <div class="text-center instruction" ng-hide="csv_data.length > 0"><em>Drop CSV files here</em></div>
 
-        <div class="text-center" ng-show="csv_data.length > 0">
-          <h5><em>{{ file_name }}</em></h5>
-          <p>{{ csv_data.length }} records found</p>
+        <div ng-show="csv_data.length > 0">
+          <div class="text-center">
+            <h5><em>{{ file_name }}</em></h5>
+          </div>
+          <p>
+            {{ csv_data.length }} records found
+          </p>
+          <p>
+            {{ distinct_notebooks.length }} notebooks found:
+            <ul>
+              <li ng-repeat="nb in distinct_notebooks">{{ nb.name }} <span class="label label-success" ng-show="nb.new">New</span></li>
+            </ul>
+          </p>
         </div>
 
         <div class="well well-warning" ng-show="csv_errors.length > 0">

@@ -43,6 +43,8 @@ app.controller(
 
             function validateData(data) {
                 var distinct_cohorts = [];
+                var distinct_notebooks_tmp = [];  // array of strings (name)
+                $scope.distinct_notebooks = [];  // array of objects
 
                 // gather validation data for every data point
                 data.forEach(function (d) {
@@ -53,6 +55,17 @@ app.controller(
                     } else {
                         if (distinct_cohorts.indexOf(d.Cohort) == -1) {
                             distinct_cohorts.push(d.Cohort);
+                        }
+                    }
+
+                    // get distinct notebooks. this field is required but there
+                    // are no additional rules for this one
+                    // but we will show the new ones to the user
+                    if (typeof(d['Notebook Number']) == "undefined") {
+                        $scope.csv_errors.push("Notebook field is required");
+                    } else {
+                        if (distinct_notebooks_tmp.indexOf(d['Notebook Number']) == -1) {
+                            distinct_notebooks_tmp.push(d['Notebook Number']);
                         }
                     }
 
@@ -70,6 +83,20 @@ app.controller(
                 if (distinct_cohorts[0] != $scope.current_cohort.name) {
                     $scope.csv_errors.push("Cohort in CSV file doesn't match this cohort");
                 }
+
+                // determine if any new notebooks are present
+                distinct_notebooks_tmp.forEach(function (n) {
+                    var new_nb = false;
+                    if ($scope.notebooks.indexOf(n) == -1) {
+                        new_nb = true;
+                    }
+                    $scope.distinct_notebooks.push(
+                        {
+                            name: n,
+                            new: new_nb
+                        }
+                    );
+                });
 
             }
         }
