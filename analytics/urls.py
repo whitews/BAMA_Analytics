@@ -38,6 +38,8 @@ urlpatterns = patterns('analytics.api_views',
         name='sample-type-list'),
     url(r'^api/analytics/sample-types/(?P<pk>\d+)/?$', SampleTypeDetail.as_view(),
         name='sample-type-detail'),
+    url(r'^api/analytics/notebooks/?$', NotebookList.as_view(),
+        name='notebook-list'),
 )
 
 # Non-API routes

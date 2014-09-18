@@ -33,6 +33,7 @@ def analytics_api_root(request):
         'buffers': reverse('buffer-list', request=request),
         'isotypes': reverse('isotype-list', request=request),
         'sample-types': reverse('sample-type-list', request=request),
+        'notebooks': reverse('notebook-list', request=request),
     })
 
 
@@ -454,3 +455,13 @@ class SampleTypeDetail(
             return Response(status=status.HTTP_403_FORBIDDEN)
     
         return super(SampleTypeDetail, self).delete(request, *args, **kwargs)
+
+
+class NotebookList(LoginRequiredMixin, generics.ListAPIView):
+    """
+    API endpoint representing a list of notebooks.
+    """
+
+    model = Notebook
+    serializer_class = NotebookSerializer
+    filter_fields = ('name',)

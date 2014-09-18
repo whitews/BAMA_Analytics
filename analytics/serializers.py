@@ -51,3 +51,10 @@ class SampleTypeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = SampleType
+
+
+class NotebookSerializer(serializers.ModelSerializer):
+    url = serializers.HyperlinkedIdentityField(view_name='notebook-detail')
+
+    class Meta:
+        model = Notebook
