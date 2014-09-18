@@ -26,10 +26,18 @@
       </tbody>
     </table>
 
-    <div class="slide" ng-show="show_upload">
+    <div class="slide" ng-show="show_upload" ng-controller="UploadController">
       <div class="drop-box" ng-show="dropSupported" ng-file-drop="onFileSelect($files);" ng-file-drop-available="dropSupported=true">
 
-        <div class="text-center instruction" ng-hide="sample_upload_model.file_queue.length > 0"><em>Drop CSV files here</em></div>
+        <div class="text-center instruction" ng-hide="csv_data.length > 0"><em>Drop CSV files here</em></div>
+
+        <div class="text-center" ng-show="csv_error"><h5><em>{{ csv_error }}</em></h5></div>
+
+        <div class="text-center" ng-show="csv_data.length > 0">
+          <h5><em>{{ file_name }}</em></h5>
+          <p>{{ csv_data.length }} records found</p>
+        </div>
+
 
       </div>
     </div>
