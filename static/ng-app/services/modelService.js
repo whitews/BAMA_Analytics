@@ -7,7 +7,8 @@ app.factory('ModelService', function(
         Conjugate,
         Buffer,
         Isotype,
-        SampleType) {
+        SampleType,
+        Notebook) {
     var service = {};
 
     service.user = User.get();
@@ -239,6 +240,13 @@ app.factory('ModelService', function(
         });
 
         return errors;
+    };
+
+    // Notebook services
+    service.getNotebooks = function() {
+        return Notebook.query(
+            {}
+        );
     };
 
     return service;

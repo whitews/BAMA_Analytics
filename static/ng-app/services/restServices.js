@@ -6,7 +6,8 @@ var URLS = {
     'CONJUGATES':          '/api/analytics/conjugates/',
     'BUFFERS':             '/api/analytics/buffers/',
     'ISOTYPES':            '/api/analytics/isotypes/',
-    'SAMPLE_TYPES':        '/api/analytics/sample-types/'
+    'SAMPLE_TYPES':        '/api/analytics/sample-types/',
+    'NOTEBOOKS':           '/api/analytics/notebooks/'
 };
 
 app.factory('User', ['$resource', function ($resource) {
@@ -104,4 +105,6 @@ app.factory('User', ['$resource', function ($resource) {
     );
 
     return SampleType;
+}]).factory('Notebook', ['$resource', function ($resource) {
+    return $resource(URLS.NOTEBOOKS, {});
 }]);
