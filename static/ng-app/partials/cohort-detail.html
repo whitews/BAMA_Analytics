@@ -31,14 +31,17 @@
 
         <div class="text-center instruction" ng-hide="csv_data.length > 0"><em>Drop CSV files here</em></div>
 
-        <div class="text-center" ng-show="csv_error"><h5><em>{{ csv_error }}</em></h5></div>
-
         <div class="text-center" ng-show="csv_data.length > 0">
           <h5><em>{{ file_name }}</em></h5>
           <p>{{ csv_data.length }} records found</p>
         </div>
 
-
+        <div class="well well-warning" ng-show="csv_errors.length > 0">
+          <h5><em>Errors</em></h5>
+          <ul class="list-unstyled">
+            <li ng-repeat="e in csv_errors track by $index">{{ e }}</li>
+          </ul>
+        </div>
       </div>
     </div>
 
