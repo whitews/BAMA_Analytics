@@ -56,3 +56,18 @@ class SampleTypeSerializer(serializers.ModelSerializer):
 class NotebookSerializer(serializers.ModelSerializer):
     class Meta:
         model = Notebook
+
+
+class ParticipantSerializer(serializers.ModelSerializer):
+    cohort_name = serializers.CharField(
+        source='cohort.name',
+        read_only=True)
+    network_name = serializers.CharField(
+        source='network.name',
+        read_only=True)
+    species_name = serializers.CharField(
+        source='species.name',
+        read_only=True)
+
+    class Meta:
+        model = Participant

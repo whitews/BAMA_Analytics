@@ -39,12 +39,22 @@
 
           <h5>{{ csv_data.length }} records found containing:</h5>
 
-          <p>
-            {{ distinct_notebooks.length }} notebooks:
-            <ul>
-              <li ng-repeat="nb in distinct_notebooks">{{ nb.name }} <span class="label label-success" ng-show="nb.new">New</span></li>
-            </ul>
-          </p>
+          <div class="row">
+            <div class="col-md-4">
+              {{ distinct_notebooks.length }} notebooks:
+              <ul>
+                <li ng-repeat="nb in distinct_notebooks">{{ nb.name }} <span class="label label-success" ng-show="nb.new">New</span></li>
+              </ul>
+            </div>
+
+            <div class="col-md-4">
+              {{ distinct_participants.length }} participants:
+              <ul>
+                <li ng-repeat="p in distinct_participants">{{ p.name }} <span class="label label-success" ng-show="p.new">New</span></li>
+              </ul>
+            </div>
+          </div>
+
         </div>
 
         <div class="well well-warning" ng-show="csv_errors.length > 0">
