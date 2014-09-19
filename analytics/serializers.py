@@ -58,6 +58,11 @@ class NotebookSerializer(serializers.ModelSerializer):
         model = Notebook
 
 
+class NetworkSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Network
+
+
 class ParticipantSerializer(serializers.ModelSerializer):
     cohort_name = serializers.CharField(
         source='cohort.name',

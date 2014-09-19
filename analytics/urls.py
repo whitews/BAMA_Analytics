@@ -40,6 +40,8 @@ urlpatterns = patterns('analytics.api_views',
         name='sample-type-detail'),
     url(r'^api/analytics/notebooks/?$', NotebookList.as_view(),
         name='notebook-list'),
+    url(r'^api/analytics/networks/?$', NetworkList.as_view(),
+        name='network-list'),
     url(r'^api/analytics/participants/?$', ParticipantList.as_view(),
         name='participant-list'),
 )

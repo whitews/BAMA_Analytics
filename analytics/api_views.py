@@ -34,6 +34,7 @@ def analytics_api_root(request):
         'isotypes': reverse('isotype-list', request=request),
         'sample-types': reverse('sample-type-list', request=request),
         'notebooks': reverse('notebook-list', request=request),
+        'networks': reverse('network-list', request=request),
         'participants': reverse('participant-list', request=request),
     })
 
@@ -465,6 +466,16 @@ class NotebookList(LoginRequiredMixin, generics.ListAPIView):
 
     model = Notebook
     serializer_class = NotebookSerializer
+    filter_fields = ('name',)
+
+
+class NetworkList(LoginRequiredMixin, generics.ListAPIView):
+    """
+    API endpoint representing a list of networks.
+    """
+
+    model = Network
+    serializer_class = NetworkSerializer
     filter_fields = ('name',)
 
 
