@@ -41,21 +41,21 @@
 
           <div class="row">
             
-            <div class="col-md-3">
+            <div class="col-md-4">
               {{ distinct_notebooks.length }} notebooks:
               <ul>
                 <li ng-repeat="nb in distinct_notebooks">{{ nb.name }} <span class="label label-success" ng-show="nb.new">New</span></li>
               </ul>
             </div>
             
-            <div class="col-md-3">
+            <div class="col-md-4">
               {{ distinct_networks.length }} networks:
               <ul>
                 <li ng-repeat="n in distinct_networks">{{ n.name }} <span class="label label-success" ng-show="n.new">New</span></li>
               </ul>
             </div>
 
-            <div class="col-md-3">
+            <div class="col-md-4">
               {{ distinct_participants.length }} participants:
               <ul>
                 <li ng-repeat="p in distinct_participants">{{ p.code }} <span class="label label-success" ng-show="p.new">New</span></li>
