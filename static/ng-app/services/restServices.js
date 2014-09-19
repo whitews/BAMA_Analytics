@@ -8,6 +8,7 @@ var URLS = {
     'ISOTYPES':            '/api/analytics/isotypes/',
     'SAMPLE_TYPES':        '/api/analytics/sample-types/',
     'NOTEBOOKS':           '/api/analytics/notebooks/',
+    'NETWORKS':            '/api/analytics/networks/',
     'PARTICIPANTS':        '/api/analytics/participants/'
 };
 
@@ -108,6 +109,8 @@ app.factory('User', ['$resource', function ($resource) {
     return SampleType;
 }]).factory('Notebook', ['$resource', function ($resource) {
     return $resource(URLS.NOTEBOOKS, {});
+}]).factory('Network', ['$resource', function ($resource) {
+    return $resource(URLS.NETWORKS, {});
 }]).factory('Participant', ['$resource', function ($resource) {
     return $resource(URLS.PARTICIPANTS, {});
 }]);

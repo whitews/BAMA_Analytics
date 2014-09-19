@@ -73,6 +73,7 @@ app.controller(
             ModelService.setCurrentCohortById($stateParams.cohortId);
 
             $scope.notebooks = ModelService.getNotebooks();
+            $scope.networks = ModelService.getNetworks();
             $scope.participants = ModelService.getParticipants();
 
             $scope.$on('current_cohort:updated', function () {

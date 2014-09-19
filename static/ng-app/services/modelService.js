@@ -9,6 +9,7 @@ app.factory('ModelService', function(
         Isotype,
         SampleType,
         Notebook,
+        Network,
         Participant) {
     var service = {};
 
@@ -246,6 +247,13 @@ app.factory('ModelService', function(
     // Notebook services
     service.getNotebooks = function() {
         return Notebook.query(
+            {}
+        );
+    };
+
+    // Network services
+    service.getNetworks = function() {
+        return Network.query(
             {}
         );
     };
