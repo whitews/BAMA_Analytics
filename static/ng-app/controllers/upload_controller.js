@@ -45,6 +45,8 @@ app.controller(
                 var distinct_cohorts = [];
                 var distinct_notebooks_tmp = [];  // array of strings (name)
                 $scope.distinct_notebooks = [];  // array of objects
+                var distinct_participants_tmp = [];  // array of strings (name)
+                $scope.distinct_participants = [];  // array of objects
 
                 // gather validation data for every data point
                 data.forEach(function (d) {
@@ -69,6 +71,14 @@ app.controller(
                         }
                     }
 
+                    // get distinct participants (required)
+                    if (typeof(d['Participant ID']) == "undefined") {
+                        $scope.csv_errors.push("Participant ID field is required");
+                    } else {
+                        if (distinct_participants_tmp.indexOf(d['Participant ID']) == -1) {
+                            distinct_participants_tmp.push(d['Participant ID']);
+                        }
+                    }
 
                 });
 
@@ -94,6 +104,20 @@ app.controller(
                         {
                             name: n,
                             new: new_nb
+                        }
+                    );
+                });
+
+                // determine if any new participants are present
+                distinct_participants_tmp.forEach(function (p) {
+                    var new_participant = false;
+                    if ($scope.participants.indexOf(p) == -1) {
+                        new_participant = true;
+                    }
+                    $scope.distinct_participants.push(
+                        {
+                            code: p,
+                            new: new_participant
                         }
                     );
                 });
