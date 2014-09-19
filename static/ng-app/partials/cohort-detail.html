@@ -26,53 +26,74 @@
       </tbody>
     </table>
 
-    <div class="slide" ng-show="show_upload" ng-controller="UploadController">
-      <div class="drop-box" ng-show="dropSupported" ng-file-drop="onFileSelect($files);" ng-file-drop-available="dropSupported=true">
+    <accordion close-others="false">
+      <accordion-group>
+        <accordion-heading>
+          <a href="">
+              <i class="glyphicon" ng-class="{'glyphicon-chevron-down': isopen, 'glyphicon-chevron-right': !isopen}"></i>
+              Upload Data
+            </a>
+        </accordion-heading>
 
-        <div class="text-center instruction" ng-hide="csv_data.length > 0"><em>Drop CSV files here</em></div>
+        <div class="slide" ng-controller="UploadController">
+          <div class="drop-box" ng-show="dropSupported" ng-file-drop="onFileSelect($files);" ng-file-drop-available="dropSupported=true">
 
-        <div ng-show="csv_data.length > 0">
+            <div class="text-center instruction" ng-hide="csv_data.length > 0"><em>Drop CSV files here</em></div>
 
-          <div class="text-center">
-            <h4><em>{{ file_name }}</em></h4>
+            <div ng-show="csv_data.length > 0">
+
+              <div class="text-center">
+                <h4><em>{{ file_name }}</em></h4>
+              </div>
+
+              <h5>{{ csv_data.length }} records found containing:</h5>
+
+              <div class="row">
+
+                <div class="col-md-4">
+                  {{ distinct_notebooks.length }} notebooks:
+                  <ul>
+                    <li ng-repeat="nb in distinct_notebooks">{{ nb.name }} <span class="label label-success" ng-show="nb.new">New</span></li>
+                  </ul>
+                </div>
+
+                <div class="col-md-4">
+                  {{ distinct_networks.length }} networks:
+                  <ul>
+                    <li ng-repeat="n in distinct_networks">{{ n.name }} <span class="label label-success" ng-show="n.new">New</span></li>
+                  </ul>
+                </div>
+
+                <div class="col-md-4">
+                  {{ distinct_participants.length }} participants:
+                  <ul>
+                    <li ng-repeat="p in distinct_participants">{{ p.code }} <span class="label label-success" ng-show="p.new">New</span></li>
+                  </ul>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="well well-warning" ng-show="csv_errors.length > 0">
+              <h5><em>Errors</em></h5>
+              <ul class="list-unstyled">
+                <li ng-repeat="e in csv_errors track by $index">{{ e }}</li>
+              </ul>
+            </div>
           </div>
 
-          <h5>{{ csv_data.length }} records found containing:</h5>
+          <br/>
 
-          <div class="row">
-            
-            <div class="col-md-4">
-              {{ distinct_notebooks.length }} notebooks:
-              <ul>
-                <li ng-repeat="nb in distinct_notebooks">{{ nb.name }} <span class="label label-success" ng-show="nb.new">New</span></li>
-              </ul>
-            </div>
-            
-            <div class="col-md-4">
-              {{ distinct_networks.length }} networks:
-              <ul>
-                <li ng-repeat="n in distinct_networks">{{ n.name }} <span class="label label-success" ng-show="n.new">New</span></li>
-              </ul>
-            </div>
-
-            <div class="col-md-4">
-              {{ distinct_participants.length }} participants:
-              <ul>
-                <li ng-repeat="p in distinct_participants">{{ p.code }} <span class="label label-success" ng-show="p.new">New</span></li>
-              </ul>
-            </div>
+          <div class="btn-group pull-right">
+            <a class="btn btn-success btn-xs" ng-click="upload_data()" ng-show="current_cohort.permissions.add_cohort_data">Upload Data</a>
           </div>
 
         </div>
 
-        <div class="well well-warning" ng-show="csv_errors.length > 0">
-          <h5><em>Errors</em></h5>
-          <ul class="list-unstyled">
-            <li ng-repeat="e in csv_errors track by $index">{{ e }}</li>
-          </ul>
-        </div>
-      </div>
-    </div>
+      </accordion-group>
+    </accordion>
+
+
 
     <div class="row">
       <div class="col-md-4">
@@ -116,12 +137,6 @@
                   <div style="position:relative;">
 
                     <h5>Data Points</h5>
-
-                    <div style="position:absolute; right:0;top:0;">
-                      <div class="btn-group pull-right">
-                        <a class="btn btn-success btn-xs" ng-click="show_upload=true" ng-show="current_cohort.permissions.add_cohort_data">Upload Data</a>
-                      </div>
-                    </div>
 
                   </div>
 
