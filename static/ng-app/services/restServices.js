@@ -7,7 +7,8 @@ var URLS = {
     'BUFFERS':             '/api/analytics/buffers/',
     'ISOTYPES':            '/api/analytics/isotypes/',
     'SAMPLE_TYPES':        '/api/analytics/sample-types/',
-    'NOTEBOOKS':           '/api/analytics/notebooks/'
+    'NOTEBOOKS':           '/api/analytics/notebooks/',
+    'PARTICIPANTS':        '/api/analytics/participants/'
 };
 
 app.factory('User', ['$resource', function ($resource) {
@@ -107,4 +108,6 @@ app.factory('User', ['$resource', function ($resource) {
     return SampleType;
 }]).factory('Notebook', ['$resource', function ($resource) {
     return $resource(URLS.NOTEBOOKS, {});
+}]).factory('Participant', ['$resource', function ($resource) {
+    return $resource(URLS.PARTICIPANTS, {});
 }]);
