@@ -45,6 +45,8 @@ app.controller(
                 var distinct_cohorts = [];
                 var distinct_notebooks_tmp = [];  // array of strings (name)
                 $scope.distinct_notebooks = [];  // array of objects
+                var distinct_networks_tmp = [];  // array of strings (name)
+                $scope.distinct_networks = [];  // array of objects
                 var distinct_participants_tmp = [];  // array of strings (name)
                 $scope.distinct_participants = [];  // array of objects
 
@@ -68,6 +70,15 @@ app.controller(
                     } else {
                         if (distinct_notebooks_tmp.indexOf(d['Notebook Number']) == -1) {
                             distinct_notebooks_tmp.push(d['Notebook Number']);
+                        }
+                    }
+                    
+                    // get distinct networks (required)
+                    if (typeof(d['Network']) == "undefined") {
+                        $scope.csv_errors.push("Network field is required");
+                    } else {
+                        if (distinct_networks_tmp.indexOf(d['Network']) == -1) {
+                            distinct_networks_tmp.push(d['Network']);
                         }
                     }
 
@@ -104,6 +115,20 @@ app.controller(
                         {
                             name: n,
                             new: new_nb
+                        }
+                    );
+                });
+                
+                // determine if any new networks are present
+                distinct_networks_tmp.forEach(function (n) {
+                    var new_network = false;
+                    if ($scope.networks.indexOf(n) == -1) {
+                        new_network = true;
+                    }
+                    $scope.distinct_networks.push(
+                        {
+                            name: n,
+                            new: new_network
                         }
                     );
                 });
