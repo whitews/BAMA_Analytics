@@ -88,6 +88,39 @@ app.controller(
                     } else {
                         if (distinct_participants_tmp.indexOf(d['Participant ID']) == -1) {
                             distinct_participants_tmp.push(d['Participant ID']);
+
+                            // determine if any new participants are present
+                            var existing_participant_idx = null;
+
+                            for (var i= 0, len = $scope.participants.length; i < len; i++) {
+                                if ($scope.participants[i].code == d['Participant ID']) {
+                                    existing_participant_idx = i;
+                                    break;
+                                }
+                            }
+
+                            if (existing_participant_idx != null) {
+                                // existing participant:
+                                // verify species and network match this record.
+                                // this is done only for this first encountered
+                                // record, all others will be assumed to be the
+                                // same, checking this would potentially be
+                                // quite expensive
+                                if (d['Species'] != $scope.participants[existing_participant_idx].species_name) {
+                                    $scope.csv_errors.push("Species for participant " + d['Participant ID'] + " does not match the server");
+                                }
+
+                                if (d['Network'] != $scope.participants[existing_participant_idx].network_name) {
+                                    $scope.csv_errors.push("Network for participant " + d['Participant ID'] + " does not match the server");
+                                }
+                            }
+
+                            $scope.distinct_participants.push(
+                                {
+                                    code: d['Participant ID'],
+                                    new: existing_participant_idx == null
+                                }
+                            );
                         }
                     }
 
@@ -118,7 +151,7 @@ app.controller(
                         }
                     );
                 });
-                
+
                 // determine if any new networks are present
                 distinct_networks_tmp.forEach(function (n) {
                     var new_network = false;
@@ -132,21 +165,6 @@ app.controller(
                         }
                     );
                 });
-
-                // determine if any new participants are present
-                distinct_participants_tmp.forEach(function (p) {
-                    var new_participant = false;
-                    if ($scope.participants.indexOf(p) == -1) {
-                        new_participant = true;
-                    }
-                    $scope.distinct_participants.push(
-                        {
-                            code: p,
-                            new: new_participant
-                        }
-                    );
-                });
-
             }
         }
     ]
