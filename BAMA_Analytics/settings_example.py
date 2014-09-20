@@ -66,9 +66,9 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    BASE_DIR + '/BAMA_Analytics/templates',
-    BASE_DIR + '/BAMA_Analytics/authenticate/templates',
-    BASE_DIR + '/BAMA_Analytics/analytics/templates'
+    BASE_DIR + '/templates',
+    BASE_DIR + '/authenticate/templates',
+    BASE_DIR + '/analytics/templates'
 )
 
 # Absolute path to the directory static files should be collected to.
@@ -86,7 +86,7 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    BASE_DIR + '/BAMA_Analytics/static/',
+    BASE_DIR + '/static/',
 )
 
 # Database
