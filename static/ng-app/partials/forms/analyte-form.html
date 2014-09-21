@@ -28,8 +28,8 @@
       <select ng-model="instance.subtrahend" ng-options="a.id as a.name for a in analytes">
       <option value="">--------</option>
       </select>
-      <strong ng-show="errors.site" class="help-inline text-danger">
-        {{ errors.site.join(', ') }}
+      <strong ng-show="errors.subtrahend" class="help-inline text-danger">
+        {{ errors.subtrahend.join(', ') }}
       </strong>
     </div>
 
