@@ -15,6 +15,36 @@ app.factory('ModelService', function(
 
     service.user = User.get();
 
+    // Network services
+    service.getNetworks = function() {
+        return Network.query(
+            {}
+        );
+    };
+
+    service.createUpdateNetwork = function(instance) {
+        var errors = null;
+        var response;
+
+        if (instance.id) {
+            response = Network.update(
+                {id: instance.id },
+                instance
+            );
+        } else {
+            response = Network.save(instance);
+        }
+
+        response.$promise.then(function () {
+            // let everyone know the networks have changed
+            $rootScope.$broadcast('networks:updated');
+        }, function (error) {
+            errors = error.data;
+        });
+
+        return errors;
+    };
+
     // Cohort services
     service.getCohorts = function() {
         return Cohort.query(
@@ -247,13 +277,6 @@ app.factory('ModelService', function(
     // Notebook services
     service.getNotebooks = function() {
         return Notebook.query(
-            {}
-        );
-    };
-
-    // Network services
-    service.getNetworks = function() {
-        return Network.query(
             {}
         );
     };

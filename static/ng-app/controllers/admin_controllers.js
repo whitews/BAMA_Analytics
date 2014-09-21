@@ -27,6 +27,40 @@ app.controller(
 ]);
 
 app.controller(
+    'NetworkController',
+    [
+        '$scope',
+        '$controller',
+        '$modal',
+        'ModelService',
+        function ($scope, $controller, $modal, ModelService) {
+
+            $scope.networks = ModelService.getNetworks();
+
+            $scope.$on('networks:updated', function () {
+                $scope.networks = ModelService.getNetworks();
+            });
+
+            $scope.init_form = function(instance) {
+                var proposed_instance = angular.copy(instance);
+                $scope.errors = [];
+
+                // launch form modal
+                var modalInstance = $modal.open({
+                    templateUrl: MODAL_URLS.NETWORK,
+                    controller: ModalFormCtrl,
+                    resolve: {
+                        instance: function() {
+                            return proposed_instance;
+                        }
+                    }
+                });
+            };
+        }
+    ]
+);
+
+app.controller(
     'CohortController',
     [
         '$scope',

@@ -24,6 +24,16 @@ app.factory('User', ['$resource', function ($resource) {
     );
 
     return User;
+}]).factory('Network', ['$resource', function ($resource) {
+    var Network = $resource(
+        URLS.NETWORKS + ':id',
+        {},
+        {
+            update: { method: 'PUT' }
+        }
+    );
+
+    return Network;
 }]).factory('Project', ['$resource', function ($resource) {
     var Project = $resource(
         URLS.PROJECTS + ':id',
@@ -109,8 +119,6 @@ app.factory('User', ['$resource', function ($resource) {
     return SampleType;
 }]).factory('Notebook', ['$resource', function ($resource) {
     return $resource(URLS.NOTEBOOKS, {});
-}]).factory('Network', ['$resource', function ($resource) {
-    return $resource(URLS.NETWORKS, {});
 }]).factory('Participant', ['$resource', function ($resource) {
     return $resource(URLS.PARTICIPANTS, {});
 }]);

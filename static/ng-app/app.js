@@ -1,5 +1,6 @@
 var MODAL_URLS = {
     'USER':               'static/ng-app/partials/forms/user-form.html',
+    'NETWORK':            'static/ng-app/partials/forms/network-form.html',
     'COHORT':             'static/ng-app/partials/forms/cohort-form.html',
     'PARTICIPANT':        'static/ng-app/partials/forms/participant-form.html',
     'PROJECT':            'static/ng-app/partials/forms/project-form.html',
@@ -89,6 +90,19 @@ app.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
         },
         data: {
             ncyBreadcrumbLabel: 'Admin'
+        }
+    }).state({
+        name: 'network-list',
+        parent: 'admin',
+        url: 'networks/',
+        views: {
+            '@': {
+                templateUrl: '/static/ng-app/partials/network-list.html',
+                controller: 'NetworkController'
+            }
+        },
+        data: {
+            ncyBreadcrumbLabel: 'Networks'
         }
     }).state({
         name: 'cohort-list',
