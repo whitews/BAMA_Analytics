@@ -10,6 +10,7 @@ class NetworkSerializer(serializers.ModelSerializer):
 
 class CohortSerializer(serializers.ModelSerializer):
     url = serializers.HyperlinkedIdentityField(view_name='cohort-detail')
+    network_name = serializers.CharField(source="network.name")
 
     class Meta:
         model = Cohort
