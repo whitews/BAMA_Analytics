@@ -106,6 +106,56 @@ def get_user_details(request):
     )
 
 
+class NetworkList(AdminRequiredMixin, generics.ListCreateAPIView):
+    """
+    API endpoint representing a list of networks.
+    """
+
+    model = Network
+    serializer_class = NetworkSerializer
+    filter_fields = ('name',)
+
+    def get_queryset(self):
+        """
+        Override .get_queryset() to filter on user's networks.
+        """
+        return Network.objects.all()
+
+    def post(self, request, *args, **kwargs):
+        if not request.user.is_staff:
+            return Response(status=status.HTTP_403_FORBIDDEN)
+
+        response = super(NetworkList, self).post(request, *args, **kwargs)
+        return response
+
+
+class NetworkDetail(
+        AdminRequiredMixin,
+        PermissionRequiredMixin,
+        generics.RetrieveUpdateDestroyAPIView):
+    """
+    API endpoint representing a single network.
+    """
+
+    model = Network
+    serializer_class = NetworkSerializer
+
+    def put(self, request, *args, **kwargs):
+        if not request.user.is_staff:
+            return Response(status=status.HTTP_403_FORBIDDEN)
+
+        return super(NetworkDetail, self).put(request, *args, **kwargs)
+
+    def patch(self, request, *args, **kwargs):
+        return Response(status=status.HTTP_501_NOT_IMPLEMENTED)
+
+    def delete(self, request, *args, **kwargs):
+        if not request.user.is_staff:
+            return Response(status=status.HTTP_403_FORBIDDEN)
+
+        return super(NetworkDetail, self).delete(request, *args, **kwargs)
+
+
 class CohortList(AdminRequiredMixin, generics.ListCreateAPIView):
     """
     API endpoint representing a list of cohorts.
@@ -469,16 +519,6 @@ class NotebookList(LoginRequiredMixin, generics.ListAPIView):
     filter_fields = ('name',)
 
 
-class NetworkList(LoginRequiredMixin, generics.ListAPIView):
-    """
-    API endpoint representing a list of networks.
-    """
-
-    model = Network
-    serializer_class = NetworkSerializer
-    filter_fields = ('name',)
-
-
 class ParticipantList(LoginRequiredMixin, generics.ListAPIView):
     """
     API endpoint representing a list of participants.
@@ -486,4 +526,4 @@ class ParticipantList(LoginRequiredMixin, generics.ListAPIView):
 
     model = Participant
     serializer_class = ParticipantSerializer
-    filter_fields = ('cohort', 'species', 'network')
+    filter_fields = ('cohort', 'species')

@@ -3,6 +3,11 @@ from rest_framework import serializers
 from analytics.models import *
 
 
+class NetworkSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Network
+
+
 class CohortSerializer(serializers.ModelSerializer):
     url = serializers.HyperlinkedIdentityField(view_name='cohort-detail')
 
@@ -58,17 +63,9 @@ class NotebookSerializer(serializers.ModelSerializer):
         model = Notebook
 
 
-class NetworkSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Network
-
-
 class ParticipantSerializer(serializers.ModelSerializer):
     cohort_name = serializers.CharField(
         source='cohort.name',
-        read_only=True)
-    network_name = serializers.CharField(
-        source='network.name',
         read_only=True)
     species_name = serializers.CharField(
         source='species.name',
