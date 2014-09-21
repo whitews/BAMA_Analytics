@@ -15,6 +15,7 @@
         </tr>
         <tr>
           <th></th>
+          <th>Network</th>
           <th>Name</th>
           <th>Description</th>
         </tr>
@@ -26,6 +27,7 @@
                 <span style="opacity: 0.4" class="fa fa-pencil align-middle"></span>
               </a>
           </td>
+          <td>{{ cohort.network_name }}</td>
           <td>
             <a ui-sref="cohort-detail({ cohortId: cohort.id })">{{ cohort.name }}</a>
           </td>

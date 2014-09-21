@@ -7,6 +7,15 @@
   <div class="modal-body">
 
     <div class="form-group">
+      <label class="col-md-3 control-label">Network</label>
+      <select ng-model="instance.network" ng-options="n.id as n.name for n in networks">
+      </select>
+      <strong ng-required="true" ng-show="errors.network" class="help-inline text-danger">
+        {{ errors.network.join(', ') }}
+      </strong>
+    </div>
+
+    <div class="form-group">
       <label class="col-md-3 control-label">Cohort Name</label>
       <input maxlength="128" type="text" ng-model="instance.name" />
       <strong ng-show="errors.name" class="help-inline text-danger">

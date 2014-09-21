@@ -45,6 +45,9 @@ app.controller(
         '$rootScope',
         'ModelService',
         function ($scope, $rootScope, ModelService) {
+            // need list of networks
+            $scope.networks = ModelService.getNetworks();
+
             $scope.errors = null;
             $scope.create_update = function(instance) {
                 $scope.errors = ModelService.createUpdateCohort(instance);
@@ -67,6 +70,7 @@ app.controller(
         function ($scope, $rootScope, ModelService) {
             // need list of analytes for the subtrahend
             $scope.analytes = ModelService.getAnalytes();
+
             $scope.errors = null;
             $scope.create_update = function(instance) {
                 $scope.errors = ModelService.createUpdateAnalyte(instance);
