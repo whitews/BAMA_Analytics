@@ -22,6 +22,19 @@ class ProtectedModel(models.Model):
         return False
 
 
+class Network(models.Model):
+    name = models.CharField(
+        unique=True,
+        max_length=128,
+        null=False,
+        blank=False
+    )
+    description = models.TextField(
+        null=True,
+        blank=True
+    )
+
+
 class CohortManager(models.Manager):
     @staticmethod
     def get_cohorts_user_can_view(user):
@@ -52,6 +65,11 @@ class CohortManager(models.Manager):
     
 
 class Cohort(models.Model):
+    network = models.ForeignKey(
+        Network,
+        null=False,
+        blank=False
+    )
     name = models.CharField(
         unique=True,
         max_length=128,
@@ -207,19 +225,6 @@ class Species(models.Model):
     )
 
 
-class Network(models.Model):
-    name = models.CharField(
-        unique=True,
-        max_length=128,
-        null=False,
-        blank=False
-    )
-    description = models.TextField(
-        null=True,
-        blank=True
-    )
-
-
 class Participant(models.Model):
     cohort = models.ForeignKey(
         Cohort,
@@ -234,11 +239,6 @@ class Participant(models.Model):
     )
     species = models.ForeignKey(
         Species,
-        null=True,
-        blank=True
-    )
-    network = models.ForeignKey(
-        Network,
         null=True,
         blank=True
     )
