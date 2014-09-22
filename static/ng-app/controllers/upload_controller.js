@@ -45,8 +45,7 @@ app.controller(
                 var distinct_cohorts = [];
                 var distinct_notebooks_tmp = [];  // array of strings (name)
                 $scope.distinct_notebooks = [];  // array of objects
-                var distinct_networks_tmp = [];  // array of strings (name)
-                $scope.distinct_networks = [];  // array of objects
+                var distinct_networks = [];  // array of strings (name)
                 var distinct_participants_tmp = [];  // array of strings (name)
                 $scope.distinct_participants = [];  // array of objects
 
@@ -77,8 +76,8 @@ app.controller(
                     if (typeof(d['Network']) == "undefined") {
                         $scope.csv_errors.push("Network field is required");
                     } else {
-                        if (distinct_networks_tmp.indexOf(d['Network']) == -1) {
-                            distinct_networks_tmp.push(d['Network']);
+                        if (distinct_networks.indexOf(d['Network']) == -1) {
+                            distinct_networks.push(d['Network']);
                         }
                     }
 
@@ -101,17 +100,13 @@ app.controller(
 
                             if (existing_participant_idx != null) {
                                 // existing participant:
-                                // verify species and network match this record.
+                                // verify species matches this record.
                                 // this is done only for this first encountered
                                 // record, all others will be assumed to be the
                                 // same, checking this would potentially be
                                 // quite expensive
                                 if (d['Species'] != $scope.participants[existing_participant_idx].species_name) {
                                     $scope.csv_errors.push("Species for participant " + d['Participant ID'] + " does not match the server");
-                                }
-
-                                if (d['Network'] != $scope.participants[existing_participant_idx].network_name) {
-                                    $scope.csv_errors.push("Network for participant " + d['Participant ID'] + " does not match the server");
                                 }
                             }
 
@@ -138,6 +133,17 @@ app.controller(
                     $scope.csv_errors.push("Cohort in CSV file doesn't match this cohort");
                 }
 
+                // only one network should be present and should match the
+                // cohort's network
+                if (distinct_networks.length > 1) {
+                    $scope.csv_errors.push("Multiple networks found in CSV file. Data can only be uploaded for one network at a time");
+                }
+
+                // cohort must match current cohort
+                if (distinct_networks[0] != $scope.current_cohort.network_name) {
+                    $scope.csv_errors.push("Network in CSV file doesn't match this cohort's network");
+                }
+
                 // determine if any new notebooks are present
                 distinct_notebooks_tmp.forEach(function (n) {
                     var new_nb = false;
@@ -148,20 +154,6 @@ app.controller(
                         {
                             name: n,
                             new: new_nb
-                        }
-                    );
-                });
-
-                // determine if any new networks are present
-                distinct_networks_tmp.forEach(function (n) {
-                    var new_network = false;
-                    if ($scope.networks.indexOf(n) == -1) {
-                        new_network = true;
-                    }
-                    $scope.distinct_networks.push(
-                        {
-                            name: n,
-                            new: new_network
                         }
                     );
                 });
