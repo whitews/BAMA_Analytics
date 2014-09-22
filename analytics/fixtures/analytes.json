@@ -632,15 +632,6 @@
 {
     "fields": {
         "subtrahend": 121,
-        "name": "B.MN V3 gp70 (62)",
-        "description": null
-    },
-    "model": "analytics.analyte",
-    "pk": 71
-},
-{
-    "fields": {
-        "subtrahend": 121,
         "name": "B.acute CON 1059 gp120 monomer",
         "description": null
     },
