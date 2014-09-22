@@ -49,6 +49,13 @@ app.controller(
                 var distinct_participants_tmp = [];  // array of strings (name)
                 $scope.distinct_participants = [];  // array of objects
 
+                var distinct_analytes_tmp = [];  // array of strings (name)
+                $scope.distinct_analytes = [];  // array of objects
+
+                // analyte regex pattern to strip optional bead number
+                var analyte_pattern = /^.*(?=\s\(\d+\)$)/;
+                var analyte_result;
+
                 // gather validation data for every data point
                 data.forEach(function (d) {
                     // get distinct cohorts, must be only one and must match
@@ -114,6 +121,48 @@ app.controller(
                                 {
                                     code: d['Participant ID'],
                                     new: existing_participant_idx == null
+                                }
+                            );
+                        }
+                    }
+
+                    // get distinct analytes (required)
+                    if (typeof(d['Analyte']) == "undefined") {
+                        $scope.csv_errors.push("Analyte field is required");
+                    } else {
+                        // need to strip the bead number off analyte string
+                        // if present
+                        analyte_result = analyte_pattern.exec(d['Analyte']);
+                        if (analyte_result == null) {
+                            // doesn't contain a trailing bead number
+                            analyte_result = d['Analyte'];
+                        } else {
+                            // contains a bead number, get everything but bead
+                            analyte_result = analyte_result[0];
+                        }
+
+                        if (distinct_analytes_tmp.indexOf(analyte_result) == -1) {
+                            distinct_analytes_tmp.push(analyte_result);
+
+                            // determine if any new analytes are present
+                            var existing_analyte_idx = null;
+
+                            for (var i= 0, len = $scope.analytes.length; i < len; i++) {
+                                if ($scope.analytes[i].name == analyte_result) {
+                                    existing_analyte_idx = i;
+                                    break;
+                                }
+                            }
+
+                            if (existing_analyte_idx == null) {
+                                // analyte doesn't exist, uh, that's a problem
+                                $scope.csv_errors.push("Analyte \"" + analyte_result + "\" does not exist on the server");
+                            }
+
+                            $scope.distinct_analytes.push(
+                                {
+                                    name: analyte_result,
+                                    new: existing_analyte_idx == null
                                 }
                             );
                         }

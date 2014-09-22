@@ -109,6 +109,7 @@ app.controller(
             $scope.notebooks = ModelService.getNotebooks();
             $scope.networks = ModelService.getNetworks();
             $scope.participants = ModelService.getParticipants();
+            $scope.analytes = ModelService.getAnalytes();
 
             $scope.$on('current_cohort:updated', function () {
                 $scope.current_cohort = ModelService.current_cohort;
