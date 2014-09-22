@@ -10,11 +10,14 @@ class NetworkSerializer(serializers.ModelSerializer):
 
 class CohortSerializer(serializers.ModelSerializer):
     url = serializers.HyperlinkedIdentityField(view_name='cohort-detail')
-    network_name = serializers.CharField(source="network.name")
+    network_name = serializers.CharField(
+        source="network.name",
+        read_only=True
+    )
 
     class Meta:
         model = Cohort
-        
+
 
 class ProjectSerializer(serializers.ModelSerializer):
     url = serializers.HyperlinkedIdentityField(view_name='project-detail')
@@ -25,7 +28,10 @@ class ProjectSerializer(serializers.ModelSerializer):
 
 class AnalyteSerializer(serializers.ModelSerializer):
     url = serializers.HyperlinkedIdentityField(view_name='analyte-detail')
-    subtrahend_name = serializers.CharField(source="subtrahend.name")
+    subtrahend_name = serializers.CharField(
+        source="subtrahend.name",
+        read_only=True
+    )
 
     class Meta:
         model = Analyte
