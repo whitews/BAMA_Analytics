@@ -110,6 +110,7 @@ app.controller(
             $scope.networks = ModelService.getNetworks();
             $scope.participants = ModelService.getParticipants();
             $scope.analytes = ModelService.getAnalytes();
+            $scope.isotypes = ModelService.getIsotypes();
 
             $scope.$on('current_cohort:updated', function () {
                 $scope.current_cohort = ModelService.current_cohort;

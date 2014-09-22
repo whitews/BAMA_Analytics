@@ -56,6 +56,9 @@ app.controller(
                 var analyte_pattern = /^.*(?=\s\(\d+\)$)/;
                 var analyte_result;
 
+                var distinct_isotypes_tmp = [];  // array of strings (name)
+                $scope.distinct_isotypes = [];  // array of objects
+
                 // gather validation data for every data point
                 data.forEach(function (d) {
                     // get distinct cohorts, must be only one and must match
@@ -163,6 +166,37 @@ app.controller(
                                 {
                                     name: analyte_result,
                                     new: existing_analyte_idx == null
+                                }
+                            );
+                        }
+                    }
+                    
+                    // get distinct isotypes (required)
+                    if (typeof(d['Isotype']) == "undefined") {
+                        $scope.csv_errors.push("Isotype field is required");
+                    } else {
+                        if (distinct_isotypes_tmp.indexOf(d['Isotype']) == -1) {
+                            distinct_isotypes_tmp.push(d['Isotype']);
+
+                            // determine if any new isotypes are present
+                            var existing_isotype_idx = null;
+
+                            for (var i= 0, len = $scope.isotypes.length; i < len; i++) {
+                                if ($scope.isotypes[i].name == d['Isotype']) {
+                                    existing_isotype_idx = i;
+                                    break;
+                                }
+                            }
+
+                            if (existing_isotype_idx == null) {
+                                // isotype doesn't exist, uh, that's a problem
+                                $scope.csv_errors.push("Isotype \"" + d['Isotype'] + "\" does not exist on the server");
+                            }
+
+                            $scope.distinct_isotypes.push(
+                                {
+                                    name: d['Isotype'],
+                                    new: existing_isotype_idx == null
                                 }
                             );
                         }
