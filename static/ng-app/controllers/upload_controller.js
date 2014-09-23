@@ -328,7 +328,7 @@ app.controller(
                                 // 3rd field is visit ID, which is also in a
                                 // separate column. Verify it matches that
                                 // visit column
-                                if (desc_second_pass[1] != current_visit_id) {
+                                if (desc_second_pass[1].trim() != current_visit_id) {
                                     $scope.csv_errors.push("Description field visit ID field doesn't match Visit ID column: " + desc_second_pass[1] + " vs " + current_visit_id);
                                 }
 
@@ -339,7 +339,7 @@ app.controller(
                                 // server
                                 sample_type_match = false;
                                 for (var i = 0, len = $scope.sample_types.length; i < len; i++) {
-                                    if ($scope.sample_types[i].name == desc_second_pass[3]) {
+                                    if ($scope.sample_types[i].name == desc_second_pass[3].trim()) {
                                         sample_type_match = true;
                                         break;
                                     }
@@ -353,7 +353,7 @@ app.controller(
                                 // server
                                 buffer_match = false;
                                 for (var i = 0, len = $scope.buffers.length; i < len; i++) {
-                                    if ($scope.buffers[i].name == desc_second_pass[4]) {
+                                    if ($scope.buffers[i].name == desc_second_pass[4].trim()) {
                                         buffer_match = true;
                                         break;
                                     }
