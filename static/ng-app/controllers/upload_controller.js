@@ -59,6 +59,9 @@ app.controller(
                 var distinct_isotypes_tmp = [];  // array of strings (name)
                 $scope.distinct_isotypes = [];  // array of objects
 
+                var distinct_conjugates_tmp = [];  // array of strings (name)
+                $scope.distinct_conjugates = [];  // array of objects
+
                 // gather validation data for every data point
                 data.forEach(function (d) {
                     // get distinct cohorts, must be only one and must match
@@ -197,6 +200,37 @@ app.controller(
                                 {
                                     name: d['Isotype'],
                                     new: existing_isotype_idx == null
+                                }
+                            );
+                        }
+                    }
+                    
+                    // get distinct conjugates (required)
+                    if (typeof(d['Conjugate']) == "undefined") {
+                        $scope.csv_errors.push("Conjugate field is required");
+                    } else {
+                        if (distinct_conjugates_tmp.indexOf(d['Conjugate']) == -1) {
+                            distinct_conjugates_tmp.push(d['Conjugate']);
+
+                            // determine if any new conjugates are present
+                            var existing_conjugate_idx = null;
+
+                            for (var i= 0, len = $scope.conjugates.length; i < len; i++) {
+                                if ($scope.conjugates[i].name == d['Conjugate']) {
+                                    existing_conjugate_idx = i;
+                                    break;
+                                }
+                            }
+
+                            if (existing_conjugate_idx == null) {
+                                // conjugate doesn't exist, uh, that's a problem
+                                $scope.csv_errors.push("Conjugate \"" + d['Conjugate'] + "\" does not exist on the server");
+                            }
+
+                            $scope.distinct_conjugates.push(
+                                {
+                                    name: d['Conjugate'],
+                                    new: existing_conjugate_idx == null
                                 }
                             );
                         }
