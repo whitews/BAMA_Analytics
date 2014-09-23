@@ -244,6 +244,13 @@ app.controller(
                     } else if (parseFloat(d['Dilution']) <= 0) {
                         $scope.csv_errors.push("Dilution value must be a positive number. Found: " + d['Dilution']);
                     }
+
+                    // validate FI-Bkgd is present and a number
+                    if (typeof(d['FI-Bkgd']) == "undefined") {
+                        $scope.csv_errors.push("FI-Bkgd field is required");
+                    } else if (isNaN(d['FI-Bkgd'])) {
+                        $scope.csv_errors.push("FI-Bkgd value must be a number. Found: " + d['FI-Bkgd']);
+                    }
                 });
 
                 // Now check all our validation data
