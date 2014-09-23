@@ -62,6 +62,10 @@ app.controller(
                 var distinct_conjugates_tmp = [];  // array of strings (name)
                 $scope.distinct_conjugates = [];  // array of objects
 
+                // CV regex pattern to find number with optional '%'
+                var cv_pattern = /^\d+\.?\d*(?=\%?$)/;
+                var cv_result;
+
                 // gather validation data for every data point
                 data.forEach(function (d) {
                     // get distinct cohorts, must be only one and must match
@@ -250,6 +254,26 @@ app.controller(
                         $scope.csv_errors.push("FI-Bkgd field is required");
                     } else if (isNaN(d['FI-Bkgd'])) {
                         $scope.csv_errors.push("FI-Bkgd value must be a number. Found: " + d['FI-Bkgd']);
+                    }
+
+                    // validate FI-Bkgd is present and a number
+                    if (typeof(d['FI-Bkgd-Blank']) == "undefined") {
+                        $scope.csv_errors.push("FI-Bkgd-Blank field is required");
+                    } else if (isNaN(d['FI-Bkgd-Blank'])) {
+                        $scope.csv_errors.push("FI-Bkgd-Blank value must be a number. Found: " + d['FI-Bkgd-Blank']);
+                    }
+
+                    // validate CV is present and a number w/ opt. trailing '%'
+                    if (typeof(d['CV']) == "undefined") {
+                        $scope.csv_errors.push("CV field is required");
+                    } else {
+                        // need to strip the trailing % if present
+                        cv_result = cv_pattern.exec(d['CV']);
+                        if (cv_result == null) {
+                            $scope.csv_errors.push("CV value must be a percentage. Found: " + d['CV']);
+                        } else if (isNaN(cv_result[0])) {
+                            $scope.csv_errors.push("CV value must be a percentage. Found: " + d['CV']);
+                        }
                     }
                 });
 
