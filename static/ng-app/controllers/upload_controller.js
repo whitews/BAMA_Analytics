@@ -236,6 +236,14 @@ app.controller(
                         }
                     }
 
+                    // validate dilution is present and a positive number
+                    if (typeof(d['Dilution']) == "undefined") {
+                        $scope.csv_errors.push("Dilution field is required");
+                    } else if (isNaN(d['Dilution'])) {
+                        $scope.csv_errors.push("Dilution value must be a positive number. Found: " + d['Dilution']);
+                    } else if (parseFloat(d['Dilution']) <= 0) {
+                        $scope.csv_errors.push("Dilution value must be a positive number. Found: " + d['Dilution']);
+                    }
                 });
 
                 // Now check all our validation data
