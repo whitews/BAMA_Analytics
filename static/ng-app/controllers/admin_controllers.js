@@ -112,6 +112,8 @@ app.controller(
             $scope.analytes = ModelService.getAnalytes();
             $scope.isotypes = ModelService.getIsotypes();
             $scope.conjugates = ModelService.getConjugates();
+            $scope.sample_types = ModelService.getSampleTypes();
+            $scope.buffers = ModelService.getBuffers();
 
             $scope.$on('current_cohort:updated', function () {
                 $scope.current_cohort = ModelService.current_cohort;

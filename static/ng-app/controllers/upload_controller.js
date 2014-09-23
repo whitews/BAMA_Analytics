@@ -48,6 +48,10 @@ app.controller(
                 var distinct_networks = [];  // array of strings (name)
                 var distinct_participants_tmp = [];  // array of strings (name)
                 $scope.distinct_participants = [];  // array of objects
+                var current_participant = null;
+                var current_visit_id = null;
+                var sample_type_match = false;
+                var buffer_match = false;
 
                 var distinct_analytes_tmp = [];  // array of strings (name)
                 $scope.distinct_analytes = [];  // array of objects
@@ -65,6 +69,10 @@ app.controller(
                 // CV regex pattern to find number with optional '%'
                 var cv_pattern = /^\d+\.?\d*(?=\%?$)/;
                 var cv_result;
+
+                // Description field helper vars
+                var desc_first_pass = [];
+                var desc_second_pass = [];
 
                 // gather validation data for every data point
                 data.forEach(function (d) {
@@ -101,15 +109,17 @@ app.controller(
                     // get distinct participants (required)
                     if (typeof(d['Participant ID']) == "undefined") {
                         $scope.csv_errors.push("Participant ID field is required");
+                        current_participant = null;
                     } else {
-                        if (distinct_participants_tmp.indexOf(d['Participant ID']) == -1) {
-                            distinct_participants_tmp.push(d['Participant ID']);
+                        current_participant = d['Participant ID'];
+                        if (distinct_participants_tmp.indexOf(current_participant) == -1) {
+                            distinct_participants_tmp.push(current_participant);
 
                             // determine if any new participants are present
                             var existing_participant_idx = null;
 
-                            for (var i= 0, len = $scope.participants.length; i < len; i++) {
-                                if ($scope.participants[i].code == d['Participant ID']) {
+                            for (var i = 0, len = $scope.participants.length; i < len; i++) {
+                                if ($scope.participants[i].code == current_participant) {
                                     existing_participant_idx = i;
                                     break;
                                 }
@@ -122,18 +132,28 @@ app.controller(
                                 // record, all others will be assumed to be the
                                 // same, checking this would potentially be
                                 // quite expensive
-                                if (d['Species'] != $scope.participants[existing_participant_idx].species_name) {
-                                    $scope.csv_errors.push("Species for participant " + d['Participant ID'] + " does not match the server");
+                                if (typeof(d['Species']) == "undefined") {
+                                    $scope.csv_errors.push("Species field is required");
+                                } else if (d['Species'] != $scope.participants[existing_participant_idx].species_name) {
+                                    $scope.csv_errors.push("Species for participant " + current_participant + " does not match the server");
                                 }
                             }
 
                             $scope.distinct_participants.push(
                                 {
-                                    code: d['Participant ID'],
+                                    code: current_participant,
                                     new: existing_participant_idx == null
                                 }
                             );
                         }
+                    }
+
+                    // get visit ID (required)
+                    if (typeof(d['Visit ID']) == "undefined") {
+                        $scope.csv_errors.push("Visit ID is required");
+                        current_visit_id = null;
+                    } else {
+                        current_visit_id = d['Visit ID'];
                     }
 
                     // get distinct analytes (required)
@@ -157,7 +177,7 @@ app.controller(
                             // determine if any new analytes are present
                             var existing_analyte_idx = null;
 
-                            for (var i= 0, len = $scope.analytes.length; i < len; i++) {
+                            for (var i = 0, len = $scope.analytes.length; i < len; i++) {
                                 if ($scope.analytes[i].name == analyte_result) {
                                     existing_analyte_idx = i;
                                     break;
@@ -188,7 +208,7 @@ app.controller(
                             // determine if any new isotypes are present
                             var existing_isotype_idx = null;
 
-                            for (var i= 0, len = $scope.isotypes.length; i < len; i++) {
+                            for (var i = 0, len = $scope.isotypes.length; i < len; i++) {
                                 if ($scope.isotypes[i].name == d['Isotype']) {
                                     existing_isotype_idx = i;
                                     break;
@@ -219,7 +239,7 @@ app.controller(
                             // determine if any new conjugates are present
                             var existing_conjugate_idx = null;
 
-                            for (var i= 0, len = $scope.conjugates.length; i < len; i++) {
+                            for (var i = 0, len = $scope.conjugates.length; i < len; i++) {
                                 if ($scope.conjugates[i].name == d['Conjugate']) {
                                     existing_conjugate_idx = i;
                                     break;
@@ -256,7 +276,7 @@ app.controller(
                         $scope.csv_errors.push("FI-Bkgd value must be a number. Found: " + d['FI-Bkgd']);
                     }
 
-                    // validate FI-Bkgd is present and a number
+                    // validate FI-Bkgd-Blank is present and a number
                     if (typeof(d['FI-Bkgd-Blank']) == "undefined") {
                         $scope.csv_errors.push("FI-Bkgd-Blank field is required");
                     } else if (isNaN(d['FI-Bkgd-Blank'])) {
@@ -273,6 +293,75 @@ app.controller(
                             $scope.csv_errors.push("CV value must be a percentage. Found: " + d['CV']);
                         } else if (isNaN(cv_result[0])) {
                             $scope.csv_errors.push("CV value must be a percentage. Found: " + d['CV']);
+                        }
+                    }
+
+                    // finally, check the description field
+                    // this one's overloaded as a double quoted string with
+                    // it's own semi-colon and comma delimited internal values:
+                    // <specimen_id> ; <participant_id> , <visit_id> , <visit_date> , <sample_type> , <buffer>
+                    if (typeof(d['Description']) == "undefined") {
+                        $scope.csv_errors.push("Description field is required");
+                    } else {
+                        // first value is specimen ID and it is delimited by a
+                        // semi-colon
+                        desc_first_pass = d['Description'].split(";");
+
+                        if (desc_first_pass.length != 2) {
+                            $scope.csv_errors.push("Description field format is incorrect. Found: " + d['Description']);
+                        } else {
+                            d['Specimen ID'] = desc_first_pass[0];
+
+                            // the rest are comma delimited
+                            desc_second_pass = desc_first_pass[1].split(",");
+
+                            if (desc_second_pass.length != 5) {
+                                $scope.csv_errors.push("Description field format is incorrect. Found: " + d['Description']);
+                            } else {
+                                // 2nd field is participant ID, which is also in
+                                // a separate column. Verify it matches what we
+                                // already have
+                                if (desc_second_pass[0] != current_participant) {
+                                    $scope.csv_errors.push("Description field participant field doesn't match Participant ID column: " + desc_second_pass[0] + "vs " + current_participant);
+                                }
+
+                                // 3rd field is visit ID, which is also in a
+                                // separate column. Verify it matches that
+                                // visit column
+                                if (desc_second_pass[1] != current_visit_id) {
+                                    $scope.csv_errors.push("Description field visit ID field doesn't match Visit ID column: " + desc_second_pass[1] + " vs " + current_visit_id);
+                                }
+
+                                // 4th field is visit date, don't capture it
+
+                                // 5th field is sample type which is required
+                                // and must match a sample type defined on the
+                                // server
+                                sample_type_match = false;
+                                for (var i = 0, len = $scope.sample_types.length; i < len; i++) {
+                                    if ($scope.sample_types[i].name == desc_second_pass[3]) {
+                                        sample_type_match = true;
+                                        break;
+                                    }
+                                }
+                                if (!sample_type_match) {
+                                    $scope.csv_errors.push("Description sample type does not exist on the server: " + desc_second_pass[3]);
+                                }
+
+                                // 6th field is buffer which is required
+                                // and must match a buffer defined on the
+                                // server
+                                buffer_match = false;
+                                for (var i = 0, len = $scope.buffers.length; i < len; i++) {
+                                    if ($scope.buffers[i].name == desc_second_pass[4]) {
+                                        buffer_match = true;
+                                        break;
+                                    }
+                                }
+                                if (!buffer_match) {
+                                    $scope.csv_errors.push("Description buffer does not exist on the server: " + desc_second_pass[4]);
+                                }
+                            }
                         }
                     }
                 });
