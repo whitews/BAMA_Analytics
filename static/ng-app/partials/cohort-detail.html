@@ -68,7 +68,7 @@
             </div>
 
             <div class="well well-warning" ng-show="csv_errors.length > 0">
-              <h5><em>Errors</em></h5>
+              <h5><em>Errors found in CSV file. Please correct the CSV file and try again.</em></h5>
               <ul class="list-unstyled">
                 <li ng-repeat="e in csv_errors track by $index">{{ e }}</li>
               </ul>

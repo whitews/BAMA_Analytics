@@ -322,7 +322,7 @@ app.controller(
                                 // a separate column. Verify it matches what we
                                 // already have
                                 if (desc_second_pass[0] != current_participant) {
-                                    $scope.csv_errors.push("Description field participant field doesn't match Participant ID column: " + desc_second_pass[0] + "vs " + current_participant);
+                                    $scope.csv_errors.push("Description field participant field doesn't match Participant ID column: " + desc_second_pass[0] + " vs " + current_participant);
                                 }
 
                                 // 3rd field is visit ID, which is also in a
