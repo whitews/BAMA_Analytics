@@ -44,6 +44,8 @@ urlpatterns = patterns('analytics.api_views',
         name='network-list'),
     url(r'^api/analytics/participants/?$', ParticipantList.as_view(),
         name='participant-list'),
+    url(r'^api/analytics/data-points/?$', DataPointList.as_view(),
+        name='data-point-list'),
 )
 
 # Non-API routes

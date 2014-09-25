@@ -13,6 +13,8 @@ from rest_framework.response import Response
 from django.views.generic.detail import SingleObjectMixin
 from django.core.exceptions import PermissionDenied
 from django.shortcuts import get_object_or_404
+from django.db import transaction
+
 
 from analytics.serializers import *
 
@@ -36,6 +38,7 @@ def analytics_api_root(request):
         'notebooks': reverse('notebook-list', request=request),
         'networks': reverse('network-list', request=request),
         'participants': reverse('participant-list', request=request),
+        'data-points': reverse('data-point-list', request=request),
     })
 
 
@@ -527,3 +530,60 @@ class ParticipantList(LoginRequiredMixin, generics.ListAPIView):
     model = Participant
     serializer_class = ParticipantSerializer
     filter_fields = ('cohort', 'species')
+
+
+class DataPointList(LoginRequiredMixin, generics.ListCreateAPIView):
+    """
+    API endpoint representing a list of data points.
+    """
+
+    model = DataPoint
+    serializer_class = DataPointSerializer
+    filter_fields = (
+        'notebook',
+        'cohort',
+        'participant',
+        'analyte',
+        'visit_code',
+        'isotype',
+        'conjugate',
+        'buffer'
+    )
+
+    def create(self, request, *args, **kwargs):
+        data = request.DATA
+        print 'asdf'
+
+        # validate all the data points, returns a cohort and errors
+        # cohort is null if errors are present
+        # [cohort, errors] = validate_data_points(data, request.user)
+        # if len(errors) > 0:
+        #     return Response(data=errors, status=400)
+
+        # using an atomic transaction to create intermediate model instances
+        try:
+            with transaction.atomic():
+                # create upload event
+                upload_event = UploadEvent(
+                    #...
+                )
+                upload_event.clean()
+                upload_event.save()
+
+                for param in data['data_points']:
+                    print 'asdf'
+
+                    # create any new notebooks
+
+        except Exception as e:  # catch any exception to rollback changes
+            return Response(data={'detail': e.message}, status=400)
+
+        # possibly put this in the atomic transaction above
+        serializer = self.get_serializer(data=request.DATA, many=True)
+        if serializer.is_valid():
+            serializer.save()
+            headers = self.get_success_headers(serializer.data)
+            return Response(serializer.data, status=status.HTTP_201_CREATED,
+                            headers=headers)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

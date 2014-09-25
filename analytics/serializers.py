@@ -80,3 +80,8 @@ class ParticipantSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Participant
+
+
+class DataPointSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = DataPoint
