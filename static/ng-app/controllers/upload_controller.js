@@ -48,23 +48,19 @@ app.controller(
                 var distinct_networks = [];  // array of strings (name)
                 var distinct_participants_tmp = [];  // array of strings (name)
                 $scope.distinct_participants = [];  // array of objects
-                var current_participant = null;
                 var current_visit_id = null;
                 var sample_type_match = false;
                 var buffer_match = false;
+                var visit_date = null;
 
                 var distinct_analytes_tmp = [];  // array of strings (name)
                 $scope.distinct_analytes = [];  // array of objects
 
                 // analyte regex pattern to strip optional bead number
-                var analyte_pattern = /^.*(?=\s\(\d+\)$)/;
+                var analyte_pattern = /^.*(?=\s\((\d+)\)$)/;
                 var analyte_result;
-
-                var distinct_isotypes_tmp = [];  // array of strings (name)
-                $scope.distinct_isotypes = [];  // array of objects
-
-                var distinct_conjugates_tmp = [];  // array of strings (name)
-                $scope.distinct_conjugates = [];  // array of objects
+                var analyte_name;
+                var existing_analyte_pk;
 
                 // CV regex pattern to find number with optional '%'
                 var cv_pattern = /^\d+\.?\d*(?=\%?$)/;
@@ -76,6 +72,17 @@ app.controller(
 
                 // gather validation data for every data point
                 data.forEach(function (d) {
+                    // populate some d properties we'll need to convert
+                    // to match the web API
+                    d['participant_pk'] = null;
+                    d['participant_species_name'] = null;
+                    d['conjugate_pk'] = null;
+                    d['isotype_pk'] = null;
+                    d['cv_value'] = null;
+                    d['notebook_pk'] = null;
+                    d['sample_type_pk'] = null;
+                    d['buffer_pk'] = null;
+
                     // get distinct cohorts, must be only one and must match
                     // the current cohort
                     if (typeof(d.Cohort) == "undefined") {
@@ -92,8 +99,25 @@ app.controller(
                     if (typeof(d['Notebook Number']) == "undefined") {
                         $scope.csv_errors.push("Notebook field is required");
                     } else {
+                        // check if this notebook exists on the server
+                        for (var i = 0, len = $scope.notebooks.length; i < len; i++) {
+                            if ($scope.notebooks[i].name == d['Notebook Number']) {
+                                d['notebook_pk'] = $scope.notebooks[i].id;
+                                break;
+                            }
+                        }
+
+                        // we show the distinct notebooks to the user along
+                        // with a new tag for the new ones
                         if (distinct_notebooks_tmp.indexOf(d['Notebook Number']) == -1) {
                             distinct_notebooks_tmp.push(d['Notebook Number']);
+
+                            $scope.distinct_notebooks.push(
+                                {
+                                    name: d['Notebook Number'],
+                                    new: d['notebook_pk'] == null
+                                }
+                            );
                         }
                     }
                     
@@ -109,40 +133,36 @@ app.controller(
                     // get distinct participants (required)
                     if (typeof(d['Participant ID']) == "undefined") {
                         $scope.csv_errors.push("Participant ID field is required");
-                        current_participant = null;
                     } else {
-                        current_participant = d['Participant ID'];
-                        if (distinct_participants_tmp.indexOf(current_participant) == -1) {
-                            distinct_participants_tmp.push(current_participant);
-
-                            // determine if any new participants are present
-                            var existing_participant_idx = null;
-
-                            for (var i = 0, len = $scope.participants.length; i < len; i++) {
-                                if ($scope.participants[i].code == current_participant) {
-                                    existing_participant_idx = i;
-                                    break;
-                                }
+                        for (var i = 0, len = $scope.participants.length; i < len; i++) {
+                            if ($scope.participants[i].code == d['Participant ID']) {
+                                d['participant_pk'] = $scope.participants[i].id;
+                                d['participant_species_name'] = $scope.participants[i].species_name;
+                                break;
                             }
+                        }
 
-                            if (existing_participant_idx != null) {
-                                // existing participant:
-                                // verify species matches this record.
-                                // this is done only for this first encountered
-                                // record, all others will be assumed to be the
-                                // same, checking this would potentially be
-                                // quite expensive
-                                if (typeof(d['Species']) == "undefined") {
-                                    $scope.csv_errors.push("Species field is required");
-                                } else if (d['Species'] != $scope.participants[existing_participant_idx].species_name) {
-                                    $scope.csv_errors.push("Species for participant " + current_participant + " does not match the server");
-                                }
+                        if (d['participant_pk'] != null) {
+                            // existing participant:
+                            // verify species matches this record.
+                            // this is done only for this first encountered
+                            // record, all others will be assumed to be the
+                            // same, checking this would potentially be
+                            // quite expensive
+                            if (typeof(d['Species']) == "undefined") {
+                                $scope.csv_errors.push("Species field is required");
+                            } else if (d['Species'] != d['participant_species_name']) {
+                                $scope.csv_errors.push("Species for participant " + d['Participant ID'] + " does not match the server");
                             }
+                        }
+
+                        if (distinct_participants_tmp.indexOf(d['Participant ID']) == -1) {
+                            distinct_participants_tmp.push(d['Participant ID']);
 
                             $scope.distinct_participants.push(
                                 {
-                                    code: current_participant,
-                                    new: existing_participant_idx == null
+                                    code: d['Participant ID'],
+                                    new: d['participant_pk'] == null
                                 }
                             );
                         }
@@ -165,34 +185,40 @@ app.controller(
                         analyte_result = analyte_pattern.exec(d['Analyte']);
                         if (analyte_result == null) {
                             // doesn't contain a trailing bead number
-                            analyte_result = d['Analyte'];
+                            analyte_name = d['Analyte'];
+                            d['bead_number'] = null;
                         } else {
                             // contains a bead number, get everything but bead
-                            analyte_result = analyte_result[0];
+                            analyte_name = analyte_result[0];
+                            // save bead number
+                            d['bead_number'] = analyte_result[1];
                         }
 
-                        if (distinct_analytes_tmp.indexOf(analyte_result) == -1) {
-                            distinct_analytes_tmp.push(analyte_result);
+                        // determine if any new analytes are present
+                        var existing_analyte_idx = null;
 
-                            // determine if any new analytes are present
-                            var existing_analyte_idx = null;
-
-                            for (var i = 0, len = $scope.analytes.length; i < len; i++) {
-                                if ($scope.analytes[i].name == analyte_result) {
-                                    existing_analyte_idx = i;
-                                    break;
-                                }
+                        for (var i = 0, len = $scope.analytes.length; i < len; i++) {
+                            if ($scope.analytes[i].name == analyte_name) {
+                                existing_analyte_pk = $scope.analytes[i].id;
+                                break;
                             }
+                        }
 
-                            if (existing_analyte_idx == null) {
-                                // analyte doesn't exist, uh, that's a problem
-                                $scope.csv_errors.push("Analyte \"" + analyte_result + "\" does not exist on the server");
-                            }
+                        if (existing_analyte_pk == null) {
+                            // analyte doesn't exist, uh, that's a problem
+                            $scope.csv_errors.push("Analyte \"" + analyte_result + "\" does not exist on the server");
+                        } else {
+                            // save existing analyte PK for uploading
+                            d['analyte_pk'] = existing_analyte_pk
+                        }
+
+                        if (distinct_analytes_tmp.indexOf(analyte_name) == -1) {
+                            distinct_analytes_tmp.push(analyte_name);
 
                             $scope.distinct_analytes.push(
                                 {
-                                    name: analyte_result,
-                                    new: existing_analyte_idx == null
+                                    name: analyte_name,
+                                    new: existing_analyte_pk == null
                                 }
                             );
                         }
@@ -202,30 +228,17 @@ app.controller(
                     if (typeof(d['Isotype']) == "undefined") {
                         $scope.csv_errors.push("Isotype field is required");
                     } else {
-                        if (distinct_isotypes_tmp.indexOf(d['Isotype']) == -1) {
-                            distinct_isotypes_tmp.push(d['Isotype']);
-
-                            // determine if any new isotypes are present
-                            var existing_isotype_idx = null;
-
-                            for (var i = 0, len = $scope.isotypes.length; i < len; i++) {
-                                if ($scope.isotypes[i].name == d['Isotype']) {
-                                    existing_isotype_idx = i;
-                                    break;
-                                }
+                        // determine if any new isotypes are present
+                        for (var i = 0, len = $scope.isotypes.length; i < len; i++) {
+                            if ($scope.isotypes[i].name == d['Isotype']) {
+                                d['isotype_pk'] = $scope.isotypes[i].id;
+                                break;
                             }
+                        }
 
-                            if (existing_isotype_idx == null) {
-                                // isotype doesn't exist, uh, that's a problem
-                                $scope.csv_errors.push("Isotype \"" + d['Isotype'] + "\" does not exist on the server");
-                            }
-
-                            $scope.distinct_isotypes.push(
-                                {
-                                    name: d['Isotype'],
-                                    new: existing_isotype_idx == null
-                                }
-                            );
+                        if (d['isotype_pk'] == null) {
+                            // isotype doesn't exist, uh, that's a problem
+                            $scope.csv_errors.push("Isotype \"" + d['Isotype'] + "\" does not exist on the server");
                         }
                     }
                     
@@ -233,30 +246,18 @@ app.controller(
                     if (typeof(d['Conjugate']) == "undefined") {
                         $scope.csv_errors.push("Conjugate field is required");
                     } else {
-                        if (distinct_conjugates_tmp.indexOf(d['Conjugate']) == -1) {
-                            distinct_conjugates_tmp.push(d['Conjugate']);
 
-                            // determine if any new conjugates are present
-                            var existing_conjugate_idx = null;
-
-                            for (var i = 0, len = $scope.conjugates.length; i < len; i++) {
-                                if ($scope.conjugates[i].name == d['Conjugate']) {
-                                    existing_conjugate_idx = i;
-                                    break;
-                                }
+                        // determine if any new conjugates are present
+                        for (var i = 0, len = $scope.conjugates.length; i < len; i++) {
+                            if ($scope.conjugates[i].name == d['Conjugate']) {
+                                d['conjugate_pk'] = $scope.conjugates[i].id;
+                                break;
                             }
+                        }
 
-                            if (existing_conjugate_idx == null) {
-                                // conjugate doesn't exist, uh, that's a problem
-                                $scope.csv_errors.push("Conjugate \"" + d['Conjugate'] + "\" does not exist on the server");
-                            }
-
-                            $scope.distinct_conjugates.push(
-                                {
-                                    name: d['Conjugate'],
-                                    new: existing_conjugate_idx == null
-                                }
-                            );
+                        if (d['conjugate_pk'] == null) {
+                            // conjugate doesn't exist, uh, that's a problem
+                            $scope.csv_errors.push("Conjugate \"" + d['Conjugate'] + "\" does not exist on the server");
                         }
                     }
 
@@ -293,6 +294,8 @@ app.controller(
                             $scope.csv_errors.push("CV value must be a percentage. Found: " + d['CV']);
                         } else if (isNaN(cv_result[0])) {
                             $scope.csv_errors.push("CV value must be a percentage. Found: " + d['CV']);
+                        } else {
+                            d['cv_value'] = cv_result[0];
                         }
                     }
 
@@ -321,8 +324,8 @@ app.controller(
                                 // 2nd field is participant ID, which is also in
                                 // a separate column. Verify it matches what we
                                 // already have
-                                if (desc_second_pass[0] != current_participant) {
-                                    $scope.csv_errors.push("Description field participant field doesn't match Participant ID column: " + desc_second_pass[0] + " vs " + current_participant);
+                                if (desc_second_pass[0] != d['Participant ID']) {
+                                    $scope.csv_errors.push("Description field participant field doesn't match Participant ID column: " + desc_second_pass[0] + " vs " + d['Participant ID']);
                                 }
 
                                 // 3rd field is visit ID, which is also in a
@@ -333,6 +336,17 @@ app.controller(
                                 }
 
                                 // 4th field is visit date, don't capture it
+                                visit_date = new Date(desc_second_pass[2].trim());
+                                if (isNaN(visit_date)) {
+                                    d['visit_date'] = null;
+                                } else {
+                                    d['visit_date'] =
+                                        visit_date.getFullYear().toString() +
+                                        "-" +
+                                        (visit_date.getMonth() + 1) +
+                                        "-" +
+                                        visit_date.getDate().toString();
+                                }
 
                                 // 5th field is sample type which is required
                                 // and must match a sample type defined on the
@@ -341,6 +355,7 @@ app.controller(
                                 for (var i = 0, len = $scope.sample_types.length; i < len; i++) {
                                     if ($scope.sample_types[i].name == desc_second_pass[3].trim()) {
                                         sample_type_match = true;
+                                        d['sample_type_pk'] = $scope.sample_types[i].id;
                                         break;
                                     }
                                 }
@@ -355,6 +370,7 @@ app.controller(
                                 for (var i = 0, len = $scope.buffers.length; i < len; i++) {
                                     if ($scope.buffers[i].name == desc_second_pass[4].trim()) {
                                         buffer_match = true;
+                                        d['buffer_pk'] = $scope.buffers[i].id;
                                         break;
                                     }
                                 }
@@ -388,19 +404,55 @@ app.controller(
                 if (distinct_networks[0] != $scope.current_cohort.network_name) {
                     $scope.csv_errors.push("Network in CSV file doesn't match this cohort's network");
                 }
+            }
 
-                // determine if any new notebooks are present
-                distinct_notebooks_tmp.forEach(function (n) {
-                    var new_nb = false;
-                    if ($scope.notebooks.indexOf(n) == -1) {
-                        new_nb = true;
-                    }
-                    $scope.distinct_notebooks.push(
-                        {
-                            name: n,
-                            new: new_nb
-                        }
-                    );
+            $scope.upload_data = function() {
+                $scope.upload_progress = 0;
+                $scope.upload_errors = null;
+
+                // coerce data objects to conform to web API upload format
+                var data_points = [];
+                var data_object = {
+                    'notebook': null,         // will be null for new notebooks
+                    'notebook_name': null,    // used for new notebooks
+                    'participant': null,      // will be null for new participants
+                    'participant_code': null, // used for new participants
+                    'sample_type': null,      // PK for sample type
+                    'analyte': null,          // PK for analyte
+                    'isotype': null,          // PK for isotype
+                    'conjugate': null,        // PK for conjugate
+                    'buffer': null,           // PK for buffer (can be null)
+                    'global_id_code': null,   // can be null
+                    'visit_code': null,       // text value
+                    'visit_date': null,
+                    'bead_number': null,
+                    'dilution': null,
+                    'fi_minus_background': null,
+                    'fi_minus_background_blank': null,
+                    'cv': null
+                };
+
+                $scope.csv_data.forEach(function (d) {
+                    console.log(d);
+                    data_points.push({
+                        'notebook': d['notebook_pk'],
+                        'notebook_name': d['Notebook Number'],
+                        'participant': d['participant_pk'],
+                        'participant_code': d['Participant ID'],
+                        'sample_type': d['sample_type_pk'],
+                        'analyte': d['analyte_pk'],
+                        'isotype': d['isotype_pk'],
+                        'conjugate': d['conjugate_pk'],
+                        'buffer': d['buffer_pk'],
+                        'global_id_code': d['Specimen ID'],
+                        'visit_code': d['Visit ID'],
+                        'visit_date': d['visit_date'],
+                        'bead_number': d['bead_number'],
+                        'dilution': d['Dilution'],
+                        'fi_minus_background': d['FI-Bkgd'],
+                        'fi_minus_background_blank': d['FI-Bkgd-Blank'],
+                        'cv': d['cv_value']
+                    });
                 });
             }
         }
