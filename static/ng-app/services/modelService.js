@@ -10,7 +10,8 @@ app.factory('ModelService', function(
         SampleType,
         Notebook,
         Network,
-        Participant) {
+        Participant,
+        DataPoint) {
     var service = {};
 
     service.user = User.get();
@@ -286,6 +287,11 @@ app.factory('ModelService', function(
         return Participant.query(
             {}
         );
+    };
+
+    // DataPoint services
+    service.saveDataPoints = function(data_array) {
+        return DataPoint.save(data_array);
     };
 
     return service;

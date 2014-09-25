@@ -9,7 +9,8 @@ var URLS = {
     'SAMPLE_TYPES':        '/api/analytics/sample-types/',
     'NOTEBOOKS':           '/api/analytics/notebooks/',
     'NETWORKS':            '/api/analytics/networks/',
-    'PARTICIPANTS':        '/api/analytics/participants/'
+    'PARTICIPANTS':        '/api/analytics/participants/',
+    'DATAPOINTS':          '/api/analytics/data-points/'
 };
 
 app.factory('User', ['$resource', function ($resource) {
@@ -121,4 +122,17 @@ app.factory('User', ['$resource', function ($resource) {
     return $resource(URLS.NOTEBOOKS, {});
 }]).factory('Participant', ['$resource', function ($resource) {
     return $resource(URLS.PARTICIPANTS, {});
+}]).factory('DataPoint', ['$resource', function ($resource) {
+    var DataPoint = $resource(
+        URLS.DATAPOINTS,
+        {},
+        {
+            save: {
+                method: 'POST',
+                isArray: true
+            }
+        }
+    );
+
+    return DataPoint;
 }]);

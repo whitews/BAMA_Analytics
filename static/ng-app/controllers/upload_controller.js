@@ -2,8 +2,6 @@ app.controller(
     'UploadController',
     [
         '$scope',
-        '$controller',
-        '$modal',
         'ModelService',
         function ($scope, ModelService) {
             // file reader stuff
@@ -433,7 +431,6 @@ app.controller(
                 };
 
                 $scope.csv_data.forEach(function (d) {
-                    console.log(d);
                     data_points.push({
                         'notebook': d['notebook_pk'],
                         'notebook_name': d['Notebook Number'],
@@ -453,6 +450,15 @@ app.controller(
                         'fi_minus_background_blank': d['FI-Bkgd-Blank'],
                         'cv': d['cv_value']
                     });
+                });
+
+                var response = ModelService.saveDataPoints(data_points);
+
+                response.$promise.then(function () {
+                    console.log('success');
+
+                }, function (error) {
+                    $scope.upload_errors = error.data;
                 });
             }
         }
