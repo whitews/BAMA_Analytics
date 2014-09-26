@@ -234,7 +234,6 @@ class Participant(models.Model):
         blank=True
     )
     code = models.CharField(
-        unique=True,
         max_length=128,
         null=False,
         blank=False
@@ -244,6 +243,9 @@ class Participant(models.Model):
         null=True,
         blank=True
     )
+
+    class Meta:
+        unique_together = (('cohort', 'code'),)
 
 
 class UploadEvent(models.Model):
