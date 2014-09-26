@@ -552,7 +552,6 @@ class DataPointList(LoginRequiredMixin, generics.ListCreateAPIView):
 
     def create(self, request, *args, **kwargs):
         data = request.DATA
-        print 'asdf'
 
         # validate all the data points, returns a cohort and errors
         # cohort is null if errors are present
@@ -563,19 +562,70 @@ class DataPointList(LoginRequiredMixin, generics.ListCreateAPIView):
         # using an atomic transaction to create intermediate model instances
         try:
             with transaction.atomic():
+                # get cohort from first data point
+                cohort = Cohort.objects.get(name=data[0]['cohort'])
+
                 # create upload event
-                upload_event = UploadEvent(
-                    #...
-                )
+                upload_event = UploadEvent(user=request.user)
                 upload_event.clean()
                 upload_event.save()
 
-                for param in data['data_points']:
-                    print 'asdf'
+                # distinct set of new notebooks by notebook name, value is
+                # the provisional Notebook object
+                new_notebooks = dict()
 
-                    # create any new notebooks
+                # distinct set of new participants by part code, value is
+                # the provisional Participant object
+                new_participants = dict()
+
+                for d in data:
+                    d['upload_event'] = upload_event.id
+
+                    # check for and create any new notebooks
+                    if d['notebook'] is None:
+                        if d['notebook_name'] not in new_notebooks.keys():
+                            notebook = Notebook(name=d['notebook_name'])
+                            notebook.clean()
+                            notebook.save()
+
+                            # notebook PK to our data point for saving later
+                            d['notebook'] = notebook.id
+
+                            # add to our dict so we don't recreate it
+                            new_notebooks[notebook.name] = notebook
+                        else:
+                            # we've already created a new notebook during this
+                            # upload event so just grab it's id for the data
+                            # point
+                            d['notebook'] = new_notebooks[d['notebook_name']].id
+
+                    # check for and create any new participants
+                    if d['participant'] is None:
+                        if d['participant_code'] not in new_participants.keys():
+                            participant = Participant(
+                                cohort=cohort,
+                                code=d['participant_code'],
+                                species=Species.objects.get(name=d['species'])
+                            )
+                            participant.clean()
+                            participant.save()
+
+                            # participant PK to our data point for saving later
+                            d['participant'] = participant.id
+
+                            # add to our dict so we don't recreate it
+                            new_participants[participant.code] = participant
+                        else:
+                            # we've already created a new participant during this
+                            # upload event so just grab it's id for the data
+                            # point
+                            d['participant'] = new_participants[
+                                d['participant_code']].id
+
+                print 'asdf'
 
         except Exception as e:  # catch any exception to rollback changes
+            print e
             return Response(data={'detail': e.message}, status=400)
 
         # possibly put this in the atomic transaction above

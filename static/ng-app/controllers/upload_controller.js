@@ -40,6 +40,10 @@ app.controller(
             }
 
             function validateData(data) {
+                // clear errors
+                $scope.csv_errors = [];
+                $scope.upload_errors = [];
+
                 var distinct_cohorts = [];
                 var distinct_notebooks_tmp = [];  // array of strings (name)
                 $scope.distinct_notebooks = [];  // array of objects
@@ -50,6 +54,7 @@ app.controller(
                 var sample_type_match = false;
                 var buffer_match = false;
                 var visit_date = null;
+                var assay_date = null;
 
                 var distinct_analytes_tmp = [];  // array of strings (name)
                 $scope.distinct_analytes = [];  // array of objects
@@ -297,6 +302,23 @@ app.controller(
                         }
                     }
 
+                    // get assay date (required)
+                    if (typeof(d['Assay Date']) == "undefined") {
+                        $scope.csv_errors.push("Assay Date field is required");
+                    } else {
+                        assay_date = new Date(d['Assay Date'].trim());
+                        if (isNaN(assay_date)) {
+                            $scope.csv_errors.push("Assay Date format is incorrect. Found: " + d['Assay Date']);
+                        } else {
+                            d['assay_date'] =
+                                assay_date.getFullYear().toString() +
+                                "-" +
+                                (assay_date.getMonth() + 1) +
+                                "-" +
+                                assay_date.getDate().toString();
+                        }
+                    }
+
                     // finally, check the description field
                     // this one's overloaded as a double quoted string with
                     // it's own semi-colon and comma delimited internal values:
@@ -406,36 +428,20 @@ app.controller(
 
             $scope.upload_data = function() {
                 $scope.upload_progress = 0;
-                $scope.upload_errors = null;
+                $scope.upload_errors = [];
 
                 // coerce data objects to conform to web API upload format
                 var data_points = [];
-                var data_object = {
-                    'notebook': null,         // will be null for new notebooks
-                    'notebook_name': null,    // used for new notebooks
-                    'participant': null,      // will be null for new participants
-                    'participant_code': null, // used for new participants
-                    'sample_type': null,      // PK for sample type
-                    'analyte': null,          // PK for analyte
-                    'isotype': null,          // PK for isotype
-                    'conjugate': null,        // PK for conjugate
-                    'buffer': null,           // PK for buffer (can be null)
-                    'global_id_code': null,   // can be null
-                    'visit_code': null,       // text value
-                    'visit_date': null,
-                    'bead_number': null,
-                    'dilution': null,
-                    'fi_minus_background': null,
-                    'fi_minus_background_blank': null,
-                    'cv': null
-                };
 
                 $scope.csv_data.forEach(function (d) {
                     data_points.push({
+                        'cohort': d['Cohort'],
                         'notebook': d['notebook_pk'],
                         'notebook_name': d['Notebook Number'],
+                        'assay_date': d['assay_date'],
                         'participant': d['participant_pk'],
                         'participant_code': d['Participant ID'],
+                        'species': d['Species'],
                         'sample_type': d['sample_type_pk'],
                         'analyte': d['analyte_pk'],
                         'isotype': d['isotype_pk'],
@@ -458,7 +464,7 @@ app.controller(
                     console.log('success');
 
                 }, function (error) {
-                    $scope.upload_errors = error.data;
+                    $scope.upload_errors.push(error.data);
                 });
             }
         }

@@ -73,6 +73,13 @@
                 <li ng-repeat="e in csv_errors track by $index">{{ e }}</li>
               </ul>
             </div>
+
+            <div class="well well-warning" ng-show="upload_errors.length > 0">
+              <h5><em>Errors returned by the server. Please correct the CSV file and try again.</em></h5>
+              <ul class="list-unstyled">
+                <li ng-repeat="e in upload_errors track by $index">{{ e }}</li>
+              </ul>
+            </div>
           </div>
 
           <br/>

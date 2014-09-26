@@ -1,3 +1,5 @@
+import datetime
+
 from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
@@ -245,14 +247,10 @@ class Participant(models.Model):
 
 
 class UploadEvent(models.Model):
-    filename = models.CharField(
-        max_length=256,
-        null=False,
-        blank=False
-    )
     upload_date = models.DateField(
         null=False,
-        blank=False
+        blank=False,
+        editable=False
     )
     user = models.ForeignKey(
         User,
@@ -260,6 +258,12 @@ class UploadEvent(models.Model):
         blank=False,
         editable=False
     )
+
+    def save(self, *args, **kwargs):
+        """ Populate upload date on save """
+        if not self.id:
+            self.upload_date = datetime.datetime.today()
+            super(UploadEvent, self).save(*args, **kwargs)
 
 
 class Notebook(models.Model):
