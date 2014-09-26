@@ -83,5 +83,12 @@ class ParticipantSerializer(serializers.ModelSerializer):
 
 
 class DataPointSerializer(serializers.ModelSerializer):
+    participant_code = serializers.CharField(
+        source='participant.code',
+        read_only=True)
+    analyte_name = serializers.CharField(
+        source='analyte.name',
+        read_only=True)
+
     class Meta:
         model = DataPoint

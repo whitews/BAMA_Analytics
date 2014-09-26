@@ -111,12 +111,12 @@
 
             <hr/>
 
-            <b>Filter1</b>
+            <b>Participants</b>
             <ul>
-              <li ng-repeat="s in something">
+              <li ng-repeat="p in participants">
                 <label>
                   <input type="checkbox" ng-model="p.query" />
-                  {{ asdf }}
+                  {{ p.code }}
                 </label>
               </li>
             </ul>
@@ -144,19 +144,19 @@
             </tr>
             <tr>
                 <th></th>
-                <th>Col1</th>
-                <th>Col2</th>
-                <th>Col3</th>
+                <th>Participant</th>
+                <th>Visit</th>
+                <th>Analyte</th>
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="s in samples">
+            <tr ng-repeat="dp in data_points">
               <td class="no-wrap" width="1%">
 
               </td>
-              <td></td>
-              <td></td>
-              <td></td>
+              <td>{{ dp.participant_code }}</td>
+              <td>{{ dp.visit_code }}</td>
+              <td>{{ dp.analyte_name }}</td>
             </tr>
           </tbody>
         </table>

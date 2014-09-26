@@ -121,6 +121,20 @@ app.controller(
                 // re-direct to 404
                 $state.transitionTo('404');
             });
+
+            $scope.apply_filter = function () {
+                $scope.filter_errors = [];
+
+                var participants = [];
+                $scope.participants.forEach(function (p) {
+                    if (p.query) {
+                        participants.push(p.id);
+                    }
+                });
+
+
+                $scope.data_points = ModelService.getDataPoints(participants);
+            };
         }
     ]
 );
