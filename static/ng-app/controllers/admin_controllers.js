@@ -133,7 +133,11 @@ app.controller(
                 });
 
 
-                $scope.data_points = ModelService.getDataPoints(participants);
+                $scope.data_points = ModelService.getDataPoints(
+                    {
+                        'participants': participants
+                    }
+                );
             };
         }
     ]

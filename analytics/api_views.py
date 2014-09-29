@@ -9,6 +9,10 @@ from rest_framework.decorators import \
     api_view
 from rest_framework.reverse import reverse
 from rest_framework.response import Response
+from rest_framework.views import exception_handler
+from rest_framework.exceptions import NotAuthenticated
+
+import django_filters
 
 from django.views.generic.detail import SingleObjectMixin
 from django.core.exceptions import PermissionDenied
@@ -17,6 +21,19 @@ from django.db import transaction
 
 
 from analytics.serializers import *
+
+
+def custom_exception_handler(exc):
+    # Call REST framework's default exception handler first,
+    # to get the standard error response.
+    if isinstance(exc, NotAuthenticated):
+        response = Response({'detail': 'Not authenticated'},
+                        status=status.HTTP_401_UNAUTHORIZED,
+                        exception=True)
+    else:
+        response = exception_handler(exc)
+
+    return response
 
 
 @api_view(['GET'])
@@ -319,7 +336,7 @@ class ConjugateList(AdminRequiredMixin, generics.ListCreateAPIView):
 
     model = Conjugate
     serializer_class = ConjugateSerializer
-    filter_fields = ('name')
+    filter_fields = ('name',)
 
     def get_queryset(self):
         """
@@ -369,7 +386,7 @@ class BufferList(AdminRequiredMixin, generics.ListCreateAPIView):
 
     model = Buffer
     serializer_class = BufferSerializer
-    filter_fields = ('name')
+    filter_fields = ('name',)
 
     def get_queryset(self):
         """
@@ -419,7 +436,7 @@ class IsotypeList(AdminRequiredMixin, generics.ListCreateAPIView):
 
     model = Isotype
     serializer_class = IsotypeSerializer
-    filter_fields = ('name')
+    filter_fields = ('name',)
 
     def get_queryset(self):
         """
@@ -469,7 +486,7 @@ class SampleTypeList(AdminRequiredMixin, generics.ListCreateAPIView):
 
     model = SampleType
     serializer_class = SampleTypeSerializer
-    filter_fields = ('name')
+    filter_fields = ('name',)
 
     def get_queryset(self):
         """
@@ -532,6 +549,23 @@ class ParticipantList(LoginRequiredMixin, generics.ListAPIView):
     filter_fields = ('cohort', 'species')
 
 
+class DataPointFilter(django_filters.FilterSet):
+    participant = django_filters.ModelMultipleChoiceFilter(
+        queryset=Participant.objects.all(),
+        name='participant')
+    participant_code = django_filters.CharFilter(
+        name='participant__code'
+    )
+    # site_panel = django_filters.ModelMultipleChoiceFilter(
+    #     queryset=SitePanel.objects.all())
+    # subject_code = django_filters.CharFilter(
+    #     name='subject__subject_code')
+    # original_filename = django_filters.CharFilter(lookup_type="icontains")
+
+    class Meta:
+        model = DataPoint
+
+
 class DataPointList(LoginRequiredMixin, generics.ListCreateAPIView):
     """
     API endpoint representing a list of data points.
@@ -539,16 +573,7 @@ class DataPointList(LoginRequiredMixin, generics.ListCreateAPIView):
 
     model = DataPoint
     serializer_class = DataPointSerializer
-    filter_fields = (
-        'notebook',
-        'cohort',
-        'participant',
-        'analyte',
-        'visit_code',
-        'isotype',
-        'conjugate',
-        'buffer'
-    )
+    filter_class = DataPointFilter
 
     def create(self, request, *args, **kwargs):
         data = request.DATA

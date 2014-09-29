@@ -297,7 +297,7 @@ app.factory('ModelService', function(
     service.getDataPoints = function(query_object) {
         return DataPoint.query(
             {
-                'participant': query_object.participant || null
+                'participant': query_object.participants || null
             }
         );
     };

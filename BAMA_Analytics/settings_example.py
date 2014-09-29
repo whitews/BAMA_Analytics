@@ -117,3 +117,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/static/'
+
+REST_FRAMEWORK = {
+    'PAGINATE_BY': None,
+    'PAGINATE_BY_PARAM': 'paginate_by',
+    'FILTER_BACKEND': 'rest_framework.filters.DjangoFilterBackend',
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+    'EXCEPTION_HANDLER': 'repository.api_views.custom_exception_handler'
+}
