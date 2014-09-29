@@ -89,6 +89,21 @@ class DataPointSerializer(serializers.ModelSerializer):
     analyte_name = serializers.CharField(
         source='analyte.name',
         read_only=True)
+    conjugate_name = serializers.CharField(
+        source='conjugate.name',
+        read_only=True)
+    buffer_name = serializers.CharField(
+        source='buffer.name',
+        read_only=True)
+    sample_type_name = serializers.CharField(
+        source='sample_type.name',
+        read_only=True)
+    upload_date = serializers.DateField(
+        source='upload_event.upload_date',
+        read_only=True)
+    user = serializers.CharField(
+        source='upload_event.user.username',
+        read_only=True)
 
     class Meta:
         model = DataPoint

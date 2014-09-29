@@ -122,6 +122,37 @@ app.controller(
                 $state.transitionTo('404');
             });
 
+            $scope.data_point_columns = {
+                'participant': {
+                    'name': 'Participant',
+                    'show': false
+                },
+                'analyte': {
+                    'name': 'Analyte',
+                    'show': true
+                }
+            };
+
+            $scope.open_column_chooser = function (size) {
+
+                var modalInstance = $modal.open({
+                    templateUrl: 'myModalContent.html',
+                    controller: ModalFormCtrl,
+                    size: size,
+                    resolve: {
+                        instance: function () {
+                            return $scope.data_point_columns;
+                        }
+                    }
+                });
+
+                modalInstance.result.then(function (instance) {
+                    //$scope.data_point_columns = instance;
+                }, function () {
+                    //$log.info('Modal dismissed at: ' + new Date());
+                });
+            };
+
             $scope.apply_filter = function () {
                 $scope.filter_errors = [];
 
@@ -131,7 +162,6 @@ app.controller(
                         participants.push(p.id);
                     }
                 });
-
 
                 $scope.data_points = ModelService.getDataPoints(
                     {

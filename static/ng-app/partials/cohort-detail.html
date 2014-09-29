@@ -96,7 +96,7 @@
 
 
     <div class="row">
-      <div class="col-md-4">
+      <div class="col-md-3">
 
         <div class="well" style="margin-top:52px">
           <form class="unstyled-checkboxes" id="sample-filter-form" method="get">
@@ -127,19 +127,44 @@
         </div>
       </div>
 
-      <div class="col-md-8">
+      <div class="col-md-9">
         <table id="data-table" class="table table-hover">
           <thead>
             <tr>
 
-                <th colspan="50" class="center">
+                <th colspan="50">
 
                   <div style="position:relative;">
 
-                    <h5>
+                    <h5 class="text-center">
                       Data Points
                       <span class="badge badge-inverse align-top">{{ data_points.length }}</span>
                     </h5>
+
+                    <div style="position: absolute; right:0;top:0;">
+                      <button class="btn btn-info btn-xs" type="button" ng-click="open_column_chooser('sm')">
+                        Choose Columns
+                      </button>
+
+                      <script type="text/ng-template" id="myModalContent.html">
+                        <div class="modal-header">
+                          <h3 class="modal-title">Choose Columns</h3>
+                        </div>
+                        <div class="modal-body">
+                          <ul class="list-unstyled">
+                            <li ng-repeat="(key, value) in instance">
+                              <label>
+                                <input type="checkbox" ng-model="value.show" />
+                                {{ value.name }}
+                              </label>
+                            </li>
+                          </ul>
+                        </div>
+                        <div class="modal-footer">
+                          <button class="btn btn-primary" ng-click="ok()">OK</button>
+                        </div>
+                      </script>
+                    </div>
 
                   </div>
 
@@ -147,9 +172,18 @@
             </tr>
             <tr>
                 <th></th>
-                <th>Participant</th>
+                <th ng-show="data_point_columns.participant.show">Participant</th>
+                <th>Global ID</th>
                 <th>Visit</th>
-                <th>Analyte</th>
+                <th>Visit Date</th>
+                <th>Assay Date</th>
+                <thng-show="data_point_columns.analyte.show">Analyte</th>
+                <th>Bead #</th>
+                <th>Sample Type</th>
+                <th>Conjugate</th>
+                <th>Buffer</th>
+                <th>Upload Date</th>
+                <th>Uploaded By</th>
             </tr>
           </thead>
           <tbody>
@@ -157,9 +191,18 @@
               <td class="no-wrap" width="1%">
 
               </td>
-              <td>{{ dp.participant_code }}</td>
+              <td ng-show="data_point_columns.participant.show">{{ dp.participant_code }}</td>
+              <td>{{ dp.global_id_code }}</td>
               <td>{{ dp.visit_code }}</td>
+              <td>{{ dp.visit_date }}</td>
+              <td>{{ dp.assay_date }}</td>
               <td>{{ dp.analyte_name }}</td>
+              <td>{{ dp.bead_number }}</td>
+              <td>{{ dp.sample_type_name }}</td>
+              <td>{{ dp.conjugate_name }}</td>
+              <td>{{ dp.buffer_name }}</td>
+              <td>{{ dp.upload_date }}</td>
+              <td>{{ dp.user }}</td>
             </tr>
           </tbody>
         </table>
