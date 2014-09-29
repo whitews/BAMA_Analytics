@@ -15,8 +15,8 @@
         </tr>
         <tr>
           <th></th>
-          <th>Network</th>
           <th>Name</th>
+          <th>Network</th>
           <th>Description</th>
         </tr>
       </thead>
@@ -27,10 +27,10 @@
                 <span style="opacity: 0.4" class="fa fa-pencil align-middle"></span>
               </a>
           </td>
-          <td>{{ cohort.network_name }}</td>
           <td>
             <a ui-sref="cohort-detail({ cohortId: cohort.id })">{{ cohort.name }}</a>
           </td>
+          <td>{{ cohort.network_name }}</td>
           <td>{{ cohort.description }}</td>
         </tr>
       </tbody>
