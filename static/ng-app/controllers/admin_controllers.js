@@ -123,13 +123,53 @@ app.controller(
             });
 
             $scope.data_point_columns = {
-                'participant': {
+                'participant_code': {
                     'name': 'Participant',
+                    'show': true
+                },
+                'global_id_code': {
+                    'name': 'Global ID',
                     'show': false
                 },
-                'analyte': {
+                'visit_code': {
+                    'name': 'Visit',
+                    'show': true
+                },
+                'visit_date': {
+                    'name': 'Visit Date',
+                    'show': false
+                },
+                'assay_date': {
+                    'name': 'Assay Date',
+                    'show': false
+                },
+                'analyte_name': {
                     'name': 'Analyte',
                     'show': true
+                },
+                'bead_number': {
+                    'name': 'Bead #',
+                    'show': false
+                },
+                'sample_type_name': {
+                    'name': 'Sample Type',
+                    'show': false
+                },
+                'conjugate_name': {
+                    'name': 'Conjugate',
+                    'show': false
+                },
+                'buffer_name': {
+                    'name': 'Buffer',
+                    'show': false
+                },
+                'upload_date': {
+                    'name': 'Upload Date',
+                    'show': false
+                },
+                'user': {
+                    'name': 'User',
+                    'show': false
                 }
             };
 
