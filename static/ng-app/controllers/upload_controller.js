@@ -4,6 +4,12 @@ app.controller(
         '$scope',
         'ModelService',
         function ($scope, ModelService) {
+            $scope.file_name = null;
+            $scope.csv_data = null;
+            $scope.csv_errors = [];
+            $scope.upload_success = false;
+            $scope.success_message = null;
+
             // file reader stuff
             $scope.fileReaderSupported = window.FileReader != null;
             $scope.hasUploader = function (index) {
@@ -18,6 +24,8 @@ app.controller(
                 $scope.file_name = null;
                 $scope.csv_data = null;
                 $scope.csv_errors = [];
+                $scope.upload_success = false;
+                $scope.success_message = null;
                 if ($files.length != 1) {
                     $scope.csv_errors.push('Please drag only one file at a time.');
                 } else {
@@ -427,6 +435,12 @@ app.controller(
             }
 
             $scope.upload_data = function() {
+                if (!$scope.csv_data) {
+                    // there's no data
+                    return;
+                }
+
+                $scope.uploading = true;
                 $scope.upload_progress = 0;
                 $scope.upload_errors = [];
 
@@ -461,7 +475,17 @@ app.controller(
                 var response = ModelService.saveDataPoints(data_points);
 
                 response.$promise.then(function () {
-                    console.log('success');
+                    // success!
+                    // Set upload success message.
+                    $scope.upload_success = true;
+                    $scope.success_message = data_points.length + " records successfully uploaded.";
+
+                    // reset data upload vars
+                    $scope.file_name = null;
+                    $scope.csv_data = null;
+                    $scope.csv_errors = [];
+                    $scope.uploading = false;
+
 
                 }, function (error) {
                     $scope.upload_errors.push(error.data);

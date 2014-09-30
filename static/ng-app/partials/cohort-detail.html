@@ -82,10 +82,23 @@
             </div>
           </div>
 
+          <div ng-show="upload_success">
+            <br/>
+            <div class="panel panel-success">
+              <div class="panel-heading">
+                <h3 class="panel-title">Upload Completed</h3>
+              </div>
+              <div class="panel-body">
+                {{ success_message }}
+              </div>
+            </div>
+          </div>
+
           <br/>
 
-          <div class="btn-group pull-right">
-            <a class="btn btn-success btn-xs" ng-disabled="csv_errors.length > 0" ng-click="upload_data()" ng-show="current_cohort.permissions.add_cohort_data">Upload Data</a>
+          <div class="pull-right no-wrap">
+            <img data-ng-show="uploading" src="/static/img/whirligig.gif">
+            <a class="btn btn-success btn-xs" ng-disabled="!csv_data || csv_errors.length > 0 || uploading" ng-click="upload_data()" ng-show="current_cohort.permissions.add_cohort_data">Upload Data</a>
           </div>
 
         </div>
