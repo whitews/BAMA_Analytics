@@ -123,6 +123,10 @@ app.controller(
             });
 
             $scope.data_point_columns = {
+                'notebook_name': {
+                    'name': 'Notebook',
+                    'show': false
+                },
                 'participant_code': {
                     'name': 'Participant',
                     'show': true
@@ -159,6 +163,10 @@ app.controller(
                     'name': 'Conjugate',
                     'show': false
                 },
+                'isotype_name': {
+                    'name': 'Isotype',
+                    'show': false
+                },
                 'buffer_name': {
                     'name': 'Buffer',
                     'show': false
@@ -169,6 +177,22 @@ app.controller(
                 },
                 'user': {
                     'name': 'User',
+                    'show': false
+                },
+                'cv': {
+                    'name': 'CV',
+                    'show': true
+                },
+                'fi_minus_background': {
+                    'name': 'FI-Bkgd',
+                    'show': true
+                },
+                'fi_minus_background_blank': {
+                    'name': 'FI-Bkgd-Blank',
+                    'show': true
+                },
+                'dilution': {
+                    'name': 'Dilution',
                     'show': false
                 }
             };

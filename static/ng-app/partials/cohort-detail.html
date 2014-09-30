@@ -172,6 +172,7 @@
             </tr>
             <tr>
                 <th></th>
+                <th ng-show="data_point_columns.notebook_name.show">Notebook</th>
                 <th ng-show="data_point_columns.participant_code.show">Participant</th>
                 <th ng-show="data_point_columns.global_id_code.show">Global ID</th>
                 <th ng-show="data_point_columns.visit_code.show">Visit</th>
@@ -181,7 +182,11 @@
                 <th ng-show="data_point_columns.bead_number.show">Bead #</th>
                 <th ng-show="data_point_columns.sample_type_name.show">Sample Type</th>
                 <th ng-show="data_point_columns.conjugate_name.show">Conjugate</th>
+                <th ng-show="data_point_columns.isotype_name.show">Isotype</th>
                 <th ng-show="data_point_columns.buffer_name.show">Buffer</th>
+                <th ng-show="data_point_columns.fi_minus_background.show">FI-Bkgd</th>
+                <th ng-show="data_point_columns.fi_minus_background_blank.show">FI-Bkgd-Blank</th>
+                <th ng-show="data_point_columns.cv.show">CV</th>
                 <th ng-show="data_point_columns.upload_date.show">Upload Date</th>
                 <th ng-show="data_point_columns.user.show">Uploaded By</th>
             </tr>
@@ -191,6 +196,7 @@
               <td class="no-wrap" width="1%">
 
               </td>
+              <td ng-show="data_point_columns.notebook_name.show">{{ dp.notebook_name }}</td>
               <td ng-show="data_point_columns.participant_code.show">{{ dp.participant_code }}</td>
               <td ng-show="data_point_columns.global_id_code.show">{{ dp.global_id_code }}</td>
               <td ng-show="data_point_columns.visit_code.show">{{ dp.visit_code }}</td>
@@ -200,7 +206,11 @@
               <td ng-show="data_point_columns.bead_number.show">{{ dp.bead_number }}</td>
               <td ng-show="data_point_columns.sample_type_name.show">{{ dp.sample_type_name }}</td>
               <td ng-show="data_point_columns.conjugate_name.show">{{ dp.conjugate_name }}</td>
+              <td ng-show="data_point_columns.isotype_name.show">{{ dp.isotype_name }}</td>
               <td ng-show="data_point_columns.buffer_name.show">{{ dp.buffer_name }}</td>
+              <td ng-show="data_point_columns.fi_minus_background.show">{{ dp.fi_minus_background }}</td>
+              <td ng-show="data_point_columns.fi_minus_background_blank.show">{{ dp.fi_minus_background_blank }}</td>
+              <td ng-show="data_point_columns.cv.show">{{ dp.cv }}</td>
               <td ng-show="data_point_columns.upload_date.show">{{ dp.upload_date }}</td>
               <td ng-show="data_point_columns.user.show">{{ dp.user }}</td>
             </tr>
