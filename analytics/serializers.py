@@ -83,6 +83,9 @@ class ParticipantSerializer(serializers.ModelSerializer):
 
 
 class DataPointSerializer(serializers.ModelSerializer):
+    notebook_name = serializers.CharField(
+        source='notebook.name',
+        read_only=True)
     participant_code = serializers.CharField(
         source='participant.code',
         read_only=True)
@@ -94,6 +97,9 @@ class DataPointSerializer(serializers.ModelSerializer):
         read_only=True)
     buffer_name = serializers.CharField(
         source='buffer.name',
+        read_only=True)
+    isotype_name = serializers.CharField(
+        source='isotype.name',
         read_only=True)
     sample_type_name = serializers.CharField(
         source='sample_type.name',
