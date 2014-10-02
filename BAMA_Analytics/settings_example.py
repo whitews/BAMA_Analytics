@@ -126,5 +126,5 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.TokenAuthentication',
     ),
-    'EXCEPTION_HANDLER': 'repository.api_views.custom_exception_handler'
+    'EXCEPTION_HANDLER': 'analytics.api_views.custom_exception_handler'
 }
