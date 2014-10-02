@@ -391,9 +391,9 @@ app.controller(
                                     $scope.csv_errors.push("Description sample type does not exist on the server: " + desc_second_pass[3]);
                                 }
 
-                                // 6th field is buffer which is required
-                                // and must match a buffer defined on the
-                                // server
+                                // 6th field is buffer which is optional
+                                // but must match a buffer defined on the
+                                // server if it is present
                                 buffer_match = false;
                                 for (var i = 0, len = $scope.buffers.length; i < len; i++) {
                                     if ($scope.buffers[i].name == desc_second_pass[4].trim()) {
@@ -402,7 +402,9 @@ app.controller(
                                         break;
                                     }
                                 }
-                                if (!buffer_match) {
+                                // if a buffer was present but didn't match
+                                // inform the user
+                                if (!buffer_match && desc_second_pass[4] != "") {
                                     $scope.csv_errors.push("Description buffer does not exist on the server: " + desc_second_pass[4]);
                                 }
                             }

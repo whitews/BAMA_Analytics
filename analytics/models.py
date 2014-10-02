@@ -361,8 +361,8 @@ class DataPoint(models.Model):
     conjugate = models.ForeignKey(Conjugate)
     buffer = models.ForeignKey(
         Buffer,
-        null=False,
-        blank=False
+        null=True,
+        blank=True
     )
     global_id_code = models.CharField(
         max_length=64,
