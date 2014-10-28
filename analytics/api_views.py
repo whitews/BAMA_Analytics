@@ -573,18 +573,23 @@ class DataPointList(LoginRequiredMixin, generics.ListCreateAPIView):
     def create(self, request, *args, **kwargs):
         data = request.DATA
 
-        # validate all the data points, returns a cohort and errors
-        # cohort is null if errors are present
-        # [cohort, errors] = validate_data_points(data, request.user)
-        # if len(errors) > 0:
-        #     return Response(data=errors, status=400)
+        # get cohort from first data point
+        try:
+            cohort = Cohort.objects.get(name=data[0]['cohort'])
+        except Exception as e:
+            print e
+            return Response(data={'detail': e.message}, status=400)
+
+        # verify user has add permission for cohort
+        if not cohort.has_add_permission(request.user):
+            return Response(
+                data={'detail': 'Permission denied'},
+                status=status.HTTP_403_FORBIDDEN
+            )
 
         # using an atomic transaction to create intermediate model instances
         try:
             with transaction.atomic():
-                # get cohort from first data point
-                cohort = Cohort.objects.get(name=data[0]['cohort'])
-
                 # create upload event
                 upload_event = UploadEvent(user=request.user)
                 upload_event.clean()
