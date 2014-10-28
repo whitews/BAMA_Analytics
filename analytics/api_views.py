@@ -556,6 +556,10 @@ class DataPointFilter(django_filters.FilterSet):
     participant_code = django_filters.CharFilter(
         name='participant__code'
     )
+    cohort = django_filters.ModelChoiceFilter(
+        queryset=Cohort.objects.all(),
+        name='participant__cohort_id'
+    )
 
     class Meta:
         model = DataPoint
