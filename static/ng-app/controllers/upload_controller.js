@@ -492,6 +492,7 @@ app.controller(
 
                 }, function (error) {
                     $scope.upload_errors.push(error.data);
+                    $scope.uploading = false;
                 });
             }
         }
