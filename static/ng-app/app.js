@@ -119,7 +119,7 @@ app.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
         }
     }).state({
         name: 'cohort-detail',
-        parent: 'home',
+        parent: 'cohort-list',
         url: 'cohort/:cohortId',
         views: {
             '@': {
