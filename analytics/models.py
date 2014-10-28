@@ -385,18 +385,9 @@ class DataPoint(models.Model):
     bead_number = models.IntegerField()
     dilution = models.IntegerField()
     # fi is fluorescence intensity
-    fi_minus_background = models.DecimalField(
-        max_digits=16,
-        decimal_places=9
-    )
-    fi_minus_background_blank = models.DecimalField(
-        max_digits=16,
-        decimal_places=9
-    )
-    cv = models.DecimalField(
-        max_digits=12,
-        decimal_places=9
-    )
+    fi_minus_background = models.FloatField()
+    fi_minus_background_blank = models.FloatField()
+    cv = models.FloatField()
 
     class Meta:
         unique_together = (
