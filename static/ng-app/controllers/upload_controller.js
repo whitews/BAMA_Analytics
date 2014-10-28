@@ -26,6 +26,7 @@ app.controller(
                 $scope.csv_errors = [];
                 $scope.upload_success = false;
                 $scope.success_message = null;
+                $scope.uploading = false;
                 if ($files.length != 1) {
                     $scope.csv_errors.push('Please drag only one file at a time.');
                 } else {
