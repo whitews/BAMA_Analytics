@@ -1,6 +1,6 @@
 import datetime
 
-from django.db import models
+from django.db import models, IntegrityError
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from guardian.shortcuts import get_objects_for_user, get_users_with_perms
@@ -397,6 +397,14 @@ class DataPoint(models.Model):
         max_digits=12,
         decimal_places=9
     )
+
+    class Meta:
+        unique_together = (
+            (
+                'notebook', 'participant', 'visit_code', 'isotype',
+                'dilution', 'conjugate', 'analyte'
+            ),
+        )
 
 
 class ProjectDataPoint(models.Model):

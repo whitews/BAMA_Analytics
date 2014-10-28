@@ -556,11 +556,6 @@ class DataPointFilter(django_filters.FilterSet):
     participant_code = django_filters.CharFilter(
         name='participant__code'
     )
-    # site_panel = django_filters.ModelMultipleChoiceFilter(
-    #     queryset=SitePanel.objects.all())
-    # subject_code = django_filters.CharFilter(
-    #     name='subject__subject_code')
-    # original_filename = django_filters.CharFilter(lookup_type="icontains")
 
     class Meta:
         model = DataPoint
@@ -647,8 +642,38 @@ class DataPointList(LoginRequiredMixin, generics.ListCreateAPIView):
                             d['participant'] = new_participants[
                                 d['participant_code']].id
 
-                print 'asdf'
-
+                    new_dp = DataPoint(
+                        upload_event_id=d['upload_event'],
+                        notebook_id=d['notebook'],
+                        participant_id=d['participant'],
+                        sample_type_id=d['sample_type'],
+                        analyte_id=d['analyte'],
+                        isotype_id=d['isotype'],
+                        conjugate_id=d['conjugate'],
+                        buffer_id=d['buffer'],
+                        global_id_code=d['global_id_code'],
+                        visit_code=d['visit_code'],
+                        visit_date=d['visit_date'],
+                        assay_date=d['assay_date'],
+                        bead_number=d['bead_number'],
+                        dilution=d['dilution'],
+                        fi_minus_background=d['fi_minus_background'],
+                        fi_minus_background_blank=d['fi_minus_background_blank'],
+                        cv=d['cv'],
+                    )
+                    new_dp.clean()
+                    new_dp.save()
+        except IntegrityError as e:
+            print e
+            e.message = "Duplicate data point found: " + \
+                "Notebook=" + new_dp.notebook.name + \
+                ", Participant=" + new_dp.participant.code + \
+                ", Visit=" + new_dp.visit_code + \
+                ", Analyte=" + new_dp.analyte.name + \
+                ", Isotype=" + new_dp.isotype.name + \
+                ", Conjugate=" + new_dp.conjugate.name
+            return Response(data={'detail': e.message}, status=400)
+            
         except Exception as e:  # catch any exception to rollback changes
             print e
             return Response(data={'detail': e.message}, status=400)
@@ -656,7 +681,6 @@ class DataPointList(LoginRequiredMixin, generics.ListCreateAPIView):
         # possibly put this in the atomic transaction above
         serializer = self.get_serializer(data=request.DATA, many=True)
         if serializer.is_valid():
-            serializer.save()
             headers = self.get_success_headers(serializer.data)
             return Response(serializer.data, status=status.HTTP_201_CREATED,
                             headers=headers)
