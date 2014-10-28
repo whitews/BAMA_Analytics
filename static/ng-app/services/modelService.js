@@ -283,9 +283,11 @@ app.factory('ModelService', function(
     };
 
     // Participant services
-    service.getParticipants = function() {
+    service.getParticipants = function(cohort_id) {
         return Participant.query(
-            {}
+            {
+                'cohort': cohort_id
+            }
         );
     };
 
@@ -297,6 +299,7 @@ app.factory('ModelService', function(
     service.getDataPoints = function(query_object) {
         return DataPoint.query(
             {
+                'cohort': query_object.cohort,
                 'participant': query_object.participants || null
             }
         );

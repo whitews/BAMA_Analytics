@@ -107,7 +107,7 @@ app.controller(
             ModelService.setCurrentCohortById($stateParams.cohortId);
 
             $scope.notebooks = ModelService.getNotebooks();
-            $scope.participants = ModelService.getParticipants();
+
             $scope.analytes = ModelService.getAnalytes();
             $scope.isotypes = ModelService.getIsotypes();
             $scope.conjugates = ModelService.getConjugates();
@@ -116,6 +116,9 @@ app.controller(
 
             $scope.$on('current_cohort:updated', function () {
                 $scope.current_cohort = ModelService.current_cohort;
+                $scope.participants = ModelService.getParticipants(
+                    $scope.current_cohort.id
+                );
             });
             $scope.$on('current_cohort:invalid', function () {
                 // re-direct to 404
@@ -229,6 +232,7 @@ app.controller(
 
                 $scope.data_points = ModelService.getDataPoints(
                     {
+                        'cohort': $scope.current_cohort.id,
                         'participants': participants
                     }
                 );
