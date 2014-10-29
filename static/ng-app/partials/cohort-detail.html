@@ -136,6 +136,16 @@
 
             <hr/>
 
+            <b>Analytes</b>
+
+            <br/>
+
+            <select ui-select2="{}" multiple ng-model="selected_analytes">
+              <option value="{{ a.id }}" data-ng-repeat="a in analytes">{{ a.name }}</option>
+            </select>
+
+            <hr/>
+
           </form>
         </div>
       </div>

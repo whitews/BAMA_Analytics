@@ -233,7 +233,8 @@ app.controller(
                 $scope.data_points = ModelService.getDataPoints(
                     {
                         'cohort': $scope.current_cohort.id,
-                        'participants': participants
+                        'participants': participants,
+                        'analytes': $scope.selected_analytes
                     }
                 );
             };

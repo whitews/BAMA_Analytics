@@ -560,6 +560,9 @@ class DataPointFilter(django_filters.FilterSet):
         queryset=Cohort.objects.all(),
         name='participant__cohort_id'
     )
+    analyte = django_filters.ModelMultipleChoiceFilter(
+        queryset=Analyte.objects.all(),
+        name='analyte')
 
     class Meta:
         model = DataPoint

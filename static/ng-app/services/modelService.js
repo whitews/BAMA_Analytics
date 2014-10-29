@@ -300,7 +300,8 @@ app.factory('ModelService', function(
         return DataPoint.query(
             {
                 'cohort': query_object.cohort,
-                'participant': query_object.participants || null
+                'participant': query_object.participants || null,
+                'analyte': query_object.analytes || null
             }
         );
     };

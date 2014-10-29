@@ -171,8 +171,8 @@ hr {
 }
 
 .select2-container {
-  max-width: 150px !important;
-  width: 150px;
+  /*max-width: 150px !important;*/
+  width: 100%;
 }
 
 .breadcrumb {
