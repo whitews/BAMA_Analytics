@@ -393,7 +393,7 @@ class DataPoint(models.Model):
         unique_together = (
             (
                 'notebook', 'participant', 'visit_code', 'isotype',
-                'dilution', 'conjugate', 'analyte'
+                'dilution', 'conjugate', 'analyte', 'buffer'
             ),
         )
 
