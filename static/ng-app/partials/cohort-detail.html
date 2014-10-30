@@ -116,7 +116,7 @@
             <div style="position: relative">
               <h5>Filter Data</h5>
               <div style="position: absolute; right:0;top:0;">
-                <button class="btn btn-default btn-xs" ng-click="apply_filter()">
+                <button class="btn btn-default btn-xs" ng-click="apply_filter()" ng-disabled="current_cohort == null">
                   Apply
                 </button>
               </div>
@@ -201,7 +201,7 @@
 
                     <h5 class="text-center">
                       Data Points
-                      <span class="badge badge-inverse align-top">{{ data_points.length }}</span>
+                      <span class="badge badge-inverse align-top" ng-hide="retrieving_data">{{ data_points.length }}</span>
                     </h5>
 
                     <div style="position: absolute; right:0;top:0;">
@@ -279,5 +279,13 @@
             </tr>
           </tbody>
         </table>
+
+        <div class="text-center" ng-show="retrieving_data">
+          <br/>
+          <br/>
+          <h4><em>Retrieving data...</em></h4>
+          <img src="/static/img/giant_whirligig.gif">
+        </div>
+
       </div>
     </div>

@@ -106,6 +106,8 @@ app.controller(
         function ($scope, $controller, $state, $stateParams, $modal, ModelService) {
             ModelService.setCurrentCohortById($stateParams.cohortId);
 
+            $scope.retrieving_data = false;
+
             $scope.notebooks = ModelService.getNotebooks();
 
             $scope.analytes = ModelService.getAnalytes();
@@ -221,16 +223,20 @@ app.controller(
             };
 
             $scope.apply_filter = function () {
+                $scope.data_points = null;
+                $scope.retrieving_data = true;
                 $scope.filter_errors = [];
 
                 var participants = [];
-                $scope.participants.forEach(function (p) {
-                    if (p.query) {
-                        participants.push(p.id);
-                    }
-                });
+                if ($scope.participants != null) {
+                    $scope.participants.forEach(function (p) {
+                        if (p.query) {
+                            participants.push(p.id);
+                        }
+                    });
+                }
 
-                $scope.data_points = ModelService.getDataPoints(
+                var response = ModelService.getDataPoints(
                     {
                         'cohort': $scope.current_cohort.id,
                         'participants': participants,
@@ -241,6 +247,14 @@ app.controller(
                         'buffers': $scope.selected_buffers,
                     }
                 );
+
+                response.$promise.then(function () {
+                    $scope.retrieving_data = false;
+                    $scope.data_points = response;
+                }, function (error) {
+                    $scope.retrieving_data = false;
+                    $scope.data_errors = error.data;
+                });
             };
         }
     ]
