@@ -234,7 +234,9 @@ app.controller(
                     {
                         'cohort': $scope.current_cohort.id,
                         'participants': participants,
-                        'analytes': $scope.selected_analytes
+                        'analytes': $scope.selected_analytes,
+                        'isotypes': $scope.selected_isotypes,
+                        'conjugates': $scope.selected_conjugates
                     }
                 );
             };

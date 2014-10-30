@@ -301,7 +301,9 @@ app.factory('ModelService', function(
             {
                 'cohort': query_object.cohort,
                 'participant': query_object.participants || null,
-                'analyte': query_object.analytes || null
+                'analyte': query_object.analytes || null,
+                'isotype': query_object.isotypes || null,
+                'conjugate': query_object.conjugates || null
             }
         );
     };

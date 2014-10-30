@@ -146,6 +146,26 @@
 
             <hr/>
 
+            <b>Isotypes</b>
+
+            <br/>
+
+            <select ui-select2="{}" multiple ng-model="selected_isotypes">
+              <option value="{{ i.id }}" data-ng-repeat="i in isotypes">{{ i.name }}</option>
+            </select>
+
+            <hr/>
+
+            <b>Conjugates</b>
+
+            <br/>
+
+            <select ui-select2="{}" multiple ng-model="selected_conjugates">
+              <option value="{{ c.id }}" data-ng-repeat="c in conjugates">{{ c.name }}</option>
+            </select>
+
+            <hr/>
+
           </form>
         </div>
       </div>
