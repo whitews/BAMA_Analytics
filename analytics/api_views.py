@@ -690,11 +690,4 @@ class DataPointList(LoginRequiredMixin, generics.ListCreateAPIView):
             print e
             return Response(data={'detail': e.message}, status=400)
 
-        # possibly put this in the atomic transaction above
-        serializer = self.get_serializer(data=request.DATA, many=True)
-        if serializer.is_valid():
-            headers = self.get_success_headers(serializer.data)
-            return Response(serializer.data, status=status.HTTP_201_CREATED,
-                            headers=headers)
-
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response(status=status.HTTP_201_CREATED)
