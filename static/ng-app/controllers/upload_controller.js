@@ -180,9 +180,8 @@ app.controller(
                         }
                     }
 
-                    // get visit ID (required)
+                    // get visit ID (optional)
                     if (typeof(d['Visit ID']) == "undefined") {
-                        $scope.csv_errors.push("Visit ID is required");
                         current_visit_id = null;
                     } else {
                         current_visit_id = d['Visit ID'];
@@ -364,7 +363,7 @@ app.controller(
                                     $scope.csv_errors.push("Description field visit ID field doesn't match Visit ID column: " + desc_second_pass[1] + " vs " + current_visit_id);
                                 }
 
-                                // 4th field is visit date, don't capture it
+                                // 4th field is visit date
                                 visit_date = new Date(desc_second_pass[2].trim());
                                 if (isNaN(visit_date)) {
                                     d['visit_date'] = null;
