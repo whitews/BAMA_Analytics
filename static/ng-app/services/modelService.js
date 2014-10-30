@@ -303,7 +303,8 @@ app.factory('ModelService', function(
                 'participant': query_object.participants || null,
                 'analyte': query_object.analytes || null,
                 'isotype': query_object.isotypes || null,
-                'conjugate': query_object.conjugates || null
+                'conjugate': query_object.conjugates || null,
+                'sample_type': query_object.sample_types || null,
             }
         );
     };

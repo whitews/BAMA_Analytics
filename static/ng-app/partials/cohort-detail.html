@@ -166,6 +166,16 @@
 
             <hr/>
 
+            <b>Sample Types</b>
+
+            <br/>
+
+            <select ui-select2="{}" multiple ng-model="selected_sample_types">
+              <option value="{{ st.id }}" data-ng-repeat="st in sample_types">{{ st.name }}</option>
+            </select>
+
+            <hr/>
+
           </form>
         </div>
       </div>

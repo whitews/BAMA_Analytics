@@ -236,7 +236,8 @@ app.controller(
                         'participants': participants,
                         'analytes': $scope.selected_analytes,
                         'isotypes': $scope.selected_isotypes,
-                        'conjugates': $scope.selected_conjugates
+                        'conjugates': $scope.selected_conjugates,
+                        'sample_types': $scope.selected_sample_types,
                     }
                 );
             };
