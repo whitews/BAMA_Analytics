@@ -305,6 +305,7 @@ app.factory('ModelService', function(
                 'isotype': query_object.isotypes || null,
                 'conjugate': query_object.conjugates || null,
                 'sample_type': query_object.sample_types || null,
+                'buffer': query_object.buffers || null,
             }
         );
     };
