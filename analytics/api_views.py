@@ -678,8 +678,8 @@ class DataPointList(LoginRequiredMixin, generics.ListCreateAPIView):
         except IntegrityError as e:
             print e
             e.message = "Duplicate data point found: " + \
-                "Notebook=" + new_dp.notebook.name + \
-                ", Participant=" + new_dp.participant.code + \
+                "Notebook=" + d["notebook_name"] + \
+                ", Participant=" + d["participant_code"] + \
                 ", Visit=" + new_dp.visit_code + \
                 ", Analyte=" + new_dp.analyte.name + \
                 ", Isotype=" + new_dp.isotype.name + \
