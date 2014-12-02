@@ -34,7 +34,7 @@
 
               {% if user.is_superuser %}
               <p class="navbar-text">
-                  <a href="#/admin/" class="navbar-link">Admin</a>
+                  <a href="{% url 'admin' %}" class="navbar-link">Admin</a>
               </p>
               {% endif %}
               {% if user.is_authenticated %}
