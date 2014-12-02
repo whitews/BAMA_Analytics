@@ -1,1 +1,243 @@
-stuff goes here
+    <accordion close-others="false">
+      <accordion-group>
+        <accordion-heading>
+          <a href="" ng-click="isOpen = !isOpen">
+              <i class="glyphicon" ng-class="{'glyphicon-chevron-down': isOpen, 'glyphicon-chevron-right': !isOpen}"></i>
+              Import Data
+            </a>
+        </accordion-heading>
+
+        <div class="slide" ng-controller="ImportController">
+          <div class="drop-box" ng-show="dropSupported" ng-file-drop="onFileSelect($files);" ng-file-drop-available="dropSupported=true">
+
+            <div class="text-center instruction" ng-hide="csv_data.length > 0"><em>Drop CSV files here</em></div>
+
+            <div ng-show="csv_data.length > 0">
+
+              <div class="text-center">
+                <h4><em>{{ file_name }}</em></h4>
+              </div>
+
+              <h5>{{ csv_data.length }} records found containing:</h5>
+
+              <div class="row">
+
+                <div class="col-md-6">
+                  <ul>
+                    <li>{{ distinct_notebooks.length }} notebooks</li>
+                    <li>{{ distinct_participants.length }} participants</li>
+                  </ul>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="well well-warning" ng-show="csv_errors.length > 0">
+              <h5><em>Errors found in CSV file. Please correct the CSV file and try again.</em></h5>
+              <ul class="list-unstyled">
+                <li ng-repeat="e in csv_errors track by $index">{{ e }}</li>
+              </ul>
+            </div>
+          </div>
+
+          <div ng-show="upload_success">
+            <br/>
+            <div class="panel panel-success">
+              <div class="panel-heading">
+                <h3 class="panel-title">Upload Completed</h3>
+              </div>
+              <div class="panel-body">
+                {{ success_message }}
+              </div>
+            </div>
+          </div>
+
+          <br/>
+
+          <div class="pull-right no-wrap">
+            <img data-ng-show="importing" src="/static/img/whirligig.gif">
+            <a class="btn btn-success btn-xs" ng-disabled="!csv_data || csv_errors.length > 0 || importing" ng-click="import_data()">Import Data</a>
+          </div>
+
+        </div>
+
+      </accordion-group>
+    </accordion>
+
+    <div class="row">
+      <div class="col-md-3">
+
+        <div class="well" style="margin-top:52px">
+          <form class="unstyled-checkboxes" id="sample-filter-form" method="get">
+            <div style="position: relative">
+              <h5>Filter Data</h5>
+              <div style="position: absolute; right:0;top:0;">
+                <button class="btn btn-default btn-xs" ng-click="apply_filter()">
+                  Apply
+                </button>
+              </div>
+            </div>
+
+            <hr/>
+
+            <b>Participants</b>
+            <ul>
+              <li ng-repeat="p in participants">
+                <label>
+                  <input type="checkbox" ng-model="p.query" />
+                  {{ p.code }}
+                </label>
+              </li>
+            </ul>
+
+            <hr/>
+
+            <b>Analytes</b>
+
+            <br/>
+
+            <select ui-select2="{}" multiple ng-model="selected_analytes">
+              <option value="{{ a.id }}" data-ng-repeat="a in analytes">{{ a.name }}</option>
+            </select>
+
+            <hr/>
+
+            <b>Isotypes</b>
+
+            <br/>
+
+            <select ui-select2="{}" multiple ng-model="selected_isotypes">
+              <option value="{{ i.id }}" data-ng-repeat="i in isotypes">{{ i.name }}</option>
+            </select>
+
+            <hr/>
+
+            <b>Conjugates</b>
+
+            <br/>
+
+            <select ui-select2="{}" multiple ng-model="selected_conjugates">
+              <option value="{{ c.id }}" data-ng-repeat="c in conjugates">{{ c.name }}</option>
+            </select>
+
+            <hr/>
+
+            <b>Sample Types</b>
+
+            <br/>
+
+            <select ui-select2="{}" multiple ng-model="selected_sample_types">
+              <option value="{{ st.id }}" data-ng-repeat="st in sample_types">{{ st.name }}</option>
+            </select>
+
+            <hr/>
+
+            <b>Buffers</b>
+
+            <br/>
+
+            <select ui-select2="{}" multiple ng-model="selected_buffers">
+              <option value="{{ b.id }}" data-ng-repeat="b in buffers">{{ b.name }}</option>
+            </select>
+
+            <hr/>
+
+          </form>
+        </div>
+      </div>
+
+      <div class="col-md-9">
+        <table id="data-table" class="table table-hover">
+          <thead>
+            <tr>
+
+                <th colspan="50">
+
+                  <div style="position:relative;">
+
+                    <h5 class="text-center">
+                      Data Points
+                      <span class="badge badge-inverse align-top">{{ data_points.length }}</span>
+                    </h5>
+
+                    <div style="position: absolute; right:0;top:0;">
+                      <button class="btn btn-info btn-xs" type="button" ng-click="open_column_chooser('sm')">
+                        Choose Columns
+                      </button>
+
+                      <script type="text/ng-template" id="myModalContent.html">
+                        <div class="modal-header">
+                          <h3 class="modal-title">Choose Columns</h3>
+                        </div>
+                        <div class="modal-body">
+                          <ul class="list-unstyled">
+                            <li ng-repeat="(key, value) in instance">
+                              <label>
+                                <input type="checkbox" ng-model="value.show" />
+                                {{ value.name }}
+                              </label>
+                            </li>
+                          </ul>
+                        </div>
+                        <div class="modal-footer">
+                          <button class="btn btn-primary" ng-click="ok()">OK</button>
+                        </div>
+                      </script>
+                    </div>
+
+                  </div>
+
+                </th>
+            </tr>
+            <tr>
+                <th></th>
+                <th ng-show="data_point_columns.notebook_name.show">Notebook</th>
+                <th ng-show="data_point_columns.participant_code.show">Participant</th>
+                <th ng-show="data_point_columns.global_id_code.show">Global ID</th>
+                <th ng-show="data_point_columns.visit_code.show">Visit</th>
+                <th ng-show="data_point_columns.visit_date.show">Visit Date</th>
+                <th ng-show="data_point_columns.assay_date.show">Assay Date</th>
+                <th ng-show="data_point_columns.analyte_name.show">Analyte</th>
+                <th ng-show="data_point_columns.bead_number.show">Bead #</th>
+                <th ng-show="data_point_columns.sample_type_name.show">Sample Type</th>
+                <th ng-show="data_point_columns.conjugate_name.show">Conjugate</th>
+                <th ng-show="data_point_columns.isotype_name.show">Isotype</th>
+                <th ng-show="data_point_columns.buffer_name.show">Buffer</th>
+                <th ng-show="data_point_columns.fi_minus_background.show">FI-Bkgd</th>
+                <th ng-show="data_point_columns.fi_minus_background_blank.show">FI-Bkgd-Blank</th>
+                <th ng-show="data_point_columns.cv.show">CV</th>
+                <th ng-show="data_point_columns.upload_date.show">Upload Date</th>
+                <th ng-show="data_point_columns.user.show">Uploaded By</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="dp in data_points | filter : paginate">
+              <td class="no-wrap" width="1%">
+
+              </td>
+              <td ng-show="data_point_columns.notebook_name.show">{{ dp.notebook_name }}</td>
+              <td ng-show="data_point_columns.participant_code.show">{{ dp.participant_code }}</td>
+              <td ng-show="data_point_columns.global_id_code.show">{{ dp.global_id_code }}</td>
+              <td ng-show="data_point_columns.visit_code.show">{{ dp.visit_code }}</td>
+              <td ng-show="data_point_columns.visit_date.show">{{ dp.visit_date }}</td>
+              <td ng-show="data_point_columns.assay_date.show">{{ dp.assay_date }}</td>
+              <td ng-show="data_point_columns.analyte_name.show">{{ dp.analyte_name }}</td>
+              <td ng-show="data_point_columns.bead_number.show">{{ dp.bead_number }}</td>
+              <td ng-show="data_point_columns.sample_type_name.show">{{ dp.sample_type_name }}</td>
+              <td ng-show="data_point_columns.conjugate_name.show">{{ dp.conjugate_name }}</td>
+              <td ng-show="data_point_columns.isotype_name.show">{{ dp.isotype_name }}</td>
+              <td ng-show="data_point_columns.buffer_name.show">{{ dp.buffer_name }}</td>
+              <td ng-show="data_point_columns.fi_minus_background.show">{{ dp.fi_minus_background }}</td>
+              <td ng-show="data_point_columns.fi_minus_background_blank.show">{{ dp.fi_minus_background_blank }}</td>
+              <td ng-show="data_point_columns.cv.show">{{ dp.cv }}</td>
+              <td ng-show="data_point_columns.upload_date.show">{{ dp.upload_date }}</td>
+              <td ng-show="data_point_columns.user.show">{{ dp.user }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <pagination total-items="totalItems" ng-model="$parent.currentPage"
+          max-size="5" boundary-links="true"
+          items-per-page="numPerPage" class="pagination-sm">
+        </pagination>
+      </div>
+    </div>
