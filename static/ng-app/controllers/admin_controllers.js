@@ -244,7 +244,7 @@ app.controller(
                         'isotypes': $scope.selected_isotypes,
                         'conjugates': $scope.selected_conjugates,
                         'sample_types': $scope.selected_sample_types,
-                        'buffers': $scope.selected_buffers,
+                        'buffers': $scope.selected_buffers
                     }
                 );
 
