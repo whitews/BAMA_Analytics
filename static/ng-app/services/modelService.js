@@ -14,7 +14,9 @@ angular.module('ModelServiceModule', ['RESTServiceModule']).factory('ModelServic
         DataPoint) {
     var service = {};
 
-    service.user = User.get();
+    service.getUser = function () {
+        return User.get();
+    };
 
     // Network services
     service.getNetworks = function() {
