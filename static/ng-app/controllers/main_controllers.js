@@ -9,7 +9,7 @@ admin_app.controller(
     'MainController',
     ['$scope', 'ModelService', function ($scope, ModelService) {
         // for site wide functions
-        $scope.user = ModelService.user;
+        $scope.user = ModelService.getUser();
     }
 ]);
 
