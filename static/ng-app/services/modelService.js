@@ -1,4 +1,4 @@
-app.factory('ModelService', function(
+angular.module('ModelServiceModule', ['RESTServiceModule']).factory('ModelService', function(
         $rootScope,
         User,
         Cohort,

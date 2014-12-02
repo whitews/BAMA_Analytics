@@ -26,13 +26,22 @@
               BAMA Analytics
             </div>
             <div class="navbar-right">
-                <p class="navbar-text">{{ user.username }}</p>
-                {% if user.is_superuser %}
-                <p class="navbar-text">
-                    <a href="#/admin/" class="navbar-link">Admin</a>
-                </p>
-                {% endif %}
-                <p class="navbar-text"><a href="{% url 'logout' %}" class="navbar-link">Logout</a></p>
+              <p class="navbar-text">{{ user.username }}</p>
+
+              <p class="navbar-text">
+                <a href="{% url 'home' %}" class="navbar-link">Analytics App</a>
+              </p>
+
+              {% if user.is_superuser %}
+              <p class="navbar-text">
+                  <a href="#/admin/" class="navbar-link">Admin</a>
+              </p>
+              {% endif %}
+              {% if user.is_authenticated %}
+              <p class="navbar-text"><a href="{% url 'logout' %}" class="navbar-link">Logout</a></p>
+              {% else %}
+              <p class="navbar-text"><a href="{% url 'login' %}" class="navbar-link">Login</a></p>
+              {% endif %}
             </div>
           </div>
       </div>
@@ -68,13 +77,15 @@
     <script src="{% static 'js/angular-breadcrumb.min.js' %}"></script>
     <script src="{% static 'js/angular-file-upload-shim.js' %}"></script>
     <script src="{% static 'js/angular-file-upload.js' %}"></script>
-    <script src="{% static 'ng-app/app.js' %}"></script>
+    <script src="{% static 'ng-app/services/restServices.js' %}"></script>
+    <script src="{% static 'ng-app/services/modelService.js' %}"></script>
+    <script src="{% static 'ng-app/admin_app.js' %}"></script>
+    <script src="{% static 'ng-app/analytics_app.js' %}"></script>
+    <script src="{% static 'ng-app/controllers/analytics_app_controller.js' %}"></script>
     <script src="{% static 'ng-app/controllers/main_controllers.js' %}"></script>
     <script src="{% static 'ng-app/controllers/form_controllers.js' %}"></script>
     <script src="{% static 'ng-app/controllers/admin_controllers.js' %}"></script>
     <script src="{% static 'ng-app/controllers/upload_controller.js' %}"></script>
-    <script src="{% static 'ng-app/services/restServices.js' %}"></script>
-    <script src="{% static 'ng-app/services/modelService.js' %}"></script>
 
     <script type='text/javascript'>
         $(document).ready(function()

@@ -53,4 +53,5 @@ urlpatterns += patterns('analytics.views',
     url(r'^403$', 'permission_denied', name='permission_denied'),
     url(r'^warning$', TemplateView.as_view(template_name='warning.html'), name='warning_page'),
     url(r'^$', 'analytics_app', name='home'),
+    url(r'^analytics/admin/?$', 'analytics_admin', name='admin'),
 )

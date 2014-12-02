@@ -1,4 +1,4 @@
-app.controller(
+admin_app.controller(
     'ProjectEditController',
     [
         '$scope',
@@ -18,7 +18,7 @@ app.controller(
     ]
 );
 
-app.controller(
+admin_app.controller(
     'NetworkEditController',
     [
         '$scope',
@@ -38,7 +38,7 @@ app.controller(
     ]
 );
 
-app.controller(
+admin_app.controller(
     'CohortEditController',
     [
         '$scope',
@@ -61,7 +61,7 @@ app.controller(
     ]
 );
 
-app.controller(
+admin_app.controller(
     'AnalyteEditController',
     [
         '$scope',
@@ -84,7 +84,7 @@ app.controller(
     ]
 );
 
-app.controller(
+admin_app.controller(
     'ConjugateEditController',
     [
         '$scope',
@@ -104,7 +104,7 @@ app.controller(
     ]
 );
 
-app.controller(
+admin_app.controller(
     'BufferEditController',
     [
         '$scope',
@@ -124,7 +124,7 @@ app.controller(
     ]
 );
 
-app.controller(
+admin_app.controller(
     'IsotypeEditController',
     [
         '$scope',
@@ -144,7 +144,7 @@ app.controller(
     ]
 );
 
-app.controller(
+admin_app.controller(
     'SampleTypeEditController',
     [
         '$scope',

@@ -5,7 +5,7 @@ var ModalFormCtrl = function ($scope, $modalInstance, instance) {
     };
 };
 
-app.controller(
+admin_app.controller(
     'MainController',
     ['$scope', 'ModelService', function ($scope, ModelService) {
         // for site wide functions
@@ -13,7 +13,7 @@ app.controller(
     }
 ]);
 
-app.controller(
+admin_app.controller(
     'ProjectListController',
     [
         '$scope',
@@ -46,7 +46,7 @@ app.controller(
     ]
 );
 
-app.controller(
+admin_app.controller(
     'ProjectDetailController',
     [
         '$scope',

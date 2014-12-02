@@ -13,7 +13,7 @@ var URLS = {
     'DATAPOINTS':          '/api/analytics/data-points/'
 };
 
-app.factory('User', ['$resource', function ($resource) {
+angular.module('RESTServiceModule', []).factory('User', ['$resource', function ($resource) {
     var User = $resource(
         URLS.USER + ':username',
         {

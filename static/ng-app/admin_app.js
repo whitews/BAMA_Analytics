@@ -22,8 +22,8 @@ var MODAL_URLS = {
     'ISOTYPE_DELETE':     'static/ng-app/partials/forms/isotype-delete.html'
 };
 
-var app = angular.module(
-    'AnalyticsApp',
+var admin_app = angular.module(
+    'AnalyticsAdmin',
     [
         'ngSanitize',
         'ngCookies',
@@ -33,11 +33,12 @@ var app = angular.module(
         'ui.bootstrap',
         'ui.select2',
         'ncy-angular-breadcrumb',
-        'angularFileUpload'
+        'angularFileUpload',
+        'ModelServiceModule'
     ]
 );
 
-app.factory('LoginRedirectInterceptor', function($q, $window) {
+admin_app.factory('LoginRedirectInterceptor', function($q, $window) {
     return {
         responseError: function(rejection) {
             if (rejection.status == 401) {
@@ -49,22 +50,23 @@ app.factory('LoginRedirectInterceptor', function($q, $window) {
     };
 });
 
-app.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
+admin_app.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
     $httpProvider.interceptors.push('LoginRedirectInterceptor');
 
     $urlRouterProvider.when("", "/");
     $urlRouterProvider.otherwise("/");
 
     $stateProvider.state({
-        name: 'home',
+        name: 'admin',
         url: '/',
         views: {
             '@': {
-                templateUrl: '/static/ng-app/partials/home.html'
+                templateUrl: '/static/ng-app/partials/admin.html',
+                controller: 'AdminController'
             }
         },
         data: {
-            ncyBreadcrumbLabel: 'Home'
+            ncyBreadcrumbLabel: 'Admin'
         }
      }).state({
         name: '404',
@@ -77,19 +79,6 @@ app.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
         },
         data: {
             ncyBreadcrumbLabel: ': ('
-        }
-    }).state({
-        name: 'admin',
-        parent: 'home',
-        url: 'admin/',
-        views: {
-            '@': {
-                templateUrl: '/static/ng-app/partials/admin.html',
-                controller: 'AdminController'
-            }
-        },
-        data: {
-            ncyBreadcrumbLabel: 'Admin'
         }
     }).state({
         name: 'network-list',
@@ -211,6 +200,6 @@ app.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
     });
 });
 
-app.run(function ($http, $cookies) {
+admin_app.run(function ($http, $cookies) {
     $http.defaults.headers.common['X-CSRFToken'] = $cookies['csrftoken'];
 });

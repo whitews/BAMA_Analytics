@@ -10,6 +10,13 @@ def permission_denied(request):
 
 
 @login_required
+def analytics_admin(request):
+    return render_to_response(
+        'analytics_admin.html',
+        {},
+        context_instance=RequestContext(request)
+    )
+
 def analytics_app(request):
     return render_to_response(
         'analytics_app.html',

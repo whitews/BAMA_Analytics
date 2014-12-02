@@ -5,7 +5,7 @@ var ModalFormCtrl = function ($scope, $modalInstance, instance) {
     };
 };
 
-app.controller(
+admin_app.controller(
     'AdminController',
     ['$scope', '$modal', function ($scope, $modal) {
         $scope.init_form = function(instance, form_type) {
@@ -26,7 +26,7 @@ app.controller(
     }
 ]);
 
-app.controller(
+admin_app.controller(
     'NetworkController',
     [
         '$scope',
@@ -60,7 +60,7 @@ app.controller(
     ]
 );
 
-app.controller(
+admin_app.controller(
     'CohortController',
     [
         '$scope',
@@ -94,7 +94,7 @@ app.controller(
     ]
 );
 
-app.controller(
+admin_app.controller(
     'CohortDetailController',
     [
         '$scope',
@@ -260,7 +260,7 @@ app.controller(
     ]
 );
 
-app.controller(
+admin_app.controller(
     'AnalyteController',
     [
         '$scope',
@@ -294,7 +294,7 @@ app.controller(
     ]
 );
 
-app.controller(
+admin_app.controller(
     'ConjugateController',
     [
         '$scope',
@@ -328,7 +328,7 @@ app.controller(
     ]
 );
 
-app.controller(
+admin_app.controller(
     'BufferController',
     [
         '$scope',
@@ -362,7 +362,7 @@ app.controller(
     ]
 );
 
-app.controller(
+admin_app.controller(
     'IsotypeController',
     [
         '$scope',
@@ -396,7 +396,7 @@ app.controller(
     ]
 );
 
-app.controller(
+admin_app.controller(
     'SampleTypeController',
     [
         '$scope',

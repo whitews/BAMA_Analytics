@@ -1,4 +1,4 @@
-app.controller(
+admin_app.controller(
     'UploadController',
     [
         '$scope',
