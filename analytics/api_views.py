@@ -279,7 +279,7 @@ class ProjectDetail(
         return super(ProjectDetail, self).delete(request, *args, **kwargs)
 
 
-class AnalyteList(AdminRequiredMixin, generics.ListCreateAPIView):
+class AnalyteList(generics.ListCreateAPIView):
     """
     API endpoint representing a list of analytes.
     """
@@ -287,12 +287,6 @@ class AnalyteList(AdminRequiredMixin, generics.ListCreateAPIView):
     model = Analyte
     serializer_class = AnalyteSerializer
     filter_fields = ('name', 'subtrahend')
-
-    def get_queryset(self):
-        """
-        Override .get_queryset() to filter on user's cohorts.
-        """
-        return Analyte.objects.all()
 
     def post(self, request, *args, **kwargs):
         if not request.user.is_staff:
@@ -329,7 +323,7 @@ class AnalyteDetail(
         return super(AnalyteDetail, self).delete(request, *args, **kwargs)
 
 
-class ConjugateList(AdminRequiredMixin, generics.ListCreateAPIView):
+class ConjugateList(generics.ListCreateAPIView):
     """
     API endpoint representing a list of conjugates.
     """
@@ -337,12 +331,6 @@ class ConjugateList(AdminRequiredMixin, generics.ListCreateAPIView):
     model = Conjugate
     serializer_class = ConjugateSerializer
     filter_fields = ('name',)
-
-    def get_queryset(self):
-        """
-        Override .get_queryset() to filter on user's cohorts.
-        """
-        return Conjugate.objects.all()
 
     def post(self, request, *args, **kwargs):
         if not request.user.is_staff:
@@ -379,7 +367,7 @@ class ConjugateDetail(
         return super(ConjugateDetail, self).delete(request, *args, **kwargs)
 
 
-class BufferList(AdminRequiredMixin, generics.ListCreateAPIView):
+class BufferList(generics.ListCreateAPIView):
     """
     API endpoint representing a list of buffers.
     """
@@ -387,12 +375,6 @@ class BufferList(AdminRequiredMixin, generics.ListCreateAPIView):
     model = Buffer
     serializer_class = BufferSerializer
     filter_fields = ('name',)
-
-    def get_queryset(self):
-        """
-        Override .get_queryset() to filter on user's cohorts.
-        """
-        return Buffer.objects.all()
 
     def post(self, request, *args, **kwargs):
         if not request.user.is_staff:
@@ -429,7 +411,7 @@ class BufferDetail(
         return super(BufferDetail, self).delete(request, *args, **kwargs)
 
 
-class IsotypeList(AdminRequiredMixin, generics.ListCreateAPIView):
+class IsotypeList(generics.ListCreateAPIView):
     """
     API endpoint representing a list of isotypes.
     """
@@ -437,12 +419,6 @@ class IsotypeList(AdminRequiredMixin, generics.ListCreateAPIView):
     model = Isotype
     serializer_class = IsotypeSerializer
     filter_fields = ('name',)
-
-    def get_queryset(self):
-        """
-        Override .get_queryset() to filter on user's cohorts.
-        """
-        return Isotype.objects.all()
 
     def post(self, request, *args, **kwargs):
         if not request.user.is_staff:
@@ -479,7 +455,7 @@ class IsotypeDetail(
         return super(IsotypeDetail, self).delete(request, *args, **kwargs)
 
 
-class SampleTypeList(AdminRequiredMixin, generics.ListCreateAPIView):
+class SampleTypeList(generics.ListCreateAPIView):
     """
     API endpoint representing a list of isotypes.
     """
@@ -487,12 +463,6 @@ class SampleTypeList(AdminRequiredMixin, generics.ListCreateAPIView):
     model = SampleType
     serializer_class = SampleTypeSerializer
     filter_fields = ('name',)
-
-    def get_queryset(self):
-        """
-        Override .get_queryset() to filter on user's cohorts.
-        """
-        return SampleType.objects.all()
 
     def post(self, request, *args, **kwargs):
         if not request.user.is_staff:
