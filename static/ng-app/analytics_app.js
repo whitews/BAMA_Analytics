@@ -9,11 +9,12 @@ var analytics_app = angular.module(
         'ui.bootstrap',
         'ui.select2',
         'ncy-angular-breadcrumb',
+        'angularFileUpload',
         'ModelServiceModule'
     ]
 );
 
-analytics_app.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
+analytics_app.config(function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.when("", "/");
     $urlRouterProvider.otherwise("/");
 
