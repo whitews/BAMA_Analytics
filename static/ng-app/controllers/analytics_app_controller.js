@@ -224,7 +224,7 @@ analytics_app.controller(
                     d['participant_pk'] = null;
                     d['participant_species_name'] = null;
                     d['conjugate'] = null;
-                    d['isotype_pk'] = null;
+                    d['isotype'] = null;
                     d['cv_value'] = null;
                     d['notebook_pk'] = null;
                     d['sample_type_pk'] = null;
@@ -375,12 +375,12 @@ analytics_app.controller(
                         // determine if any new isotypes are present
                         for (var i = 0, len = $scope.isotypes.length; i < len; i++) {
                             if ($scope.isotypes[i].name == d['Isotype']) {
-                                d['isotype_pk'] = $scope.isotypes[i].id;
+                                d['isotype'] = $scope.isotypes[i].name;
                                 break;
                             }
                         }
 
-                        if (d['isotype_pk'] == null) {
+                        if (d['isotype'] == null) {
                             // isotype doesn't exist, uh, that's a problem
                             $scope.csv_errors.push("Isotype \"" + d['Isotype'] + "\" does not exist on the server");
                         }
@@ -568,7 +568,7 @@ analytics_app.controller(
                         'species': d['Species'],
                         'sample_type': d['sample_type_pk'],
                         'analyte': d['analyte'],
-                        'isotype': d['isotype_pk'],
+                        'isotype': d['isotype'],
                         'conjugate': d['conjugate'],
                         'buffer': d['buffer'],
                         'global_id_code': d['Specimen ID'],
