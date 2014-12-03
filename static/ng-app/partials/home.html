@@ -104,8 +104,8 @@
 
             <br/>
 
-            <select ui-select2="{}" multiple ng-model="selected_conjugates">
-              <option value="{{ c.id }}" data-ng-repeat="c in conjugates">{{ c.name }}</option>
+            <select ui-select2="{}" multiple ng-model="filters.selected_conjugates">
+              <option value="{{ c.name }}" data-ng-repeat="c in conjugates">{{ c.name }}</option>
             </select>
 
             <hr/>
