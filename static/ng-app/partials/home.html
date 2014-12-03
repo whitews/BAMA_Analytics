@@ -155,10 +155,10 @@
 
                   <div style="position:relative;">
 
-                    <h5 class="text-center">
+                    <h4 class="text-center">
                       Data Points
                       <span class="badge badge-inverse align-top">{{ data_points.length }}</span>
-                    </h5>
+                    </h4>
 
                     <div style="position: absolute; right:0;top:0;">
                       <button class="btn btn-info btn-xs" type="button" ng-click="open_column_chooser('sm')">
@@ -225,7 +225,7 @@
               <td ng-show="data_point_columns.analyte_name.show">{{ dp.analyte }}</td>
               <td ng-show="data_point_columns.bead_number.show">{{ dp.bead_number }}</td>
               <td ng-show="data_point_columns.dilution.show">{{ dp.dilution }}</td>
-              <td ng-show="data_point_columns.sample_type_name.show">{{ dp.sample_type_name }}</td>
+              <td ng-show="data_point_columns.sample_type_name.show">{{ dp.sample_type }}</td>
               <td ng-show="data_point_columns.conjugate_name.show">{{ dp.conjugate }}</td>
               <td ng-show="data_point_columns.isotype_name.show">{{ dp.isotype }}</td>
               <td ng-show="data_point_columns.buffer_name.show">{{ dp.buffer }}</td>

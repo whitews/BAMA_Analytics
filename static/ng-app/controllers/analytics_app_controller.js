@@ -227,7 +227,7 @@ analytics_app.controller(
                     d['isotype'] = null;
                     d['cv_value'] = null;
                     d['notebook_pk'] = null;
-                    d['sample_type_pk'] = null;
+                    d['sample_type'] = null;
                     d['buffer'] = null;
 
                     // get distinct cohorts, must be only one and must match
@@ -516,7 +516,7 @@ analytics_app.controller(
                                 for (var i = 0, len = $scope.sample_types.length; i < len; i++) {
                                     if ($scope.sample_types[i].name == desc_second_pass[3].trim()) {
                                         sample_type_match = true;
-                                        d['sample_type_pk'] = $scope.sample_types[i].id;
+                                        d['sample_type'] = $scope.sample_types[i].name;
                                         break;
                                     }
                                 }
@@ -566,7 +566,7 @@ analytics_app.controller(
                         'participant': d['participant_pk'],
                         'participant_code': d['Participant ID'],
                         'species': d['Species'],
-                        'sample_type': d['sample_type_pk'],
+                        'sample_type': d['sample_type'],
                         'analyte': d['analyte'],
                         'isotype': d['isotype'],
                         'conjugate': d['conjugate'],
