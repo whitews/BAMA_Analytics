@@ -235,9 +235,11 @@
             </tr>
           </tbody>
         </table>
+        <div class="text-center" ng-show="data_points.length > 0">
         <pagination total-items="totalItems" ng-model="$parent.currentPage"
           max-size="5" boundary-links="true"
-          items-per-page="numPerPage" class="pagination-sm">
+          items-per-page="numPerPage">
         </pagination>
+        </div>
       </div>
     </div>

@@ -26,7 +26,7 @@ analytics_app.controller(
         // pagination stuff for data points table
         $scope.totalItems = $scope.data_points.length;
         $scope.currentPage = 1;
-        $scope.numPerPage = 5;
+        $scope.numPerPage = 15;
 
         $scope.paginate = function(value) {
             var begin, end, index;
