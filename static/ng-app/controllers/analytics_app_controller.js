@@ -15,6 +15,7 @@ analytics_app.controller(
         // filter related vars
         $scope.filters = {};
         $scope.filtered_data_points = [];
+        $scope.filters.distinct_participants = [];
         $scope.filters.selected_participants = [];
         $scope.filters.selected_analytes = [];
         var dp = {};  // temp data point for matching against filters
@@ -216,15 +217,11 @@ analytics_app.controller(
                 $scope.distinct_notebooks = [];  // array of objects
                 var distinct_networks = [];  // array of strings (name)
                 var distinct_participants_tmp = [];  // array of strings (name)
-                $scope.distinct_participants = [];  // array of objects
                 var current_visit_id = null;
                 var sample_type_match = false;
                 var buffer_match = false;
                 var visit_date = null;
                 var assay_date = null;
-
-                var distinct_analytes_tmp = [];  // array of strings (name)
-                $scope.distinct_analytes = [];  // array of objects
 
                 // analyte regex pattern to strip optional bead number
                 var analyte_pattern = /^.*(?=\s\((\d+)\)$)/;
@@ -288,36 +285,6 @@ analytics_app.controller(
                     // get distinct participants (required)
                     if (typeof(d['Participant ID']) == "undefined") {
                         $scope.csv_errors.push("Participant ID field is required");
-                    } else {
-                        for (var i = 0, len = $scope.participants.length; i < len; i++) {
-                            if ($scope.participants[i].code == d['Participant ID']) {
-                                d['participant_pk'] = $scope.participants[i].id;
-                                d['participant_species_name'] = $scope.participants[i].species_name;
-                                break;
-                            }
-                        }
-
-                        if (d['participant_pk'] != null) {
-                            // existing participant:
-                            // verify species matches this record.
-                            // this is done only for this first encountered
-                            // record, all others will be assumed to be the
-                            // same, checking this would potentially be
-                            // quite expensive
-                            if (typeof(d['Species']) == "undefined") {
-                                $scope.csv_errors.push("Species field is required");
-                            } else if (d['Species'] != d['participant_species_name']) {
-                                $scope.csv_errors.push("Species for participant " + d['Participant ID'] + " does not match the server");
-                            }
-                        }
-
-                        if (distinct_participants_tmp.indexOf(d['Participant ID']) == -1) {
-                            distinct_participants_tmp.push(d['Participant ID']);
-
-                            $scope.distinct_participants.push(
-                                d['Participant ID']
-                            );
-                        }
                     }
 
                     // get visit ID (optional)
@@ -359,17 +326,6 @@ analytics_app.controller(
                         } else {
                             // save existing analyte PK for importing
                             d['analyte'] = matching_analyte.name
-                        }
-
-                        if (distinct_analytes_tmp.indexOf(analyte_name) == -1) {
-                            distinct_analytes_tmp.push(analyte_name);
-
-                            $scope.distinct_analytes.push(
-                                {
-                                    name: analyte_name,
-                                    new: matching_analyte == null
-                                }
-                            );
                         }
                     }
 
@@ -584,6 +540,12 @@ analytics_app.controller(
                         'cv': d['cv_value'],
                         'display': true
                     });
+
+                    if ($scope.filters.distinct_participants.indexOf(d['Participant ID']) == -1) {
+                        $scope.filters.distinct_participants.push(
+                            d['Participant ID']
+                        );
+                    }
                 });
 
                 $scope.append_data_points(data_points);
