@@ -228,7 +228,7 @@ analytics_app.controller(
                     d['cv_value'] = null;
                     d['notebook_pk'] = null;
                     d['sample_type_pk'] = null;
-                    d['buffer_pk'] = null;
+                    d['buffer'] = null;
 
                     // get distinct cohorts, must be only one and must match
                     // the current cohort
@@ -531,7 +531,7 @@ analytics_app.controller(
                                 for (var i = 0, len = $scope.buffers.length; i < len; i++) {
                                     if ($scope.buffers[i].name == desc_second_pass[4].trim()) {
                                         buffer_match = true;
-                                        d['buffer_pk'] = $scope.buffers[i].id;
+                                        d['buffer'] = $scope.buffers[i].name;
                                         break;
                                     }
                                 }
@@ -570,7 +570,7 @@ analytics_app.controller(
                         'analyte': d['analyte'],
                         'isotype': d['isotype_pk'],
                         'conjugate': d['conjugate_pk'],
-                        'buffer': d['buffer_pk'],
+                        'buffer': d['buffer'],
                         'global_id_code': d['Specimen ID'],
                         'visit_code': d['Visit ID'],
                         'visit_date': d['visit_date'],
