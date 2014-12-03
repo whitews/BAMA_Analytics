@@ -94,8 +94,8 @@
 
             <br/>
 
-            <select ui-select2="{}" multiple ng-model="selected_isotypes">
-              <option value="{{ i.id }}" data-ng-repeat="i in isotypes">{{ i.name }}</option>
+            <select ui-select2="{}" multiple ng-model="filters.selected_isotypes">
+              <option value="{{ i.name }}" data-ng-repeat="i in isotypes">{{ i.name }}</option>
             </select>
 
             <hr/>

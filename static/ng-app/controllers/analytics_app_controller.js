@@ -18,6 +18,7 @@ analytics_app.controller(
         $scope.filters.distinct_participants = [];
         $scope.filters.selected_participants = [];
         $scope.filters.selected_analytes = [];
+        $scope.filters.selected_isotypes = [];
         var dp = {};  // temp data point for matching against filters
 
         $scope.append_data_points = function(data_points) {
@@ -149,9 +150,15 @@ analytics_app.controller(
                         continue;
                     }
                 }
-                // match against selected analyties
+                // match against selected analytes
                 if ($scope.filters.selected_analytes.length > 0) {
                     if ($scope.filters.selected_analytes.indexOf(dp.analyte) == -1) {
+                        continue;
+                    }
+                }
+                // match against selected analytes
+                if ($scope.filters.selected_isotypes.length > 0) {
+                    if ($scope.filters.selected_isotypes.indexOf(dp.isotype) == -1) {
                         continue;
                     }
                 }
