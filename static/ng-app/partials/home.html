@@ -114,8 +114,8 @@
 
             <br/>
 
-            <select ui-select2="{}" multiple ng-model="selected_sample_types">
-              <option value="{{ st.id }}" data-ng-repeat="st in sample_types">{{ st.name }}</option>
+            <select ui-select2="{}" multiple ng-model="filters.selected_sample_types">
+              <option value="{{ st.name }}" data-ng-repeat="st in sample_types">{{ st.name }}</option>
             </select>
 
             <hr/>
@@ -124,8 +124,8 @@
 
             <br/>
 
-            <select ui-select2="{}" multiple ng-model="selected_buffers">
-              <option value="{{ b.id }}" data-ng-repeat="b in buffers">{{ b.name }}</option>
+            <select ui-select2="{}" multiple ng-model="filters.selected_buffers">
+              <option value="{{ b.name }}" data-ng-repeat="b in buffers">{{ b.name }}</option>
             </select>
 
             <hr/>
