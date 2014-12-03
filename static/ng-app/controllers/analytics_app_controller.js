@@ -119,7 +119,7 @@ analytics_app.controller(
 
             var modalInstance = $modal.open({
                 templateUrl: 'myModalContent.html',
-                controller: ModalFormCtrl,
+                controller: ModalCtrl,
                 size: size,
                 resolve: {
                     instance: function () {
@@ -216,7 +216,6 @@ analytics_app.controller(
                 var distinct_notebooks_tmp = [];  // array of strings (name)
                 $scope.distinct_notebooks = [];  // array of objects
                 var distinct_networks = [];  // array of strings (name)
-                var distinct_participants_tmp = [];  // array of strings (name)
                 var current_visit_id = null;
                 var sample_type_match = false;
                 var buffer_match = false;
@@ -250,11 +249,11 @@ analytics_app.controller(
 
                     // get distinct cohorts, must be only one and must match
                     // the current cohort
-                    if (typeof(d.Cohort) == "undefined") {
+                    if (typeof(d['Cohort']) == "undefined") {
                         $scope.csv_errors.push("Cohort field is required");
                     } else {
-                        if (distinct_cohorts.indexOf(d.Cohort) == -1) {
-                            distinct_cohorts.push(d.Cohort);
+                        if (distinct_cohorts.indexOf(d['Cohort']) == -1) {
+                            distinct_cohorts.push(d['Cohort']);
                         }
                     }
 
