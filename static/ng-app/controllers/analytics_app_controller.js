@@ -22,6 +22,8 @@ analytics_app.controller(
         $scope.filters.selected_conjugates = [];
         $scope.filters.selected_sample_types = [];
         $scope.filters.selected_buffers = [];
+        $scope.filters.min_cv = null;
+        $scope.filters.max_cv = null;
         var dp = {};  // temp data point for matching against filters
 
         $scope.append_data_points = function(data_points) {
@@ -180,6 +182,18 @@ analytics_app.controller(
                 // match against selected buffers
                 if ($scope.filters.selected_buffers.length > 0) {
                     if ($scope.filters.selected_buffers.indexOf(dp.buffer) == -1) {
+                        continue;
+                    }
+                }
+                // match against min CV
+                if ($scope.filters.min_cv) {
+                    if (parseFloat(dp.cv) < parseFloat($scope.filters.min_cv)) {
+                        continue;
+                    }
+                }
+                // match against max CV
+                if ($scope.filters.max_cv) {
+                    if (parseFloat(dp.cv) > parseFloat($scope.filters.max_cv)) {
                         continue;
                     }
                 }
