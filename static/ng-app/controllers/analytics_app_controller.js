@@ -207,7 +207,7 @@ analytics_app.controller(
                 var analyte_pattern = /^.*(?=\s\((\d+)\)$)/;
                 var analyte_result;
                 var analyte_name;
-                var existing_analyte_pk;
+                var matching_analyte;
 
                 // CV regex pattern to find number with optional '%'
                 var cv_pattern = /^\d+\.?\d*(?=\%?$)/;
@@ -341,21 +341,19 @@ analytics_app.controller(
                         }
 
                         // determine if any new analytes are present
-                        var existing_analyte_idx = null;
-
                         for (var i = 0, len = $scope.analytes.length; i < len; i++) {
                             if ($scope.analytes[i].name == analyte_name) {
-                                existing_analyte_pk = $scope.analytes[i].id;
+                                matching_analyte = $scope.analytes[i];
                                 break;
                             }
                         }
 
-                        if (existing_analyte_pk == null) {
+                        if (matching_analyte == null) {
                             // analyte doesn't exist, uh, that's a problem
                             $scope.csv_errors.push("Analyte \"" + analyte_result + "\" does not exist on the server");
                         } else {
                             // save existing analyte PK for importing
-                            d['analyte_pk'] = existing_analyte_pk
+                            d['analyte'] = matching_analyte.name
                         }
 
                         if (distinct_analytes_tmp.indexOf(analyte_name) == -1) {
@@ -364,7 +362,7 @@ analytics_app.controller(
                             $scope.distinct_analytes.push(
                                 {
                                     name: analyte_name,
-                                    new: existing_analyte_pk == null
+                                    new: matching_analyte == null
                                 }
                             );
                         }
@@ -569,7 +567,7 @@ analytics_app.controller(
                         'participant_code': d['Participant ID'],
                         'species': d['Species'],
                         'sample_type': d['sample_type_pk'],
-                        'analyte': d['analyte_pk'],
+                        'analyte': d['analyte'],
                         'isotype': d['isotype_pk'],
                         'conjugate': d['conjugate_pk'],
                         'buffer': d['buffer_pk'],
