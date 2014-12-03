@@ -58,93 +58,95 @@
       <div class="col-md-3">
 
         <div class="well" style="margin-top:52px">
-          <form class="unstyled-checkboxes" id="sample-filter-form" method="get">
-            <div style="position: relative">
-              <h5>Filter Data</h5>
-              <div style="position: absolute; right:0;top:0;">
-                <button class="btn btn-default btn-xs" ng-click="apply_filter()">
-                  Apply
-                </button>
-              </div>
+          <div style="position: relative">
+            <h5>Filter Data</h5>
+            <div style="position: absolute; right:0;top:0;">
+              <button class="btn btn-default btn-xs" ng-click="apply_filter()">
+                Apply
+              </button>
             </div>
+          </div>
 
-            <hr/>
+          <hr/>
 
-            <b>Participants</b>
+          <ul class="form-group">
+            <li>
+              <b>Participants</b>
 
-            <br/>
+              <br/>
 
-            <select ui-select2="{}" multiple ng-model="filters.selected_participants">
-              <option value="{{ p }}" data-ng-repeat="p in filters.distinct_participants">{{ p }}</option>
-            </select>
+              <select ui-select2="{}" multiple ng-model="filters.selected_participants">
+                <option value="{{ p }}" data-ng-repeat="p in filters.distinct_participants">{{ p }}</option>
+              </select>
+            </li>
 
-            <hr/>
+            <li>
+              <b>Analytes</b>
 
-            <b>Analytes</b>
+              <br/>
 
-            <br/>
+              <select ui-select2="{}" multiple ng-model="filters.selected_analytes">
+                <option value="{{ a.name }}" data-ng-repeat="a in analytes">{{ a.name }}</option>
+              </select>
+            </li>
 
-            <select ui-select2="{}" multiple ng-model="filters.selected_analytes">
-              <option value="{{ a.name }}" data-ng-repeat="a in analytes">{{ a.name }}</option>
-            </select>
+            <li>
+              <b>Isotypes</b>
 
-            <hr/>
+              <br/>
 
-            <b>Isotypes</b>
+              <select ui-select2="{}" multiple ng-model="filters.selected_isotypes">
+                <option value="{{ i.name }}" data-ng-repeat="i in isotypes">{{ i.name }}</option>
+              </select>
+            </li>
 
-            <br/>
+            <li>
+              <b>Conjugates</b>
 
-            <select ui-select2="{}" multiple ng-model="filters.selected_isotypes">
-              <option value="{{ i.name }}" data-ng-repeat="i in isotypes">{{ i.name }}</option>
-            </select>
+              <br/>
 
-            <hr/>
+              <select ui-select2="{}" multiple ng-model="filters.selected_conjugates">
+                <option value="{{ c.name }}" data-ng-repeat="c in conjugates">{{ c.name }}</option>
+              </select>
+            </li>
 
-            <b>Conjugates</b>
+            <li>
+              <b>Sample Types</b>
 
-            <br/>
+              <br/>
 
-            <select ui-select2="{}" multiple ng-model="filters.selected_conjugates">
-              <option value="{{ c.name }}" data-ng-repeat="c in conjugates">{{ c.name }}</option>
-            </select>
+              <select ui-select2="{}" multiple ng-model="filters.selected_sample_types">
+                <option value="{{ st.name }}" data-ng-repeat="st in sample_types">{{ st.name }}</option>
+              </select>
+            </li>
 
-            <hr/>
+            <li>
+              <b>Buffers</b>
 
-            <b>Sample Types</b>
+              <br/>
 
-            <br/>
+              <select ui-select2="{}" multiple ng-model="filters.selected_buffers">
+                <option value="{{ b.name }}" data-ng-repeat="b in buffers">{{ b.name }}</option>
+              </select>
+            </li>
 
-            <select ui-select2="{}" multiple ng-model="filters.selected_sample_types">
-              <option value="{{ st.name }}" data-ng-repeat="st in sample_types">{{ st.name }}</option>
-            </select>
+            <li>
+              <b>CV</b>
 
-            <hr/>
+              <br/>
 
-            <b>Buffers</b>
+              <div class="row">
+                <div class="col-sm-6">
+                  <input type="text" ng-model="filters.min_cv" placeholder="Min value" size="9">
+                </div>
 
-            <br/>
-
-            <select ui-select2="{}" multiple ng-model="filters.selected_buffers">
-              <option value="{{ b.name }}" data-ng-repeat="b in buffers">{{ b.name }}</option>
-            </select>
-
-            <hr/>
-
-            <b>CV</b>
-
-            <br/>
-
-            <div class="row">
-              <div class="col-sm-6">
-                <input type="text" ng-model="filters.min_cv" placeholder="Min value" size="9">
+                <div class="col-sm-6">
+                  <input type="text" ng-model="filters.max_cv" placeholder="Max value" size="9">
+                </div>
               </div>
+            </li>
 
-              <div class="col-sm-6">
-                <input type="text" ng-model="filters.max_cv" placeholder="Max value" size="9">
-              </div>
-            </div>
-
-          </form>
+          </ul>
         </div>
       </div>
 

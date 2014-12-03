@@ -382,13 +382,14 @@ input[type="file"] {
   display: inline-block;
 }
 
-.form-group ul {
+ul.form-group {
   list-style: none;
-  display: inline-block;
-  padding: 7px 0px;
+  padding: 0;
 }
-.form-group ul > li {
+ul.form-group > li {
   display: list-item;
+  padding: 3px 0;
+  width: 100%;
 }
 
 #render_parameters_form > select {
