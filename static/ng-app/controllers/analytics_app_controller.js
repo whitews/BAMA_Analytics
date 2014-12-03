@@ -12,9 +12,19 @@ analytics_app.controller(
         $scope.participants = [];
         $scope.data_points = [];
 
+        // filter related vars
+        $scope.filters = {};
+        $scope.filtered_data_points = [];
+        $scope.filters.selected_participants = [];
+        $scope.filters.selected_analytes = [];
+        var dp = {};  // temp data point for matching against filters
+
         $scope.append_data_points = function(data_points) {
             $scope.data_points = $scope.data_points.concat(data_points);
-            $scope.totalItems = $scope.data_points.length;
+            $scope.total_items = $scope.data_points.length;
+
+            // re-apply filter after appending new data
+            $scope.apply_filter();
         };
 
         $scope.analytes = ModelService.getAnalytes();
@@ -24,15 +34,16 @@ analytics_app.controller(
         $scope.buffers = ModelService.getBuffers();
 
         // pagination stuff for data points table
-        $scope.totalItems = $scope.data_points.length;
-        $scope.currentPage = 1;
-        $scope.numPerPage = 15;
+        $scope.total_items = $scope.data_points.length;
+        $scope.displayed_items = $scope.filtered_data_points.length;
+        $scope.current_page = 1;
+        $scope.items_per_page = 15;
 
         $scope.paginate = function(value) {
             var begin, end, index;
-            begin = ($scope.currentPage - 1) * $scope.numPerPage;
-            end = begin + $scope.numPerPage;
-            index = $scope.data_points.indexOf(value);
+            begin = ($scope.current_page - 1) * $scope.items_per_page;
+            end = begin + $scope.items_per_page;
+            index = $scope.filtered_data_points.indexOf(value);
             return (begin <= index && index < end);
         };
 
@@ -124,19 +135,31 @@ analytics_app.controller(
         };
 
         $scope.apply_filter = function () {
-            $scope.retrieving_data = true;
-            $scope.filter_errors = [];
+            // filter data points
+            $scope.filtered_data_points = [];
 
-            var participants = [];
-            if ($scope.participants != null) {
-                $scope.participants.forEach(function (p) {
-                    if (p.query) {
-                        participants.push(p.id);
+            for (var i=0; i < $scope.data_points.length; i++) {
+
+                dp = $scope.data_points[i];  // for easier reference
+
+                // match against selected participants
+                if ($scope.filters.selected_participants.length > 0) {
+                    if ($scope.filters.selected_participants.indexOf(dp.participant_code) == -1) {
+                        continue;
                     }
-                });
+                }
+                // match against selected analyties
+                if ($scope.filters.selected_analytes.length > 0) {
+                    if ($scope.filters.selected_analytes.indexOf(dp.analyte) == -1) {
+                        continue;
+                    }
+                }
+
+                $scope.filtered_data_points.push(dp);
+
             }
 
-            // TODO: filter imported data points here
+            $scope.displayed_items = $scope.filtered_data_points.length;
         };
     }
 ]);
@@ -170,17 +193,17 @@ analytics_app.controller(
             };
 
             function parseCSV(file) {
-                    $scope.file_name = file.name;
+                $scope.file_name = file.name;
 
-                    // parse CSV file
-                    Papa.parse(file, {
-                        header: true,
-                        complete: function (results) {
-                            validateData(results.data);
-                            $scope.csv_data = results.data;
-                            $scope.$apply();
-                        }
-                    });
+                // parse CSV file
+                Papa.parse(file, {
+                    header: true,
+                    complete: function (results) {
+                        validateData(results.data);
+                        $scope.csv_data = results.data;
+                        $scope.$apply();
+                    }
+                });
             }
 
             function validateData(data) {
@@ -221,12 +244,10 @@ analytics_app.controller(
                 data.forEach(function (d) {
                     // populate some d properties we'll need to convert
                     // to match the web API
-                    d['participant_pk'] = null;
                     d['participant_species_name'] = null;
                     d['conjugate'] = null;
                     d['isotype'] = null;
                     d['cv_value'] = null;
-                    d['notebook_pk'] = null;
                     d['sample_type'] = null;
                     d['buffer'] = null;
 
@@ -242,28 +263,15 @@ analytics_app.controller(
 
                     // get distinct notebooks. this field is required but there
                     // are no additional rules for this one
-                    // but we will show the new ones to the user
                     if (typeof(d['Notebook Number']) == "undefined") {
                         $scope.csv_errors.push("Notebook field is required");
                     } else {
                         // check if notebook has already been seen
-                        for (var i = 0, len = $scope.notebooks.length; i < len; i++) {
-                            if ($scope.notebooks[i].name == d['Notebook Number']) {
-                                d['notebook_pk'] = $scope.notebooks[i].id;
-                                break;
-                            }
-                        }
-
-                        // we show the distinct notebooks to the user along
-                        // with a new tag for the new ones
                         if (distinct_notebooks_tmp.indexOf(d['Notebook Number']) == -1) {
                             distinct_notebooks_tmp.push(d['Notebook Number']);
 
                             $scope.distinct_notebooks.push(
-                                {
-                                    name: d['Notebook Number'],
-                                    new: d['notebook_pk'] == null
-                                }
+                                d['Notebook Number']
                             );
                         }
                     }
@@ -307,10 +315,7 @@ analytics_app.controller(
                             distinct_participants_tmp.push(d['Participant ID']);
 
                             $scope.distinct_participants.push(
-                                {
-                                    code: d['Participant ID'],
-                                    new: d['participant_pk'] == null
-                                }
+                                d['Participant ID']
                             );
                         }
                     }
@@ -560,10 +565,8 @@ analytics_app.controller(
                 $scope.csv_data.forEach(function (d) {
                     data_points.push({
                         'cohort': d['Cohort'],
-                        'notebook': d['notebook_pk'],
                         'notebook_name': d['Notebook Number'],
                         'assay_date': d['assay_date'],
-                        'participant': d['participant_pk'],
                         'participant_code': d['Participant ID'],
                         'species': d['Species'],
                         'sample_type': d['sample_type'],
@@ -578,7 +581,8 @@ analytics_app.controller(
                         'dilution': d['Dilution'],
                         'fi_minus_background': d['FI-Bkgd'],
                         'fi_minus_background_blank': d['FI-Bkgd-Blank'],
-                        'cv': d['cv_value']
+                        'cv': d['cv_value'],
+                        'display': true
                     });
                 });
 

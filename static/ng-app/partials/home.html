@@ -81,14 +81,12 @@
             <hr/>
 
             <b>Participants</b>
-            <ul>
-              <li ng-repeat="p in participants">
-                <label>
-                  <input type="checkbox" ng-model="p.query" />
-                  {{ p.code }}
-                </label>
-              </li>
-            </ul>
+
+            <br/>
+
+            <select ui-select2="{}" multiple ng-model="filters.selected_participants">
+              <option value="{{ p }}" data-ng-repeat="p in distinct_participants">{{ p }}</option>
+            </select>
 
             <hr/>
 
@@ -96,8 +94,8 @@
 
             <br/>
 
-            <select ui-select2="{}" multiple ng-model="selected_analytes">
-              <option value="{{ a.id }}" data-ng-repeat="a in analytes">{{ a.name }}</option>
+            <select ui-select2="{}" multiple ng-model="filters.selected_analytes">
+              <option value="{{ a.name }}" data-ng-repeat="a in analytes">{{ a.name }}</option>
             </select>
 
             <hr/>
@@ -157,7 +155,9 @@
 
                     <h4 class="text-center">
                       Data Points
-                      <span class="badge badge-inverse align-top">{{ data_points.length }}</span>
+                      <span class="badge badge-inverse align-top">
+                        {{ displayed_items }} of {{ total_items }}
+                      </span>
                     </h4>
 
                     <div style="position: absolute; right:0;top:0;">
@@ -212,7 +212,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="dp in data_points | filter : paginate">
+            <tr ng-repeat="dp in filtered_data_points | filter : paginate">
               <td class="no-wrap" width="1%">
 
               </td>
@@ -237,10 +237,10 @@
             </tr>
           </tbody>
         </table>
-        <div class="text-center" ng-show="data_points.length > 0">
-        <pagination total-items="totalItems" ng-model="$parent.currentPage"
+        <div class="text-center" ng-show="filtered_data_points.length > items_per_page">
+        <pagination total-items="displayed_items" ng-model="$parent.current_page"
           max-size="5" boundary-links="true"
-          items-per-page="numPerPage">
+          items-per-page="items_per_page">
         </pagination>
         </div>
       </div>
