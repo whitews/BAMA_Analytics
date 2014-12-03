@@ -223,7 +223,7 @@ analytics_app.controller(
                     // to match the web API
                     d['participant_pk'] = null;
                     d['participant_species_name'] = null;
-                    d['conjugate_pk'] = null;
+                    d['conjugate'] = null;
                     d['isotype_pk'] = null;
                     d['cv_value'] = null;
                     d['notebook_pk'] = null;
@@ -394,12 +394,12 @@ analytics_app.controller(
                         // determine if any new conjugates are present
                         for (var i = 0, len = $scope.conjugates.length; i < len; i++) {
                             if ($scope.conjugates[i].name == d['Conjugate']) {
-                                d['conjugate_pk'] = $scope.conjugates[i].id;
+                                d['conjugate'] = $scope.conjugates[i].name;
                                 break;
                             }
                         }
 
-                        if (d['conjugate_pk'] == null) {
+                        if (d['conjugate'] == null) {
                             // conjugate doesn't exist, uh, that's a problem
                             $scope.csv_errors.push("Conjugate \"" + d['Conjugate'] + "\" does not exist on the server");
                         }
@@ -569,7 +569,7 @@ analytics_app.controller(
                         'sample_type': d['sample_type_pk'],
                         'analyte': d['analyte'],
                         'isotype': d['isotype_pk'],
-                        'conjugate': d['conjugate_pk'],
+                        'conjugate': d['conjugate'],
                         'buffer': d['buffer'],
                         'global_id_code': d['Specimen ID'],
                         'visit_code': d['Visit ID'],
