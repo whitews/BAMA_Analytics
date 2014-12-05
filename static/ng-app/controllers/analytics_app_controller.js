@@ -560,6 +560,15 @@ analytics_app.controller(
                 var data_points = [];
 
                 $scope.csv_data.forEach(function (d) {
+                    // set negative FI-Bkgd values to 0
+                    if (parseFloat(d['FI-Bkgd']) < 0) {
+                        d['FI-Bkgd'] = 0;
+                    }
+                    // set negative FI-Bkgd-Blank values to 1
+                    if (parseFloat(d['FI-Bkgd-Blank']) < 0) {
+                        d['FI-Bkgd-Blank'] = 1;
+                    }
+
                     data_points.push({
                         'cohort': d['Cohort'],
                         'notebook_name': d['Notebook Number'],
