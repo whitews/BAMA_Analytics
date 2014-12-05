@@ -101,6 +101,22 @@
             </li>
 
             <li>
+              <b>Visit Dates</b>
+
+              <br/>
+
+              <div class="row">
+                <div class="col-sm-6">
+                  <input type="text" ng-model="filters.min_visit_date" placeholder="Min value" size="9" ng-click="datepicker.open($event)" datepicker-popup="{{datepicker.format}}" is-open="datepicker.datepicker_open" datepicker-options="datepicker.dateOptions" close-text="Close" />
+                </div>
+
+                <div class="col-sm-6">
+                  <input type="text" ng-model="filters.max_visit_date" placeholder="Max value" size="9">
+                </div>
+              </div>
+            </li>
+
+            <li>
               <b>Analytes</b>
 
               <br/>

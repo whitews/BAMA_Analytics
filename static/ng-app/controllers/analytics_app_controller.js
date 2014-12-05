@@ -147,6 +147,34 @@ analytics_app.controller(
             });
         };
 
+        // Date picker stuff
+        $scope.datepicker = {};
+        $scope.datepicker.today = function() {
+            $scope.datepicker.dt = new Date();
+        };
+        $scope.datepicker.today();
+
+        $scope.datepicker.clear = function () {
+            $scope.datepicker.dt = null;
+        };
+
+        $scope.datepicker.open = function($event) {
+            $event.preventDefault();
+            $event.stopPropagation();
+
+            $scope.datepicker.datepicker_open = true;
+        };
+
+        $scope.datepicker.dateOptions = {
+            'year-format': "'yy'",
+            'starting-day': 1,
+            'show-weeks': false
+        };
+
+        $scope.datepicker.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'shortDate'];
+        $scope.datepicker.format = $scope.datepicker.formats[0];
+        // End date picker stuff
+
         $scope.apply_filter = function () {
             // filter data points
             $scope.filtered_data_points = [];
