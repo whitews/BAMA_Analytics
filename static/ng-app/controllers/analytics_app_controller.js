@@ -578,8 +578,7 @@ analytics_app.controller(
                         'dilution': d['Dilution'],
                         'fi_minus_background': d['FI-Bkgd'],
                         'fi_minus_background_blank': d['FI-Bkgd-Blank'],
-                        'cv': d['cv_value'],
-                        'display': true
+                        'cv': d['cv_value']
                     });
 
                     if ($scope.filters.distinct_participants.indexOf(d['Participant ID']) == -1) {
@@ -600,6 +599,19 @@ analytics_app.controller(
                 $scope.csv_errors = [];
                 $scope.importing = false;
             }
+        }
+    ]
+);
+
+analytics_app.controller(
+    'ExportController',
+    [
+        '$scope', '$window',
+        function ($scope, $window) {
+            $scope.create_export = function () {
+                var exported_csv = Papa.unparse($scope.$parent.filtered_data_points);
+                $window.location.assign("data:text/csv;charset=utf-8," + encodeURIComponent(exported_csv));
+            };
         }
     ]
 );
