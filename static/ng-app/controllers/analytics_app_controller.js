@@ -609,7 +609,10 @@ analytics_app.controller(
         '$scope', '$window',
         function ($scope, $window) {
             $scope.create_export = function () {
-                var exported_csv = Papa.unparse($scope.$parent.filtered_data_points);
+                // use angular.toJson, removes ng internal props like $$hashkey
+                var exported_csv = Papa.unparse(
+                    angular.toJson($scope.$parent.filtered_data_points)
+                );
                 $window.location.assign("data:text/csv;charset=utf-8," + encodeURIComponent(exported_csv));
             };
         }
