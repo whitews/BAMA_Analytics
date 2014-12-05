@@ -151,6 +151,16 @@
             </li>
 
             <li>
+              <b>Beads</b>
+
+              <br/>
+
+              <select ui-select2="{}" multiple ng-model="filters.selected_bead_numbers">
+                <option value="{{ b }}" data-ng-repeat="b in filters.distinct_bead_numbers">{{ b }}</option>
+              </select>
+            </li>
+
+            <li>
               <b>CV</b>
 
               <br/>

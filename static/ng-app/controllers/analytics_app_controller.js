@@ -18,9 +18,11 @@ analytics_app.controller(
         $scope.filters.distinct_notebooks = [];
         $scope.filters.distinct_participants = [];
         $scope.filters.distinct_visit_codes = [];
+        $scope.filters.distinct_bead_numbers = [];
         $scope.filters.selected_notebooks = [];
         $scope.filters.selected_participants = [];
         $scope.filters.selected_visit_codes = [];
+        $scope.filters.selected_bead_numbers = [];
         $scope.filters.selected_analytes = [];
         $scope.filters.selected_isotypes = [];
         $scope.filters.selected_conjugates = [];
@@ -198,6 +200,12 @@ analytics_app.controller(
                 // match against selected buffers
                 if ($scope.filters.selected_buffers.length > 0) {
                     if ($scope.filters.selected_buffers.indexOf(dp.buffer) == -1) {
+                        continue;
+                    }
+                }
+                // match against selected bead numbers
+                if ($scope.filters.selected_bead_numbers.length > 0) {
+                    if ($scope.filters.selected_bead_numbers.indexOf(dp.bead_number) == -1) {
                         continue;
                     }
                 }
@@ -620,6 +628,11 @@ analytics_app.controller(
                     if ($scope.filters.distinct_visit_codes.indexOf(d['Visit ID']) == -1) {
                         $scope.filters.distinct_visit_codes.push(
                             d['Visit ID']
+                        );
+                    }
+                    if ($scope.filters.distinct_bead_numbers.indexOf(d['bead_number']) == -1) {
+                        $scope.filters.distinct_bead_numbers.push(
+                            d['bead_number']
                         );
                     }
                 });
