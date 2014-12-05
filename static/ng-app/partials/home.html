@@ -81,6 +81,16 @@
             </li>
 
             <li>
+              <b>Visit Codes</b>
+
+              <br/>
+
+              <select ui-select2="{}" multiple ng-model="filters.selected_visit_codes">
+                <option value="{{ vc }}" data-ng-repeat="vc in filters.distinct_visit_codes">{{ vc }}</option>
+              </select>
+            </li>
+
+            <li>
               <b>Analytes</b>
 
               <br/>

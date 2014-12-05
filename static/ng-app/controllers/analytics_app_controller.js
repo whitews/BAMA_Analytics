@@ -16,7 +16,9 @@ analytics_app.controller(
         $scope.filters = {};
         $scope.filtered_data_points = [];
         $scope.filters.distinct_participants = [];
+        $scope.filters.distinct_visit_codes = [];
         $scope.filters.selected_participants = [];
+        $scope.filters.selected_visit_codes = [];
         $scope.filters.selected_analytes = [];
         $scope.filters.selected_isotypes = [];
         $scope.filters.selected_conjugates = [];
@@ -152,6 +154,12 @@ analytics_app.controller(
                 // match against selected participants
                 if ($scope.filters.selected_participants.length > 0) {
                     if ($scope.filters.selected_participants.indexOf(dp.participant_code) == -1) {
+                        continue;
+                    }
+                }
+                // match against selected visit codes
+                if ($scope.filters.selected_visit_codes.length > 0) {
+                    if ($scope.filters.selected_visit_codes.indexOf(dp.visit_code) == -1) {
                         continue;
                     }
                 }
@@ -593,6 +601,12 @@ analytics_app.controller(
                     if ($scope.filters.distinct_participants.indexOf(d['Participant ID']) == -1) {
                         $scope.filters.distinct_participants.push(
                             d['Participant ID']
+                        );
+                    }
+
+                    if ($scope.filters.distinct_visit_codes.indexOf(d['Visit ID']) == -1) {
+                        $scope.filters.distinct_visit_codes.push(
+                            d['Visit ID']
                         );
                     }
                 });
