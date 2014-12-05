@@ -71,6 +71,16 @@
 
           <ul class="form-group">
             <li>
+              <b>Notebooks</b>
+
+              <br/>
+
+              <select ui-select2="{}" multiple ng-model="filters.selected_notebooks">
+                <option value="{{ n }}" data-ng-repeat="n in filters.distinct_notebooks">{{ n }}</option>
+              </select>
+            </li>
+
+            <li>
               <b>Participants</b>
 
               <br/>

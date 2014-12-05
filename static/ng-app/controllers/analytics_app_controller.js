@@ -15,8 +15,10 @@ analytics_app.controller(
         // filter related vars
         $scope.filters = {};
         $scope.filtered_data_points = [];
+        $scope.filters.distinct_notebooks = [];
         $scope.filters.distinct_participants = [];
         $scope.filters.distinct_visit_codes = [];
+        $scope.filters.selected_notebooks = [];
         $scope.filters.selected_participants = [];
         $scope.filters.selected_visit_codes = [];
         $scope.filters.selected_analytes = [];
@@ -151,6 +153,12 @@ analytics_app.controller(
 
                 dp = $scope.data_points[i];  // for easier reference
 
+                // match against selected notebooks
+                if ($scope.filters.selected_notebooks.length > 0) {
+                    if ($scope.filters.selected_notebooks.indexOf(dp.notebook_name) == -1) {
+                        continue;
+                    }
+                }
                 // match against selected participants
                 if ($scope.filters.selected_participants.length > 0) {
                     if ($scope.filters.selected_participants.indexOf(dp.participant_code) == -1) {
@@ -598,12 +606,17 @@ analytics_app.controller(
                         'cv': d['cv_value']
                     });
 
+                    // Collect our distinct lists for filtering
+                    if ($scope.filters.distinct_notebooks.indexOf(d['Notebook Number']) == -1) {
+                        $scope.filters.distinct_notebooks.push(
+                            d['Notebook Number']
+                        );
+                    }
                     if ($scope.filters.distinct_participants.indexOf(d['Participant ID']) == -1) {
                         $scope.filters.distinct_participants.push(
                             d['Participant ID']
                         );
                     }
-
                     if ($scope.filters.distinct_visit_codes.indexOf(d['Visit ID']) == -1) {
                         $scope.filters.distinct_visit_codes.push(
                             d['Visit ID']
