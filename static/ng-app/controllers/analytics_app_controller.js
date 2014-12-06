@@ -22,6 +22,8 @@ analytics_app.controller(
         $scope.filters.selected_notebooks = [];
         $scope.filters.selected_participants = [];
         $scope.filters.selected_visit_codes = [];
+        $scope.filters.min_visit_date = null;
+        $scope.filters.max_visit_date = null;
         $scope.filters.selected_bead_numbers = [];
         $scope.filters.selected_analytes = [];
         $scope.filters.selected_isotypes = [];
@@ -31,6 +33,7 @@ analytics_app.controller(
         $scope.filters.min_cv = null;
         $scope.filters.max_cv = null;
         var dp = {};  // temp data point for matching against filters
+        var dp_visit_date = null;  // temp visit date for filter comparison
 
         $scope.append_data_points = function(data_points) {
             $scope.data_points = $scope.data_points.concat(data_points);
@@ -158,11 +161,18 @@ analytics_app.controller(
             $scope.datepicker.dt = null;
         };
 
-        $scope.datepicker.open = function($event) {
+        $scope.datepicker.open_min_visit_date = function($event) {
             $event.preventDefault();
             $event.stopPropagation();
 
-            $scope.datepicker.datepicker_open = true;
+            $scope.datepicker.min_visit_date_open = true;
+        };
+
+        $scope.datepicker.open_max_visit_date = function($event) {
+            $event.preventDefault();
+            $event.stopPropagation();
+
+            $scope.datepicker.max_visit_date_open = true;
         };
 
         $scope.datepicker.dateOptions = {
@@ -171,7 +181,7 @@ analytics_app.controller(
             'show-weeks': false
         };
 
-        $scope.datepicker.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'shortDate'];
+        $scope.datepicker.formats = ['yyyy-MMM-dd', 'yyyy/MM/dd', 'shortDate'];
         $scope.datepicker.format = $scope.datepicker.formats[0];
         // End date picker stuff
 
@@ -247,6 +257,20 @@ analytics_app.controller(
                 if ($scope.filters.max_cv) {
                     if (parseFloat(dp.cv) > parseFloat($scope.filters.max_cv)) {
                         continue;
+                    }
+                }
+                // match against visit date
+                if ($scope.filters.min_visit_date || $scope.filters.max_visit_date) {
+                    dp_visit_date = new Date(dp.visit_date);
+                    if ($scope.filters.min_visit_date) {
+                        if ($scope.filters.min_visit_date > dp_visit_date) {
+                            continue;
+                        }
+                    }
+                    if ($scope.filters.max_visit_date) {
+                        if ($scope.filters.max_visit_date < dp_visit_date) {
+                            continue;
+                        }
                     }
                 }
 

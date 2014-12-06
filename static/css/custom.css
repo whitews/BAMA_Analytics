@@ -245,7 +245,6 @@ body > #wrap {height: auto; min-height: 100%;}
 /* ----------  Sticky footer END---------- */
 /* ----------  Custom Table stuff START---------- */
 table.key-value, td {
-  padding: 5px;
   text-align: left;
 }
 

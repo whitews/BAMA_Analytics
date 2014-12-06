@@ -107,11 +107,11 @@
 
               <div class="row">
                 <div class="col-sm-6">
-                  <input type="text" ng-model="filters.min_visit_date" placeholder="Min value" size="9" ng-click="datepicker.open($event)" datepicker-popup="{{datepicker.format}}" is-open="datepicker.datepicker_open" datepicker-options="datepicker.dateOptions" close-text="Close" />
+                  <input type="text" ng-model="filters.min_visit_date" placeholder="Min value" size="10" ng-click="datepicker.open_min_visit_date($event)" datepicker-popup="{{datepicker.format}}" is-open="datepicker.min_visit_date_open" datepicker-options="datepicker.dateOptions" close-text="Close" />
                 </div>
 
                 <div class="col-sm-6">
-                  <input type="text" ng-model="filters.max_visit_date" placeholder="Max value" size="9">
+                  <input type="text" class="pull-right" ng-model="filters.max_visit_date" placeholder="Max value" size="10" ng-click="datepicker.open_max_visit_date($event)" datepicker-popup="{{datepicker.format}}" is-open="datepicker.max_visit_date_open" datepicker-options="datepicker.dateOptions" close-text="Close" />
                 </div>
               </div>
             </li>
@@ -183,11 +183,11 @@
 
               <div class="row">
                 <div class="col-sm-6">
-                  <input type="text" ng-model="filters.min_cv" placeholder="Min value" size="9">
+                  <input type="text" ng-model="filters.min_cv" placeholder="Min value" size="10">
                 </div>
 
                 <div class="col-sm-6">
-                  <input type="text" ng-model="filters.max_cv" placeholder="Max value" size="9">
+                  <input type="text" class="pull-right" ng-model="filters.max_cv" placeholder="Max value" size="10">
                 </div>
               </div>
             </li>
