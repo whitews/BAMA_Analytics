@@ -115,6 +115,22 @@
                 </div>
               </div>
             </li>
+            
+            <li>
+              <b>Assay Dates</b>
+
+              <br/>
+
+              <div class="row">
+                <div class="col-sm-6">
+                  <input type="text" ng-model="filters.min_assay_date" placeholder="Min value" size="10" ng-click="datepicker.open_min_assay_date($event)" datepicker-popup="{{datepicker.format}}" is-open="datepicker.min_assay_date_open" datepicker-options="datepicker.dateOptions" close-text="Close" />
+                </div>
+
+                <div class="col-sm-6">
+                  <input type="text" class="pull-right" ng-model="filters.max_assay_date" placeholder="Max value" size="10" ng-click="datepicker.open_max_assay_date($event)" datepicker-popup="{{datepicker.format}}" is-open="datepicker.max_assay_date_open" datepicker-options="datepicker.dateOptions" close-text="Close" />
+                </div>
+              </div>
+            </li>
 
             <li>
               <b>Analytes</b>

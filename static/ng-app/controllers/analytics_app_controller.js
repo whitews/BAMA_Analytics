@@ -24,6 +24,8 @@ analytics_app.controller(
         $scope.filters.selected_visit_codes = [];
         $scope.filters.min_visit_date = null;
         $scope.filters.max_visit_date = null;
+        $scope.filters.min_assay_date = null;
+        $scope.filters.max_assay_date = null;
         $scope.filters.selected_bead_numbers = [];
         $scope.filters.selected_analytes = [];
         $scope.filters.selected_isotypes = [];
@@ -34,6 +36,7 @@ analytics_app.controller(
         $scope.filters.max_cv = null;
         var dp = {};  // temp data point for matching against filters
         var dp_visit_date = null;  // temp visit date for filter comparison
+        var dp_assay_date = null;  // temp assay date for filter comparison
 
         $scope.append_data_points = function(data_points) {
             $scope.data_points = $scope.data_points.concat(data_points);
@@ -174,6 +177,20 @@ analytics_app.controller(
 
             $scope.datepicker.max_visit_date_open = true;
         };
+        
+        $scope.datepicker.open_min_assay_date = function($event) {
+            $event.preventDefault();
+            $event.stopPropagation();
+
+            $scope.datepicker.min_assay_date_open = true;
+        };
+
+        $scope.datepicker.open_max_assay_date = function($event) {
+            $event.preventDefault();
+            $event.stopPropagation();
+
+            $scope.datepicker.max_assay_date_open = true;
+        };
 
         $scope.datepicker.dateOptions = {
             'year-format': "'yy'",
@@ -269,6 +286,20 @@ analytics_app.controller(
                     }
                     if ($scope.filters.max_visit_date) {
                         if ($scope.filters.max_visit_date < dp_visit_date) {
+                            continue;
+                        }
+                    }
+                }
+                // match against assay date
+                if ($scope.filters.min_assay_date || $scope.filters.max_assay_date) {
+                    dp_assay_date = new Date(dp.assay_date);
+                    if ($scope.filters.min_assay_date) {
+                        if ($scope.filters.min_assay_date > dp_assay_date) {
+                            continue;
+                        }
+                    }
+                    if ($scope.filters.max_assay_date) {
+                        if ($scope.filters.max_assay_date < dp_assay_date) {
                             continue;
                         }
                     }
