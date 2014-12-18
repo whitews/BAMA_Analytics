@@ -600,9 +600,16 @@ analytics_app.controller(
 
                                 // 3rd field is visit ID, which is also in a
                                 // separate column. Verify it matches that
-                                // visit column
+                                // visit column...
+                                // however, if the current_visit_id is null,
+                                // but we have a non-null value in the
+                                // description field we'll use it instead
                                 if (desc_second_pass[1].trim() != current_visit_id) {
-                                    $scope.csv_errors.push("Description field visit ID field doesn't match Visit ID column: " + desc_second_pass[1] + " vs " + current_visit_id);
+                                    if (current_visit_id == null) {
+                                        d['Visit ID'] = desc_second_pass[1];
+                                    } else {
+                                        $scope.csv_errors.push("Description field visit ID field doesn't match Visit ID column: " + desc_second_pass[1] + " vs " + current_visit_id);
+                                    }
                                 }
 
                                 // 4th field is visit date
