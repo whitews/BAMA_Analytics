@@ -70,6 +70,13 @@
           <hr/>
 
           <ul class="form-group">
+            <li ng-show="duplicate_flag">
+              <label for="dup_filter">
+                <input type="checkbox" name="dup_filter" ng-model="filters.show_only_duplicates" />
+                Show Only Duplicates
+              </label>
+            </li>
+
             <li>
               <b>Notebook</b>
 
@@ -233,6 +240,9 @@
                     </h4>
 
                     <div style="position: absolute; right:0;top:0;">
+                      <span ng-show="duplicate_flag" class="text-error">
+                        Duplicate records found!
+                      </span>
                       <button class="btn btn-info btn-xs" type="button" ng-click="open_column_chooser('sm')">
                         Choose Columns
                       </button>

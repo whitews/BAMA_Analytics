@@ -11,10 +11,13 @@ analytics_app.controller(
         $scope.notebooks = [];
         $scope.participants = [];
         $scope.data_points = [];
+        var data_hash_map = {};  // keeps track of duplicates
+        $scope.duplicate_flag = false;  // for notifying the user of any dups
 
         // filter related vars
         $scope.filters = {};
         $scope.filtered_data_points = [];
+        $scope.filters.show_only_duplicates = false;
         $scope.filters.distinct_notebooks = [];
         $scope.filters.distinct_participants = [];
         $scope.filters.distinct_visit_codes = [];
@@ -39,7 +42,46 @@ analytics_app.controller(
         var dp_assay_date = null;  // temp assay date for filter comparison
 
         $scope.append_data_points = function(data_points) {
-            $scope.data_points = $scope.data_points.concat(data_points);
+            var hash;
+            data_points.forEach(function (d) {
+                // assume each data point is not a duplicate
+                d.duplicate = false;
+
+                hash = md5(
+                    [
+                        d.cohort,
+                        d.participant_code,
+                        d.visit_code,
+                        d.visit_date,
+                        d.analyte,
+                        d.conjugate,
+                        d.isotype,
+                        d.dilution
+                    ].toString()
+                );
+                $scope.data_points.push(d);
+
+                if (!data_hash_map[hash]) {
+                    // we haven't seen this combo yet, so save the hash and
+                    // data point index in a list
+                    data_hash_map[hash] = [$scope.data_points.length - 1];
+                } else {
+                    // we have a duplicate, save the index
+                    data_hash_map[hash].push($scope.data_points.length - 1);
+                }
+            });
+
+            // now we need to mark our duplicates
+            Object.keys(data_hash_map).forEach(function (k) {
+                if (data_hash_map[k].length > 1) {
+                    $scope.duplicate_flag = true;
+
+                    data_hash_map[k].forEach(function (idx) {
+                        $scope.data_points[idx].duplicate = true;
+                    });
+                }
+            });
+
             $scope.total_items = $scope.data_points.length;
 
             // re-apply filter after appending new data
@@ -209,6 +251,13 @@ analytics_app.controller(
             for (var i=0; i < $scope.data_points.length; i++) {
 
                 dp = $scope.data_points[i];  // for easier reference
+
+                // match against duplicates
+                if ($scope.filters.show_only_duplicates) {
+                    if (!dp.duplicate) {
+                        continue;
+                    }
+                }
 
                 // match against selected notebooks
                 if ($scope.filters.selected_notebooks.length > 0) {
