@@ -55,7 +55,9 @@ analytics_app.controller(
                         d.visit_date,
                         d.analyte,
                         d.conjugate,
+                        d.sample_type,
                         d.isotype,
+                        d.buffer,
                         d.dilution
                     ].toString()
                 );
