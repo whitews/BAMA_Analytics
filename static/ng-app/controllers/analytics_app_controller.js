@@ -14,6 +14,8 @@ analytics_app.controller(
         var data_hash_map = {};  // keeps track of duplicates
         $scope.duplicate_flag = false;  // for notifying the user of any dups
 
+        $scope.isOpen = true;  // controls the Import CSV accordion
+
         // filter related vars
         $scope.filters = {};
         $scope.filtered_data_points = [];
