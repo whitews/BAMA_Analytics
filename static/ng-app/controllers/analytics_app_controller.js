@@ -448,6 +448,7 @@ analytics_app.controller(
                     d['cv_value'] = null;
                     d['sample_type'] = null;
                     d['buffer'] = null;
+                    matching_analyte = null;
 
                     // get distinct cohorts, must be only one and must match
                     // the current cohort
