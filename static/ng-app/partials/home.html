@@ -276,6 +276,7 @@
                 <th ng-show="data_point_columns.notebook_name.show">Notebook</th>
                 <th ng-show="data_point_columns.participant_code.show">Participant</th>
                 <th ng-show="data_point_columns.global_id_code.show">Global ID</th>
+                <th ng-show="data_point_columns.species.show">Species</th>
                 <th ng-show="data_point_columns.visit_code.show">Visit</th>
                 <th ng-show="data_point_columns.visit_date.show">Visit Date</th>
                 <th ng-show="data_point_columns.assay_date.show">Assay Date</th>
@@ -287,10 +288,16 @@
                 <th ng-show="data_point_columns.isotype_name.show">Isotype</th>
                 <th ng-show="data_point_columns.buffer_name.show">Buffer</th>
                 <th ng-show="data_point_columns.fi_minus_background.show">FI-Bkgd</th>
-                <th ng-show="data_point_columns.fi_minus_background_blank.show">FI-Bkgd-Blank</th>
+                <th ng-show="data_point_columns.fi_minus_background_neg.show">FI-Bkgd-Neg</th>
                 <th ng-show="data_point_columns.cv.show">CV</th>
-                <th ng-show="data_point_columns.upload_date.show">Upload Date</th>
-                <th ng-show="data_point_columns.user.show">Uploaded By</th>
+                <th ng-show="data_point_columns.network.show">Network</th>
+                <th ng-show="data_point_columns.auc.show">AUC</th>
+                <th ng-show="data_point_columns.ec50.show">EC50</th>
+                <th ng-show="data_point_columns.obs_conc.show">Obs Conc</th>
+                <th ng-show="data_point_columns.obs_conc_bioplex_5pl.show">Obs Conc BioPlex 5PL</th>
+                <th ng-show="data_point_columns.titration.show">Titration</th>
+                <th ng-show="data_point_columns.positivity.show">Positivity</th>
+                <th ng-show="data_point_columns.concentration_total_ab_kit.show">Conc (total ab kit)</th>
             </tr>
           </thead>
           <tbody>
@@ -301,6 +308,7 @@
               <td ng-show="data_point_columns.notebook_name.show">{{ dp.notebook_name }}</td>
               <td ng-show="data_point_columns.participant_code.show">{{ dp.participant_code }}</td>
               <td ng-show="data_point_columns.global_id_code.show">{{ dp.global_id_code }}</td>
+              <td ng-show="data_point_columns.species.show">{{ dp.species }}</td>
               <td ng-show="data_point_columns.visit_code.show">{{ dp.visit_code }}</td>
               <td ng-show="data_point_columns.visit_date.show">{{ dp.visit_date }}</td>
               <td ng-show="data_point_columns.assay_date.show">{{ dp.assay_date }}</td>
@@ -312,10 +320,16 @@
               <td ng-show="data_point_columns.isotype_name.show">{{ dp.isotype }}</td>
               <td ng-show="data_point_columns.buffer_name.show">{{ dp.buffer }}</td>
               <td ng-show="data_point_columns.fi_minus_background.show">{{ dp.fi_minus_background }}</td>
-              <td ng-show="data_point_columns.fi_minus_background_blank.show">{{ dp.fi_minus_background_blank }}</td>
+              <td ng-show="data_point_columns.fi_minus_background_neg.show">{{ dp.fi_minus_background_neg }}</td>
               <td ng-show="data_point_columns.cv.show">{{ dp.cv }}</td>
-              <td ng-show="data_point_columns.upload_date.show">{{ dp.upload_date }}</td>
-              <td ng-show="data_point_columns.user.show">{{ dp.user }}</td>
+              <td ng-show="data_point_columns.network.show">{{ dp.network }}</td>
+              <td ng-show="data_point_columns.auc.show">{{ dp.auc }}</td>
+              <td ng-show="data_point_columns.ec50.show">{{ dp.ec50 }}</td>
+              <td ng-show="data_point_columns.obs_conc.show">{{ dp.obs_conc }}</td>
+              <td ng-show="data_point_columns.obs_conc_bioplex_5pl.show">{{ dp.obs_conc_bioplex_5pl }}</td>
+              <td ng-show="data_point_columns.titration.show">{{ dp.titration }}</td>
+              <td ng-show="data_point_columns.positivity.show">{{ dp.positivity }}</td>
+              <td ng-show="data_point_columns.concentration_total_ab_kit.show">{{ dp.concentration_total_ab_kit }}</td>
             </tr>
           </tbody>
         </table>

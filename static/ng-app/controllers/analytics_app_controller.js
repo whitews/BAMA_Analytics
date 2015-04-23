@@ -169,12 +169,48 @@ analytics_app.controller(
                 'name': 'FI-Bkgd',
                 'show': true
             },
-            'fi_minus_background_blank': {
-                'name': 'FI-Bkgd-Blank',
+            'fi_minus_background_neg': {
+                'name': 'FI-Bkgd-Neg',
                 'show': true
             },
             'dilution': {
                 'name': 'Dilution',
+                'show': false
+            },
+            'species': {
+                'name': 'Species',
+                'show': false
+            },
+            'network': {
+                'name': 'Network',
+                'show': false
+            },
+            'auc': {
+                'name': 'AUC',
+                'show': false
+            },
+            'ec50': {
+                'name': 'EC50',
+                'show': false
+            },
+            'obs_conc': {
+                'name': 'Obs Conc',
+                'show': false
+            },
+            'obs_conc_bioplex_5pl': {
+                'name': 'Obs Conc BioPlex 5PL',
+                'show': false
+            },
+            'titration': {
+                'name': 'Titration',
+                'show': false
+            },
+            'positivity': {
+                'name': 'Positivity',
+                'show': false
+            },
+            'concentration_total_ab_kit': {
+                'name': 'Concentration (total ab kit)',
                 'show': false
             }
         };
@@ -584,11 +620,11 @@ analytics_app.controller(
                         $scope.csv_errors.push("FI-Bkgd value must be a number. Found: " + d['FI-Bkgd']);
                     }
 
-                    // validate FI-Bkgd-Blank is present and a number
-                    if (typeof(d['FI-Bkgd-Blank']) == "undefined") {
-                        $scope.csv_errors.push("FI-Bkgd-Blank field is required");
-                    } else if (isNaN(d['FI-Bkgd-Blank'])) {
-                        $scope.csv_errors.push("FI-Bkgd-Blank value must be a number. Found: " + d['FI-Bkgd-Blank']);
+                    // validate FI-Bkgd-Neg is present and a number
+                    if (typeof(d['FI-Bkgd-Neg']) == "undefined") {
+                        $scope.csv_errors.push("FI-Bkgd-Neg field is required");
+                    } else if (isNaN(d['FI-Bkgd-Neg'])) {
+                        $scope.csv_errors.push("FI-Bkgd-Neg value must be a number. Found: " + d['FI-Bkgd-Neg']);
                     }
 
                     // validate CV is present and a number w/ opt. trailing '%'
@@ -732,9 +768,9 @@ analytics_app.controller(
                     if (parseFloat(d['FI-Bkgd']) < 0) {
                         d['FI-Bkgd'] = 0;
                     }
-                    // set negative FI-Bkgd-Blank values to 1
-                    if (parseFloat(d['FI-Bkgd-Blank']) < 0) {
-                        d['FI-Bkgd-Blank'] = 1;
+                    // set negative FI-Bkgd-Neg values to 1
+                    if (parseFloat(d['FI-Bkgd-Neg']) < 0) {
+                        d['FI-Bkgd-Neg'] = 1;
                     }
 
                     data_points.push({
@@ -754,7 +790,7 @@ analytics_app.controller(
                         'bead_number': d['bead_number'],
                         'dilution': d['Dilution'],
                         'fi_minus_background': d['FI-Bkgd'],
-                        'fi_minus_background_blank': d['FI-Bkgd-Blank'],
+                        'fi_minus_background_neg': d['FI-Bkgd-Neg'],
                         'cv': d['cv_value']
                     });
 
@@ -816,13 +852,18 @@ analytics_app.controller(
                             "dilution",
                             "analyte",
                             "fi_minus_background",
-                            "fi_minus_background_blank",
+                            "fi_minus_background_neg",
                             "cv",
-                            // more fields here
+                            "auc",
+                            "ec50",
+                            "obs_conc",
+                            "obs_conc_bioplex_5pl",
+                            "positivity",
                             "isotype",
                             "conjugate",
                             "buffer",
-                            // more fields here
+                            "concentration_total_ab_kit",
+                            "titration",
                             "bead_number",
                             "species",
                             "cohort",
