@@ -804,7 +804,32 @@ analytics_app.controller(
             $scope.create_export = function () {
                 // use angular.toJson, removes ng internal props like $$hashkey
                 var exported_csv = Papa.unparse(
-                    angular.toJson($scope.$parent.filtered_data_points)
+                    {
+                        fields: [
+                            "notebook_name",
+                            "assay_date",
+                            "global_id_code",
+                            "participant_code",
+                            "visit_code",
+                            "visit_date",
+                            "sample_type",
+                            "dilution",
+                            "analyte",
+                            "fi_minus_background",
+                            "fi_minus_background_blank",
+                            "cv",
+                            // more fields here
+                            "isotype",
+                            "conjugate",
+                            "buffer",
+                            // more fields here
+                            "bead_number",
+                            "species",
+                            "cohort",
+                            "duplicate"
+                        ],
+                        data: angular.toJson($scope.$parent.filtered_data_points)
+                    }
                 );
                 $window.location.assign("data:text/csv;charset=utf-8," + encodeURIComponent(exported_csv));
             };
