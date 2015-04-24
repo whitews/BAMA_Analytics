@@ -273,6 +273,7 @@
             </tr>
             <tr>
                 <th></th>
+                <th ng-show="data_point_columns.cohort.show">Cohort</th>
                 <th ng-show="data_point_columns.notebook_name.show">Notebook</th>
                 <th ng-show="data_point_columns.participant_code.show">Participant</th>
                 <th ng-show="data_point_columns.global_id_code.show">Global ID</th>
@@ -305,6 +306,7 @@
               <td class="no-wrap" width="1%">
 
               </td>
+              <td ng-show="data_point_columns.cohort.show">{{ dp.cohort }}</td>
               <td ng-show="data_point_columns.notebook_name.show">{{ dp.notebook_name }}</td>
               <td ng-show="data_point_columns.participant_code.show">{{ dp.participant_code }}</td>
               <td ng-show="data_point_columns.global_id_code.show">{{ dp.global_id_code }}</td>

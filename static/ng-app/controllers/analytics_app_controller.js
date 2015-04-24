@@ -113,6 +113,10 @@ analytics_app.controller(
         };
 
         $scope.data_point_columns = {
+            'cohort': {
+                'name': 'Cohort',
+                'show': false
+            },
             'notebook_name': {
                 'name': 'Notebook',
                 'show': false
