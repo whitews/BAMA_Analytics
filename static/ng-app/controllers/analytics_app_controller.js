@@ -776,6 +776,9 @@ analytics_app.controller(
                     if (parseFloat(d['FI-Bkgd-Neg']) < 0) {
                         d['FI-Bkgd-Neg'] = 1;
                     }
+                    if (parseFloat(d['AUC']) < 100) {
+                        d['AUC'] = '<100';
+                    }
 
                     data_points.push({
                         'cohort': d['Cohort'],
@@ -795,7 +798,15 @@ analytics_app.controller(
                         'dilution': d['Dilution'],
                         'fi_minus_background': d['FI-Bkgd'],
                         'fi_minus_background_neg': d['FI-Bkgd-Neg'],
-                        'cv': d['cv_value']
+                        'cv': d['cv_value'],
+                        'network': d['Network'],
+                        'auc': d['AUC'],
+                        'ec50': d['EC50'],
+                        'obs_conc': d['Obs Conc'],
+                        'obs_conc_bioplex_5pl': d['Obs Conc BioPlex 5PL'],
+                        'titration': d['Titration'],
+                        'positivity': d['Positivity'],
+                        'concentration_total_ab_kit': d['Concentration (total ab kit)']
                     });
 
                     // Collect our distinct lists for filtering
