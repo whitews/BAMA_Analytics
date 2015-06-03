@@ -1,23 +1,12 @@
 from django.conf.urls import patterns, url
-from django.views.generic import TemplateView
 
 from analytics.api_views import *
 
 # API routes
-urlpatterns = patterns('analytics.api_views',
+urlpatterns = patterns(
+    'analytics.api_views',
     url(r'^api/analytics/?$', 'analytics_api_root', name='analytics-api-root'),
     url(r'^api/analytics/user/?$', get_user_details, name='get_user_details'),
-    url(r'^api/analytics/cohorts/?$', CohortList.as_view(),
-        name='cohort-list'),
-    url(r'^api/analytics/cohorts/(?P<pk>\d+)/?$', CohortDetail.as_view(),
-        name='cohort-detail'),
-    url(r'^api/analytics/cohorts/(?P<cohort>\d+)/permissions/?$',
-        get_cohort_permissions,
-        name='get-cohort-permissions'),
-    url(r'^api/analytics/projects/?$', ProjectList.as_view(),
-        name='project-list'),
-    url(r'^api/analytics/projects/(?P<pk>\d+)/?$', ProjectDetail.as_view(),
-        name='project-detail'),
     url(r'^api/analytics/analytes/?$', AnalyteList.as_view(),
         name='analyte-list'),
     url(r'^api/analytics/analytes/(?P<pk>\d+)/?$', AnalyteDetail.as_view(),
@@ -36,22 +25,15 @@ urlpatterns = patterns('analytics.api_views',
         name='isotype-detail'),
     url(r'^api/analytics/sample-types/?$', SampleTypeList.as_view(),
         name='sample-type-list'),
-    url(r'^api/analytics/sample-types/(?P<pk>\d+)/?$', SampleTypeDetail.as_view(),
+    url(r'^api/analytics/sample-types/(?P<pk>\d+)/?$',
+        SampleTypeDetail.as_view(),
         name='sample-type-detail'),
-    url(r'^api/analytics/notebooks/?$', NotebookList.as_view(),
-        name='notebook-list'),
-    url(r'^api/analytics/networks/?$', NetworkList.as_view(),
-        name='network-list'),
-    url(r'^api/analytics/participants/?$', ParticipantList.as_view(),
-        name='participant-list'),
-    url(r'^api/analytics/data-points/?$', DataPointList.as_view(),
-        name='data-point-list'),
 )
 
 # Non-API routes
-urlpatterns += patterns('analytics.views',
+urlpatterns += patterns(
+    'analytics.views',
     url(r'^403$', 'permission_denied', name='permission_denied'),
-    url(r'^warning$', TemplateView.as_view(template_name='warning.html'), name='warning_page'),
     url(r'^$', 'analytics_app', name='home'),
     url(r'^analytics/admin/$', 'analytics_admin', name='admin'),
 )

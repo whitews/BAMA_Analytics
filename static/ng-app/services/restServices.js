@@ -1,16 +1,10 @@
 var URLS = {
     'USER':                '/api/analytics/user/',
-    'COHORTS':             '/api/analytics/cohorts/',
-    'PROJECTS':            '/api/analytics/projects/',
     'ANALYTES':            '/api/analytics/analytes/',
     'CONJUGATES':          '/api/analytics/conjugates/',
     'BUFFERS':             '/api/analytics/buffers/',
     'ISOTYPES':            '/api/analytics/isotypes/',
-    'SAMPLE_TYPES':        '/api/analytics/sample-types/',
-    'NOTEBOOKS':           '/api/analytics/notebooks/',
-    'NETWORKS':            '/api/analytics/networks/',
-    'PARTICIPANTS':        '/api/analytics/participants/',
-    'DATAPOINTS':          '/api/analytics/data-points/'
+    'SAMPLE_TYPES':        '/api/analytics/sample-types/'
 };
 
 angular.module('RESTServiceModule', []).factory('User', ['$resource', function ($resource) {
@@ -25,49 +19,6 @@ angular.module('RESTServiceModule', []).factory('User', ['$resource', function (
     );
 
     return User;
-}]).factory('Network', ['$resource', function ($resource) {
-    var Network = $resource(
-        URLS.NETWORKS + ':id',
-        {},
-        {
-            update: { method: 'PUT' }
-        }
-    );
-
-    return Network;
-}]).factory('Project', ['$resource', function ($resource) {
-    var Project = $resource(
-        URLS.PROJECTS + ':id',
-        {},
-        {
-            update: { method: 'PUT' }
-        }
-    );
-
-    return Project;
-}]).factory('Cohort', ['$resource', function ($resource) {
-    var Cohort = $resource(
-        URLS.COHORTS + ':id',
-        {},
-        {
-            update: { method: 'PUT' }
-        }
-    );
-
-    Cohort.prototype.getUserPermissions = function() {
-        var perms = $resource(
-            URLS.COHORTS + this.id + '/permissions/',
-            {},
-            {
-                get: {
-                    isArray: false
-                }
-            }
-        );
-        return perms.get();
-    };
-
-    return Cohort;
 }]).factory('Analyte', ['$resource', function ($resource) {
     var Analyte = $resource(
         URLS.ANALYTES + ':id',
@@ -118,21 +69,4 @@ angular.module('RESTServiceModule', []).factory('User', ['$resource', function (
     );
 
     return SampleType;
-}]).factory('Notebook', ['$resource', function ($resource) {
-    return $resource(URLS.NOTEBOOKS, {});
-}]).factory('Participant', ['$resource', function ($resource) {
-    return $resource(URLS.PARTICIPANTS, {});
-}]).factory('DataPoint', ['$resource', function ($resource) {
-    var DataPoint = $resource(
-        URLS.DATAPOINTS,
-        {},
-        {
-            save: {
-                method: 'POST',
-                isArray: true
-            }
-        }
-    );
-
-    return DataPoint;
 }]);

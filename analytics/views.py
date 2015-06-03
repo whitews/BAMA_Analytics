@@ -17,6 +17,7 @@ def analytics_admin(request):
         context_instance=RequestContext(request)
     )
 
+
 def analytics_app(request):
     return render_to_response(
         'analytics_app.html',

@@ -1,9 +1,4 @@
 var MODAL_URLS = {
-    'USER':               '/static/ng-app/partials/forms/user-form.html',
-    'NETWORK':            '/static/ng-app/partials/forms/network-form.html',
-    'COHORT':             '/static/ng-app/partials/forms/cohort-form.html',
-    'PARTICIPANT':        '/static/ng-app/partials/forms/participant-form.html',
-    'PROJECT':            '/static/ng-app/partials/forms/project-form.html',
     'ANALYTE':            '/static/ng-app/partials/forms/analyte-form.html',
     'CONJUGATE':          '/static/ng-app/partials/forms/conjugate-form.html',
     'BUFFER':             '/static/ng-app/partials/forms/buffer-form.html',
@@ -11,10 +6,6 @@ var MODAL_URLS = {
     'ISOTYPE':            '/static/ng-app/partials/forms/isotype-form.html',
 
     // delete modals
-    'USER_DELETE':        '/static/ng-app/partials/forms/user-delete.html',
-    'COHORT_DELETE':      '/static/ng-app/partials/forms/cohort-delete.html',
-    'PARTICIPANT_DELETE': '/static/ng-app/partials/forms/participant-delete.html',
-    'PROJECT_DELETE':     '/static/ng-app/partials/forms/project-delete.html',
     'ANALYTE_DELETE':     '/static/ng-app/partials/forms/analyte-delete.html',
     'CONJUGATE_DELETE':   '/static/ng-app/partials/forms/conjugate-delete.html',
     'BUFFER_DELETE':      '/static/ng-app/partials/forms/buffer-delete.html',
@@ -79,58 +70,6 @@ admin_app.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
         },
         data: {
             ncyBreadcrumbLabel: ': ('
-        }
-    }).state({
-        name: 'network-list',
-        parent: 'admin',
-        url: 'networks/',
-        views: {
-            '@': {
-                templateUrl: '/static/ng-app/partials/network-list.html',
-                controller: 'NetworkController'
-            }
-        },
-        data: {
-            ncyBreadcrumbLabel: 'Networks'
-        }
-    }).state({
-        name: 'cohort-list',
-        parent: 'admin',
-        url: 'cohorts/',
-        views: {
-            '@': {
-                templateUrl: '/static/ng-app/partials/cohort-list.html',
-                controller: 'CohortController'
-            }
-        },
-        data: {
-            ncyBreadcrumbLabel: 'Cohorts'
-        }
-    }).state({
-        name: 'cohort-detail',
-        parent: 'cohort-list',
-        url: 'cohort/:cohortId',
-        views: {
-            '@': {
-                templateUrl: '/static/ng-app/partials/cohort-detail.html',
-                controller: 'CohortDetailController'
-            }
-        },
-        data: {
-            ncyBreadcrumbLabel: '{{current_cohort.name}}'
-        }
-    }).state({
-        name: 'project-detail',
-        parent: 'home',
-        url: 'project/:projectId',
-        views: {
-            '@': {
-                templateUrl: '/static/ng-app/partials/project-detail.html',
-                controller: 'ProjectDetailController'
-            }
-        },
-        data: {
-            ncyBreadcrumbLabel: '{{current_project.name}}'
         }
     }).state({
         name: 'analyte-list',
