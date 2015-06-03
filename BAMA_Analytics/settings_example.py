@@ -40,8 +40,7 @@ INSTALLED_APPS = (
     'django_extensions',
     'authenticate',
     'analytics',
-    'rest_framework',
-    'guardian'
+    'rest_framework'
 )
 
 MIDDLEWARE_CLASSES = (
