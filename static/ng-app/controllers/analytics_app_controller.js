@@ -564,7 +564,7 @@ analytics_app.controller(
 
                         if (matching_analyte == null) {
                             // analyte doesn't exist, uh, that's a problem
-                            $scope.csv_errors.push("Analyte \"" + analyte_result + "\" does not exist on the server");
+                            $scope.csv_errors.push("Analyte \"" + analyte_name + "\" does not exist on the server");
                         } else {
                             // save existing analyte PK for importing
                             d['analyte'] = matching_analyte.name
